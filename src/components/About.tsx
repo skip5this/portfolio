@@ -1,7 +1,9 @@
 import React from 'react';
+
 export function About() {
-  return <section id="about" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+  return (
+    <section id="about" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">About</h2>
           <div className="space-y-6">
@@ -24,5 +26,6 @@ export function About() {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }

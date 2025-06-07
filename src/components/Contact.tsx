@@ -1,8 +1,10 @@
 import React from 'react';
 import { MailIcon, GithubIcon, LinkedinIcon, TwitterIcon } from 'lucide-react';
+
 export function Contact() {
-  return <section id="contact" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+  return (
+    <section id="contact" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-2">Get In Touch</h2>
           <p className="text-gray-600 mb-8">
@@ -28,5 +30,6 @@ export function Contact() {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }
