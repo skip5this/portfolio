@@ -55,23 +55,39 @@ export function Header() {
     }
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.querySelector(id);
+    if (element) {
+      const headerHeight = 56; // Adjusted header height to match actual height (py-4 = 32px + some extra for border)
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    if (isMenuOpen) setIsMenuOpen(false);
+  };
+
   return (
     <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-        <div className="font-diatype-mono font-medium text-lg">Dynamic Quality</div>
+        <div className="font-diatype font-medium">Nakamoto Design Corporation</div>
         {/* Mobile menu button */}
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
         </button>
         {/* Desktop navigation */}
         <nav className="hidden md:flex space-x-8 font-diatype">
-          <a href="#projects" className="hover:text-gray-600 transition-colors">
+          <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '.bg-strike')}>
             Projects
           </a>
-          <a href="#about" className="hover:text-gray-600 transition-colors">
+          <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
             About
           </a>
-          <a href="#contact" className="hover:text-gray-600 transition-colors">
+          <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
             Contact
           </a>
         </nav>
@@ -79,13 +95,13 @@ export function Header() {
         {isMenuOpen && (
           <nav className={`absolute top-full left-0 right-0 border-b border-gray-100 py-4 md:hidden ${getHeaderBackground()}`}>
             <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col space-y-4 items-center font-diatype">
-              <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '.bg-strike')}>
                 Projects
               </a>
-              <a href="#about" className="hover:text-gray-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
                 About
               </a>
-              <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
                 Contact
               </a>
             </div>
