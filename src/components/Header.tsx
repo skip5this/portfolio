@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
 
-type Section = 'hero' | 'strike' | 'fountain' | 'about' | 'contact';
+type Section = 'hero' | 'strike' | 'fountain' | 'aioz' | 'about' | 'contact';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,6 +20,8 @@ export function Header() {
             setCurrentSection('strike');
           } else if (sectionElement.classList.contains('bg-fountain')) {
             setCurrentSection('fountain');
+          } else if (sectionElement.classList.contains('bg-aioz')) {
+            setCurrentSection('aioz');
           } else if (sectionElement.classList.contains('bg-gray-50')) {
             setCurrentSection('about');
           } else if (sectionElement.classList.contains('bg-white')) {
@@ -47,6 +49,8 @@ export function Header() {
         return 'bg-strike';
       case 'fountain':
         return 'bg-fountain';
+      case 'aioz':
+        return 'bg-aioz';
       case 'about':
         return 'bg-gray-50';
       case 'contact':

@@ -13,6 +13,9 @@ import strike4 from './assets/images/Strike 4.png';
 import fountain1 from './assets/images/Fountain-1.png';
 import fountain2 from './assets/images/Fountain-2.png';
 import fountain3 from './assets/images/Fountain-3.png';
+import aioz1 from './assets/images/AiozNetwork-1.png';
+import aioz2 from './assets/images/AiozNetwork-2.png';
+import aioz3 from './assets/images/AiozNetwork-3.png';
 
 export function App() {
   return (
@@ -31,6 +34,13 @@ export function App() {
           year="2023"
           images={[fountain1, fountain2, fountain3]}
           backgroundColor="bg-fountain"
+        />
+        <ProjectFeature 
+          title="AIOZ Network"
+          year="2024"
+          images={[aioz1, aioz2, aioz3]}
+          backgroundColor="bg-aioz"
+          layout="split"
         />
         <About />
         <Contact />

@@ -8,7 +8,8 @@ export default {
       colors: {
         fountain: '#FFCE5E',
         strike: '#FFEDED',
-        hero: '#BBFFCD'
+        hero: '#BBFFCD',
+        aioz: '#E6F7FF'
       },
       fontFamily: {
         'diatype': ['"ABC Diatype"', 'sans-serif'],
