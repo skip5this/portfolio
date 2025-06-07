@@ -24,7 +24,7 @@ export function App() {
           title="Strike"
           year="2023"
           images={[strike2, strike3, strike4]}
-          backgroundColor="bg-pink-50"
+          backgroundColor="bg-strike"
         />
         <ProjectFeature 
           title="Fountain"

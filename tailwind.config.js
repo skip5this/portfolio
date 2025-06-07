@@ -6,7 +6,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        fountain: '#FFCE5E'
+        fountain: '#FFCE5E',
+        strike: '#FFEDED',
+        hero: '#BBFFCD'
+      },
+      fontFamily: {
+        'diatype': ['"ABC Diatype"', 'sans-serif'],
+        'diatype-mono': ['"ABC Diatype Mono"', 'monospace']
       }
     }
   }

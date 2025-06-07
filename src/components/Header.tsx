@@ -6,14 +6,14 @@ export function Header() {
   
   return (
     <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="font-medium text-xl">Portfolio</div>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+        <div className="font-diatype font-medium text-xl">Portfolio</div>
         {/* Mobile menu button */}
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
         </button>
         {/* Desktop navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-8 font-diatype">
           <a href="#projects" className="hover:text-gray-600 transition-colors">
             Projects
           </a>
@@ -27,7 +27,7 @@ export function Header() {
         {/* Mobile navigation */}
         {isMenuOpen && (
           <nav className="absolute top-full left-0 right-0 bg-white border-b border-gray-100 py-4 md:hidden">
-            <div className="max-w-7xl mx-auto px-4 flex flex-col space-y-4 items-center">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col space-y-4 items-center font-diatype">
               <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={() => setIsMenuOpen(false)}>
                 Projects
               </a>

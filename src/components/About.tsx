@@ -5,8 +5,8 @@ export function About() {
     <section id="about" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8">About</h2>
-          <div className="space-y-6">
+          <h2 className="text-3xl font-diatype-mono font-medium mb-8">About</h2>
+          <div className="space-y-6 font-diatype">
             <p className="text-lg leading-relaxed">
               I'm a digital product designer with over a decade of making the
               complex feel simple. My background spans fintech, AI, Web3, and
