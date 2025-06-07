@@ -14,7 +14,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
   backgroundColor,
 }) => {
   return (
-    <section className={`${backgroundColor} py-8`}>
+    <section className={`${backgroundColor} pt-16 pb-16 space-y-8`}>
       {/* Title container - matches ProjectFeature exactly */}
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
@@ -36,7 +36,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
       </div>
 
       {/* Bottom two images */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {images.slice(1).map((image, index) => (
             <div key={index} className="relative">
