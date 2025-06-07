@@ -5,6 +5,7 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { RecentWorks } from './components/RecentWorks';
 import { ProjectFeature } from './components/ProjectFeature';
+import { DesktopProjectFeature } from './components/DesktopProjectFeature';
 
 // Import all project images
 import strike2 from './assets/images/Strike 2.png';
@@ -35,12 +36,11 @@ export function App() {
           images={[fountain1, fountain2, fountain3]}
           backgroundColor="bg-fountain"
         />
-        <ProjectFeature 
+        <DesktopProjectFeature 
           title="AIOZ Network"
           year="2024"
           images={[aioz1, aioz2, aioz3]}
           backgroundColor="bg-aioz"
-          layout="split"
         />
         <About />
         <Contact />

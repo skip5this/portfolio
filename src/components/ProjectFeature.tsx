@@ -18,10 +18,10 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
   layout = 'grid'  // default to grid layout
 }) => {
   return (
-    <section className={`${backgroundColor} py-16`}>
+    <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'py-8'}`}>
       {/* Title container */}
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex justify-between items-center mb-8">
+        <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-4'}`}>
           <h2 className="text-2xl font-diatype-mono">{title}</h2>
           <span className="text-gray-500 font-diatype-mono">{year}</span>
         </div>
@@ -46,13 +46,11 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
         // Split layout - one image top, two images bottom
         <>
           {/* Top row - full width image */}
-          <div className="max-w-7xl mx-auto">
-            <img 
-              src={images[0]} 
-              alt={`${title} screenshot 1`}
-              className="w-full h-auto"
-            />
-          </div>
+          <img 
+            src={images[0]} 
+            alt={`${title} screenshot 1`}
+            className="w-full h-auto"
+          />
           {/* Bottom row - two images */}
           <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
