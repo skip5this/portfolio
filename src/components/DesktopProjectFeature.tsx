@@ -25,11 +25,12 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
 
       {/* Top image - constrained to container width */}
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="aspect-[16/9] relative">
+        <div className="relative">
+          <div className="absolute inset-0 -bottom-12 blur-2xl bg-[#ACB0AC]/30 rounded-3xl" />
           <img 
             src={images[0]} 
             alt={`${title} screenshot 1`}
-            className="absolute inset-0 w-full h-full object-contain"
+            className="w-full h-auto relative"
           />
         </div>
       </div>
@@ -38,12 +39,14 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
       <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {images.slice(1).map((image, index) => (
-            <img 
-              key={index}
-              src={image} 
-              alt={`${title} screenshot ${index + 2}`}
-              className="w-full h-auto"
-            />
+            <div key={index} className="relative">
+              <div className="absolute inset-0 -bottom-12 blur-2xl bg-[#ACB0AC]/30 rounded-3xl" />
+              <img 
+                src={image} 
+                alt={`${title} screenshot ${index + 2}`}
+                className="w-full h-auto relative"
+              />
+            </div>
           ))}
         </div>
       </div>
