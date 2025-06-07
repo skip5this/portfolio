@@ -30,7 +30,7 @@ export function App() {
           title="Fountain"
           year="2023"
           images={[fountain1, fountain2, fountain3]}
-          backgroundColor="bg-amber-50"
+          backgroundColor="bg-fountain"
         />
         <About />
         <Contact />
