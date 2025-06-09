@@ -12,12 +12,7 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "lucide-react": "^0.441.0",
-    "components/Header": "latest",
-    "components/Projects": "latest",
-    "components/About": "latest",
-    "components/Contact": "latest",
-    "components/Footer": "latest"
+    "lucide-react": "^0.441.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.18",
