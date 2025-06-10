@@ -20,7 +20,7 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
   return (
     <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'pt-16 pb-16'}`}>
       {/* Title container */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-16">
         <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-8'}`}>
           <h2 className="text-2xl font-diatype-mono">{title}</h2>
           <span className="text-gray-500 font-diatype-mono">{year}</span>
@@ -29,10 +29,10 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
 
       {layout === 'grid' ? (
         // Regular 3-column grid layout
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {images.map((image, index) => (
-              <div key={index} className="relative w-full md:w-[calc(100%-2rem)]">
+              <div key={index} className="relative w-full">
                 <img 
                   src={image} 
                   alt={`${title} screenshot ${index + 1}`}
@@ -52,7 +52,7 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
             className="w-full h-auto"
           />
           {/* Bottom row - two images */}
-          <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
+          <div className="max-w-7xl mx-auto px-4 md:px-16 mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {images.slice(1).map((image, index) => (
                 <div key={index} className="relative">
