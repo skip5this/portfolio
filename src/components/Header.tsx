@@ -7,6 +7,18 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState<Section>('hero');
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px is Tailwind's md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   useEffect(() => {
     // Create an Intersection Observer to detect which section is in view
@@ -32,16 +44,21 @@ export function Header() {
         }
       });
     }, {
-      threshold: 0.5 // Lower threshold to make detection more sensitive
+      threshold: isMobile ? 0.15 : 0.5, // Lower threshold on mobile
+      rootMargin: isMobile ? '-20% 0px' : '0px' // Adjust the detection area on mobile
     });
 
-    // Observe all sections
-    document.querySelectorAll('section, .bg-hero').forEach(section => {
+    // Observe all sections with a more specific selector for mobile
+    const selector = isMobile ? 
+      'section[class*="bg-"], div[class*="bg-hero"], div[class*="bg-strike"], div[class*="bg-fountain"]' :
+      'section, .bg-hero';
+    
+    document.querySelectorAll(selector).forEach(section => {
       observer.observe(section);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]); // Re-run when isMobile changes
 
   const getHeaderBackground = () => {
     if (!hasScrolled) return 'bg-hero';
