@@ -14,18 +14,19 @@ export function Header() {
         if (entry.isIntersecting) {
           // Get the section name from the element's class list
           const sectionElement = entry.target as HTMLElement;
-          if (sectionElement.classList.contains('bg-hero')) {
-            setCurrentSection('hero');
-          } else if (sectionElement.classList.contains('bg-strike')) {
-            setCurrentSection('strike');
-          } else if (sectionElement.classList.contains('bg-fountain')) {
-            setCurrentSection('fountain');
-          } else if (sectionElement.classList.contains('bg-aioz')) {
-            setCurrentSection('aioz');
-          } else if (sectionElement.classList.contains('bg-gray-50')) {
-            setCurrentSection('about');
-          } else if (sectionElement.classList.contains('bg-white')) {
-            setCurrentSection('contact');
+          // Only update if we're not in the hero section to prevent flickering
+          if (!sectionElement.classList.contains('bg-hero')) {
+            if (sectionElement.classList.contains('bg-strike')) {
+              setCurrentSection('strike');
+            } else if (sectionElement.classList.contains('bg-fountain')) {
+              setCurrentSection('fountain');
+            } else if (sectionElement.classList.contains('bg-aioz')) {
+              setCurrentSection('aioz');
+            } else if (sectionElement.classList.contains('bg-gray-50')) {
+              setCurrentSection('about');
+            } else if (sectionElement.classList.contains('bg-white')) {
+              setCurrentSection('contact');
+            }
           }
         }
       });
@@ -76,7 +77,7 @@ export function Header() {
   };
 
   return (
-    <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 ${getHeaderBackground()}`}>
+    <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 bg-hero ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
         <div className="font-diatype font-medium">Nakamoto Design Corporation</div>
         {/* Mobile menu button */}
