@@ -32,7 +32,7 @@ export function Header() {
         }
       });
     }, {
-      threshold: 0.9 // Trigger when section is 90% visible
+      threshold: 0.5 // Lower threshold to make detection more sensitive
     });
 
     // Observe all sections
@@ -80,7 +80,7 @@ export function Header() {
   };
 
   return (
-    <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 ${getHeaderBackground()}`}>
+    <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
         <div className="font-diatype font-medium">Nakamoto Design Co</div>
         {/* Mobile menu button */}

@@ -9,7 +9,7 @@ export default {
         fountain: '#FFCE5E',
         strike: '#FFEDED',
         hero: '#BBFFCD',
-        aioz: '#E6F7FF'
+        aioz: '#EBF5EC'
       },
       fontFamily: {
         'diatype': ['"ABC Diatype"', 'sans-serif'],
