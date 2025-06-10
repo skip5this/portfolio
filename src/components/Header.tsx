@@ -6,27 +6,28 @@ type Section = 'hero' | 'strike' | 'fountain' | 'aioz' | 'about' | 'contact';
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState<Section>('hero');
+  const [hasScrolled, setHasScrolled] = useState(false);
   
   useEffect(() => {
     // Create an Intersection Observer to detect which section is in view
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          setHasScrolled(true);
           // Get the section name from the element's class list
           const sectionElement = entry.target as HTMLElement;
-          // Only update if we're not in the hero section to prevent flickering
-          if (!sectionElement.classList.contains('bg-hero')) {
-            if (sectionElement.classList.contains('bg-strike')) {
-              setCurrentSection('strike');
-            } else if (sectionElement.classList.contains('bg-fountain')) {
-              setCurrentSection('fountain');
-            } else if (sectionElement.classList.contains('bg-aioz')) {
-              setCurrentSection('aioz');
-            } else if (sectionElement.classList.contains('bg-gray-50')) {
-              setCurrentSection('about');
-            } else if (sectionElement.classList.contains('bg-white')) {
-              setCurrentSection('contact');
-            }
+          if (sectionElement.classList.contains('bg-hero')) {
+            setCurrentSection('hero');
+          } else if (sectionElement.classList.contains('bg-strike')) {
+            setCurrentSection('strike');
+          } else if (sectionElement.classList.contains('bg-fountain')) {
+            setCurrentSection('fountain');
+          } else if (sectionElement.classList.contains('bg-aioz')) {
+            setCurrentSection('aioz');
+          } else if (sectionElement.classList.contains('bg-gray-50')) {
+            setCurrentSection('about');
+          } else if (sectionElement.classList.contains('bg-white')) {
+            setCurrentSection('contact');
           }
         }
       });
@@ -43,6 +44,8 @@ export function Header() {
   }, []);
 
   const getHeaderBackground = () => {
+    if (!hasScrolled) return 'bg-hero';
+    
     switch (currentSection) {
       case 'hero':
         return 'bg-hero';
@@ -77,7 +80,7 @@ export function Header() {
   };
 
   return (
-    <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 bg-hero ${getHeaderBackground()}`}>
+    <header className={`sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
         <div className="font-diatype font-medium">Nakamoto Design Corporation</div>
         {/* Mobile menu button */}
