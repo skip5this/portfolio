@@ -32,11 +32,11 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
         <div className="max-w-7xl mx-auto px-4 md:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {images.map((image, index) => (
-              <div key={index} className="relative w-full">
+              <div key={index} className="relative w-full rounded-[30px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)]">
                 <img 
                   src={image} 
                   alt={`${title} screenshot ${index + 1}`}
-                  className="w-full h-auto"
+                  className="w-full h-auto rounded-[30px]"
                 />
               </div>
             ))}
