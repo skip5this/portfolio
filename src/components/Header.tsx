@@ -99,7 +99,7 @@ export function Header() {
   return (
     <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
-        <div className="font-diatype font-medium">Nakamoto Design Co</div>
+        <div className="font-diatype font-medium"> : ) </div>
         {/* Mobile menu button */}
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
