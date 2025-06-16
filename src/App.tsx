@@ -9,9 +9,9 @@ import { DesktopProjectFeature } from './components/DesktopProjectFeature';
 
 // Import all project images
 import strike1 from './assets/images/strike1.png';
-import strike2 from './assets/images/Strike 2.png';
-import strike3 from './assets/images/Strike 3.png';
-import strike4 from './assets/images/Strike 4.png';
+import strike2 from './assets/images/strike2.png';
+import strike3 from './assets/images/strike3.png';
+import strike4 from './assets/images/strike4.png';
 import fountain1 from './assets/images/Fountain-1.png';
 import fountain2 from './assets/images/Fountain-2.png';
 import fountain3 from './assets/images/Fountain-3.png';
