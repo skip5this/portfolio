@@ -8,6 +8,7 @@ import { ProjectFeature } from './components/ProjectFeature';
 import { DesktopProjectFeature } from './components/DesktopProjectFeature';
 
 // Import all project images
+import strike1 from './assets/images/strike1.png';
 import strike2 from './assets/images/Strike 2.png';
 import strike3 from './assets/images/Strike 3.png';
 import strike4 from './assets/images/Strike 4.png';
@@ -27,7 +28,7 @@ export function App() {
         <ProjectFeature 
           title="Strike"
           year="2023"
-          images={[strike2, strike3, strike4]}
+          images={[strike1, strike2, strike3, strike4]}
           backgroundColor="bg-strike"
         />
         <ProjectFeature 
@@ -38,7 +39,7 @@ export function App() {
         />
         <DesktopProjectFeature 
           title="AIOZ Network"
-          year="2024"
+          year="2024-25"
           images={[aioz1, aioz2, aioz3]}
           backgroundColor="bg-aioz"
         />

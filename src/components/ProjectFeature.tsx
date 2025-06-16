@@ -17,6 +17,14 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
   backgroundColor,
   layout = 'grid'  // default to grid layout
 }) => {
+  // Determine grid columns based on number of images
+  const getGridCols = () => {
+    if (images.length === 4) {
+      return 'grid-cols-2 md:grid-cols-4'; // 2x2 on mobile, 4 across on desktop
+    }
+    return 'grid-cols-1 md:grid-cols-3'; // Default: 1 on mobile, 3 on desktop
+  };
+
   return (
     <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'pt-16 pb-16'}`}>
       {/* Title container */}
@@ -28,9 +36,9 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
       </div>
 
       {layout === 'grid' ? (
-        // Regular 3-column grid layout
+        // Regular grid layout - responsive based on number of images
         <div className="max-w-7xl mx-auto px-4 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className={`grid ${getGridCols()} gap-12`}>
             {images.map((image, index) => (
               <div key={index} className="relative w-full rounded-[30px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)]">
                 <img 
