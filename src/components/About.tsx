@@ -9,12 +9,12 @@ export function About() {
           <div className="space-y-6 font-diatype">
             <p className="text-lg leading-relaxed">
               I'm a digital product designer with over a decade of making the
-              complex feel simple. My work spans fintech, AI, Web3, and
-              consumer apps, with products used by millions in 100+ countries.
-              I've led design from zero-to-one launches to 100x scale-ups—including
-              at a company that reached a $1B+ marketcap. I've built many systems
-              from scratch, mentored teams, taught professionally, and worked
-              hands-on across research, UX, and visual design.
+              complex feel simple. My background spans fintech, AI, Web3, and
+              consumer apps, with products I've designed reaching millions of users
+              across 100+ countries. I've led at $1B+ market cap scale, launched
+              products from zero to one, built many systems from scratch, taught
+              professionally, mentored teams, and worked hands-on across research,
+              UX, and visual design.
             </p>
             <p className="text-lg leading-relaxed">
               I'm drawn to design as a way of making sense—and making things
