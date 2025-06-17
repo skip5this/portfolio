@@ -43,7 +43,7 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
       {/* Title container */}
       <div className="max-w-7xl mx-auto px-4 md:px-16">
         <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-6'}`}>
-          <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
+          <h2 className="text-3xl font-diatype-mono font-medium">{title}</h2>
           <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
         </div>
       </div>

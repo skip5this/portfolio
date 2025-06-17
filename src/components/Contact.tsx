@@ -6,7 +6,7 @@ export function Contact() {
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-16">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-diatype-mono mb-8">Get in touch</h2>
+          <h2 className="text-3xl font-diatype-mono font-medium mb-8">Get in touch</h2>
           <div className="space-y-1 text-gray-600 mb-8 font-diatype">
             <p>Thanks for taking the time to explore my work.</p>
             <p>If anything resonated, feel free to reach out.</p>

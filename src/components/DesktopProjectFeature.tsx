@@ -31,7 +31,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
       {/* Title container - matches ProjectFeature exactly */}
       <div className="max-w-7xl mx-auto px-4 md:px-16 mb-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
+          <h2 className="text-3xl font-diatype-mono font-medium">{title}</h2>
           <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
         </div>
       </div>

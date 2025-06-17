@@ -17,8 +17,8 @@ import fountain2 from './assets/images/fountain2.png';
 import fountain3 from './assets/images/fountain3.png';
 import fountain4 from './assets/images/fountain4.png';
 import aioz1 from './assets/images/AiozNetwork-1.png';
-import aioz2 from './assets/images/AiozNetwork-2.png';
-import aioz3 from './assets/images/AiozNetwork-3.png';
+import aioz2 from './assets/images/aioz2.png';
+import aioz3 from './assets/images/aioz3.png';
 
 export function App() {
   return (
