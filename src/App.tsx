@@ -12,9 +12,10 @@ import strike1 from './assets/images/strike1.png';
 import strike2 from './assets/images/strike2.png';
 import strike3 from './assets/images/strike3.png';
 import strike4 from './assets/images/strike4.png';
-import fountain1 from './assets/images/Fountain-1.png';
-import fountain2 from './assets/images/Fountain-2.png';
-import fountain3 from './assets/images/Fountain-3.png';
+import fountain1 from './assets/images/fountain1.png';
+import fountain2 from './assets/images/fountain2.png';
+import fountain3 from './assets/images/fountain3.png';
+import fountain4 from './assets/images/fountain4.png';
 import aioz1 from './assets/images/AiozNetwork-1.png';
 import aioz2 from './assets/images/AiozNetwork-2.png';
 import aioz3 from './assets/images/AiozNetwork-3.png';
@@ -34,7 +35,7 @@ export function App() {
         <ProjectFeature 
           title="Fountain"
           year="2023"
-          images={[fountain1, fountain2, fountain3]}
+          images={[fountain1, fountain2, fountain3, fountain4]}
           backgroundColor="bg-fountain"
         />
         <DesktopProjectFeature 
