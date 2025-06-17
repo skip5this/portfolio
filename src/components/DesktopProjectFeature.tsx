@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
 interface DesktopProjectFeatureProps {
   title: string;
@@ -13,6 +15,17 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
   images,
   backgroundColor,
 }) => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  // Convert images to lightbox format
+  const lightboxSlides = images.map(src => ({ src }));
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
   return (
     <section data-section="aioz" className={`${backgroundColor} pt-16 pb-16 space-y-16`}>
       {/* Title container - matches ProjectFeature exactly */}
@@ -30,6 +43,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
             src={images[0]} 
             alt={`${title} screenshot 1`}
             className="w-full h-auto relative rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+            onClick={() => openLightbox(0)}
           />
         </div>
       </div>
@@ -43,11 +57,20 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
                 src={image} 
                 alt={`${title} screenshot ${index + 2}`}
                 className="w-full h-auto relative rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                onClick={() => openLightbox(index + 1)}
               />
             </div>
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={lightboxSlides}
+      />
     </section>
   );
 }; 
