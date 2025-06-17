@@ -40,11 +40,11 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
         <div className="max-w-7xl mx-auto px-4 md:px-16">
           <div className={`grid ${getGridCols()} gap-12`}>
             {images.map((image, index) => (
-              <div key={index} className="relative w-full rounded-[20px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)]">
+              <div key={index} className="relative w-full">
                 <img 
                   src={image} 
                   alt={`${title} screenshot ${index + 1}`}
-                  className="w-full h-auto rounded-[20px]"
+                  className="w-full h-auto rounded-[20px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
                 />
               </div>
             ))}
