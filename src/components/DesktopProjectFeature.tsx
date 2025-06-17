@@ -27,9 +27,9 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
   };
 
   return (
-    <section data-section="aioz" className={`${backgroundColor} pt-16 pb-16 space-y-6`}>
+    <section data-section="aioz" className={`${backgroundColor} pt-16 pb-16`}>
       {/* Title container - matches ProjectFeature exactly */}
-      <div className="max-w-7xl mx-auto px-4 md:px-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-16 mb-6">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
           <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
@@ -37,7 +37,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
       </div>
 
       {/* Top image - constrained to container width */}
-      <div className="max-w-7xl mx-auto px-4 md:px-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-16 mb-8">
         <div className="relative">
           <img 
             src={images[0]} 
