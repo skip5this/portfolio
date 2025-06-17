@@ -42,9 +42,9 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
     <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'pt-16 pb-16'}`}>
       {/* Title container */}
       <div className="max-w-7xl mx-auto px-4 md:px-16">
-        <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-8'}`}>
-          <h2 className="text-2xl font-diatype-mono">{title}</h2>
-          <span className="text-gray-500 font-diatype-mono">{year}</span>
+        <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-6'}`}>
+          <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
+          <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
         </div>
       </div>
 
