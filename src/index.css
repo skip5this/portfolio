@@ -52,3 +52,8 @@
 @tailwind components;
 @tailwind utilities;
 /* DO NOT DELETE THESE TAILWIND IMPORTS, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
+
+/* Custom Lightbox Styling */
+.yarl__root {
+  --yarl__color_backdrop: #3C3C3C !important;
+}
