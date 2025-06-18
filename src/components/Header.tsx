@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
+import { TarotModal } from './TarotModal';
 
 type Section = 'hero' | 'strike' | 'fountain' | 'aioz' | 'about' | 'contact';
 
@@ -16,6 +17,7 @@ const SECTIONS = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState<Section>('hero');
+  const [showTarot, setShowTarot] = useState(false);
   
   // Calculate which section is at the top of the viewport (under the header)
   const calculateCurrentSection = useCallback(() => {
@@ -91,50 +93,58 @@ export function Header() {
     if (isMenuOpen) setIsMenuOpen(false);
   };
 
-  const handleLogoClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  const handleCrystalBallClick = () => {
+    setShowTarot(true);
   };
 
   return (
-    <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
-        <div className="font-diatype font-medium text-gray-500">🔮</div>
-        {/* Mobile menu button */}
-        <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
-        </button>
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex space-x-8 font-diatype">
-          <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
-            Projects
-          </a>
-          <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
-            About
-          </a>
-          <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
-            Contact
-          </a>
-        </nav>
-        {/* Mobile navigation */}
-        {isMenuOpen && (
-          <nav className={`absolute top-full left-0 right-0 border-b border-gray-100 py-4 md:hidden ${getHeaderBackground()}`}>
-            <div className="max-w-7xl mx-auto px-4 md:px-16 flex flex-col space-y-4 items-center font-diatype">
-              <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
-                Projects
-              </a>
-              <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
-                About
-              </a>
-              <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
-                Contact
-              </a>
-            </div>
+    <>
+      <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
+        <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
+          <button 
+            onClick={handleCrystalBallClick}
+            className="font-diatype font-medium text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
+            aria-label="Open tarot reading"
+          >
+            🔮
+          </button>
+          {/* Mobile menu button */}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
+          </button>
+          {/* Desktop navigation */}
+          <nav className="hidden md:flex space-x-8 font-diatype">
+            <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
+              Projects
+            </a>
+            <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
+              About
+            </a>
+            <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
+              Contact
+            </a>
           </nav>
-        )}
-      </div>
-    </header>
+          {/* Mobile navigation */}
+          {isMenuOpen && (
+            <nav className={`absolute top-full left-0 right-0 border-b border-gray-100 py-4 md:hidden ${getHeaderBackground()}`}>
+              <div className="max-w-7xl mx-auto px-4 md:px-16 flex flex-col space-y-4 items-center font-diatype">
+                <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
+                  Projects
+                </a>
+                <a href="#about" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#about')}>
+                  About
+                </a>
+                <a href="#contact" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, '#contact')}>
+                  Contact
+                </a>
+              </div>
+            </nav>
+          )}
+        </div>
+      </header>
+      
+      {/* Tarot Modal */}
+      {showTarot && <TarotModal onClose={() => setShowTarot(false)} />}
+    </>
   );
 }
