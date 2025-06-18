@@ -91,6 +91,13 @@ export function Header() {
     if (isMenuOpen) setIsMenuOpen(false);
   };
 
+  const handleLogoClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
