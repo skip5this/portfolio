@@ -7,6 +7,7 @@ interface DesktopProjectFeatureProps {
   year: string;
   images: string[];
   backgroundColor: string;
+  companyUrl?: string;
 }
 
 export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
@@ -14,6 +15,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
   year,
   images,
   backgroundColor,
+  companyUrl
 }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -31,7 +33,18 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
       {/* Title container - matches ProjectFeature exactly */}
       <div className="max-w-7xl mx-auto px-4 md:px-16 mb-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-3xl font-diatype-mono font-medium">{title}</h2>
+          {companyUrl ? (
+            <a 
+              href={companyUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-3xl font-diatype-mono font-medium hover:underline hover:decoration-1 hover:underline-offset-4 transition-all duration-500"
+            >
+              {title}
+            </a>
+          ) : (
+            <h2 className="text-3xl font-diatype-mono font-medium">{title}</h2>
+          )}
           <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
         </div>
       </div>

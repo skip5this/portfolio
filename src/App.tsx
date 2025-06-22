@@ -31,18 +31,21 @@ export function App() {
           year="2023"
           images={[strike1, strike2, strike3, strike4]}
           backgroundColor="bg-strike"
+          companyUrl="https://strike.me/"
         />
         <ProjectFeature 
           title="Fountain"
           year="2023"
           images={[fountain1, fountain2, fountain3, fountain4]}
           backgroundColor="bg-fountain"
+          companyUrl="https://www.fountain.fm/"
         />
         <DesktopProjectFeature 
           title="AIOZ Network"
           year="2024-25"
           images={[aioz1, aioz2, aioz3]}
           backgroundColor="bg-aioz"
+          companyUrl="https://aioz.network/"
         />
         <About />
         <Contact />
