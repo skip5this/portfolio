@@ -50,14 +50,14 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
               href={companyUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-3xl font-diatype-mono font-medium hover:underline hover:decoration-1 hover:underline-offset-4 transition-all duration-500"
+              className="text-2xl font-diatype-mono font-medium hover:underline hover:decoration-1 hover:underline-offset-4 transition-all duration-500"
             >
               {title}
             </a>
           ) : (
-            <h2 className="text-3xl font-diatype-mono font-medium">{title}</h2>
+            <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
           )}
-          <span className="text-gray-500 font-diatype-mono text-lg">{year}</span>
+          <span className="text-gray-500 font-diatype-mono text-xl">{year}</span>
         </div>
       </div>
 

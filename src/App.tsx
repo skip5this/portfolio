@@ -28,7 +28,7 @@ export function App() {
         <RecentWorks />
         <ProjectFeature 
           title="Strike"
-          year="2023"
+          year="2021-23"
           images={[strike1, strike2, strike3, strike4]}
           backgroundColor="bg-strike"
           companyUrl="https://strike.me/"
