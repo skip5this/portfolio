@@ -14,6 +14,13 @@ export default {
       fontFamily: {
         'diatype': ['"ABC Diatype"', 'sans-serif'],
         'diatype-mono': ['"ABC Diatype Mono"', 'monospace']
+      },
+      fontWeight: {
+        'thin': '100',
+        'light': '300',
+        'normal': '400',
+        'medium': '500',
+        'bold': '700'
       }
     }
   }

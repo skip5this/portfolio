@@ -11,6 +11,7 @@ interface ProjectFeatureProps {
   backgroundColor: string;
   layout?: LayoutPattern;
   companyUrl?: string;
+  caseStudyUrl?: string;
 }
 
 export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
@@ -19,7 +20,8 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
   images,
   backgroundColor,
   layout = 'grid',  // default to grid layout
-  companyUrl
+  companyUrl,
+  caseStudyUrl
 }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -45,18 +47,28 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
       {/* Title container */}
       <div className="max-w-7xl mx-auto px-4 md:px-16">
         <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-6'}`}>
-          {companyUrl ? (
-            <a 
-              href={companyUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-2xl font-diatype-mono font-medium hover:underline hover:decoration-1 hover:underline-offset-4 transition-all duration-500"
-            >
-              {title}
-            </a>
-          ) : (
-            <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
-          )}
+          <div className="flex items-center space-x-4">
+            {companyUrl ? (
+              <a 
+                href={companyUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-2xl font-diatype-mono font-medium hover:underline hover:decoration-1 hover:underline-offset-4 transition-all duration-500"
+              >
+                {title}
+              </a>
+            ) : (
+              <h2 className="text-2xl font-diatype-mono font-medium">{title}</h2>
+            )}
+            {caseStudyUrl && (
+              <a 
+                href={caseStudyUrl}
+                className="text-sm text-gray-600 hover:text-gray-900 font-medium px-3 py-1 border border-gray-300 rounded-md hover:border-gray-400 transition-colors"
+              >
+                Case Study
+              </a>
+            )}
+          </div>
           <span className="text-gray-500 font-diatype-mono text-xl">{year}</span>
         </div>
       </div>
