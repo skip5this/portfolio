@@ -277,18 +277,15 @@ export function StrikeCaseStudy() {
       {/* Setting the compass section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
-          {/* Title and intro paragraph */}
+          {/* Intro paragraph */}
           <div className="mb-12 md:mb-16">
-            <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
-              Setting the compass
-            </h2>
-            <p className="text-[1.6rem] leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype text-secondary-grey">
+            <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype font-light text-white">
               Before diving in, I believe in setting clear goals. They're the compass that keeps the team aligned and the work focused. For this project, we zeroed in on three:
             </p>
           </div>
           
           {/* Venn diagram and goals */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Venn diagram */}
             <div className="flex justify-center lg:justify-start h-full">
               <img 
@@ -328,7 +325,7 @@ export function StrikeCaseStudy() {
       {/* Finding Clarity section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text content */}
             <div>
               <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
@@ -363,7 +360,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
           {/* Text and Don't trust verify image in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-6">
             {/* Text content */}
             <div>
               <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
@@ -432,7 +429,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
           {/* Text and Bitcoin GIF in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16 md:mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 md:mb-24">
             {/* Text content */}
             <div>
               <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
@@ -440,7 +437,7 @@ export function StrikeCaseStudy() {
               </h2>
               <div className="space-y-6">
                 <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
-                  From there, we moved into low-fidelity wireframes using FigJam. This let us focus on content and flow without getting distracted by visual details. Simple shapes and text helped us see if the structure made sense.
+                  Next, we moved into low-fidelity wireframes, deliberately keeping things rough so we could focus on content and flow before worrying about visuals. FigJam was our tool of choice because it kept us constrained to simple shapes and text, forcing clarity.
                 </p>
               </div>
             </div>
@@ -456,47 +453,58 @@ export function StrikeCaseStudy() {
           </div>
           
           {/* Mid-fi wireframes - full width */}
-          <div className="w-full mb-16 md:mb-24">
+          <div className="w-full">
             <img 
               src={midfi} 
               alt="Mid-fidelity wireframes showing app flows and user journeys"
               className="w-full h-auto object-contain"
             />
           </div>
-          
-          {/* Design Directions Carousel */}
-          <div className="w-full">
-            <h3 className="text-[1.5rem] font-diatype-mono font-normal text-white mb-8">
-              Three Design Directions
-            </h3>
-            <div className="space-y-6 mb-12">
+        </div>
+      </section>
+
+      {/* Three Design Directions section */}
+      <section className="bg-black text-white py-20 md:py-32">
+        <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
+                    <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
+            Three Design Directions
+          </h2>
+          <div className="space-y-6 mb-12">
               <p className="text-[1.6rem] leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype text-secondary-grey">
-                Then we moved to mid-fidelity designs. We ran two rounds of explorations, creating three distinct directions each time. This gave us a chance to really push different approaches.
+                Once we were confident in the content, we stepped into mid-fidelity designs. We ran two rounds of explorations, each time creating three distinct directions.
               </p>
               <p className="text-[1.6rem] leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype text-secondary-grey">
-                We had three designers focus on visuals, which let us explore more broadly. Leadership would pick a favorite, then we'd refine it together. It created good discussions and healthy feedback loops.
+                Why three? We had three designers focusing on visuals at that stage, and giving each person a direction allowed us to explore more ground. Leadership would pick a favorite, and we'd refine it further in the next round. There were no heated debates, just collaborative discussions and healthy feedback loops.
               </p>
+                        </div>
+            
+            {/* Title and keyline with left margin */}
+            <div className="mb-12 md:mb-16">
+              <div className="w-16 h-px bg-[#FFC4C4] mb-6"></div>
+              <h3 className="text-[2rem] font-diatype-mono font-normal text-white">
+                Round 1
+              </h3>
             </div>
+            
             <DirectionCarousel 
               directions={[
-                {
-                  title: "Direction 1",
-                  images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
-                  alt: "Design direction 1 showing app screens"
-                },
-                {
-                  title: "Direction 2", 
-                  images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
-                  alt: "Design direction 2 showing app screens"
-                },
-                {
-                  title: "Direction 3",
-                  images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
-                  alt: "Design direction 3 showing app screens"
-                }
-              ]}
-            />
-          </div>
+              {
+                title: "Direction 1",
+                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                alt: "Design direction 1 showing app screens"
+              },
+              {
+                title: "Direction 2", 
+                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                alt: "Design direction 2 showing app screens"
+              },
+              {
+                title: "Direction 3",
+                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                alt: "Design direction 3 showing app screens"
+              }
+            ]}
+          />
         </div>
       </section>
     </div>

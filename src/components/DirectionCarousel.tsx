@@ -62,13 +62,13 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
       // Snap to nearest direction
       const startScroll = currentScroll;
       const distance = targetScroll - startScroll;
-      const duration = 200;
+      const duration = 400; // Increased from 200ms to 400ms
       const startTime = Date.now();
       
       const animate = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
+        const easeOut = 1 - Math.pow(1 - progress, 2); // Changed from cubic to quadratic for smoother easing
         
         if (scrollRef.current) {
           scrollRef.current.scrollLeft = startScroll + (distance * easeOut);
@@ -126,13 +126,13 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
       // Snap to nearest direction
       const startScroll = currentScroll;
       const distance = targetScroll - startScroll;
-      const duration = 200;
+      const duration = 400; // Increased from 200ms to 400ms
       const startTime = Date.now();
       
       const animate = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
+        const easeOut = 1 - Math.pow(1 - progress, 2); // Changed from cubic to quadratic for smoother easing
         
         if (scrollRef.current) {
           scrollRef.current.scrollLeft = startScroll + (distance * easeOut);
@@ -183,7 +183,7 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
     <div className="w-full">
       <div 
         ref={scrollRef}
-        className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+        className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -192,17 +192,17 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="flex gap-8 snap-x snap-mandatory pb-4 select-none">
+        <div className="flex snap-x snap-mandatory pb-4 select-none">
           {directions.map((direction, index) => (
             <div 
               key={index}
               className="flex-shrink-0 w-full snap-start"
             >
-              <div className="bg-[#141414] rounded-[40px] p-4 shadow-lg">
+              <div className="w-full">
                 <h3 className="text-lg font-diatype-mono font-normal text-white mb-4 text-center">
                   {direction.title}
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-4 gap-8 md:gap-16">
                   {direction.images.map((image, phoneIndex) => (
                     <div 
                       key={phoneIndex}
@@ -211,7 +211,7 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
                       <img 
                         src={image} 
                         alt={`${direction.alt} - screen ${phoneIndex + 1}`}
-                        className="w-auto h-auto max-h-[700px] md:max-h-[600px] lg:max-h-[700px] rounded-[20px] object-contain pointer-events-none"
+                        className="w-auto h-auto max-h-[812px] rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out border-[20px] border-[#141414] object-contain pointer-events-none"
                       />
                     </div>
                   ))}
