@@ -1,4 +1,24 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { ImageCredit } from './ImageCredit';
+
+// Custom cursor styles
+const cursorStyles = `
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 300ms ease;
+    transform: translate(-50%, -50%);
+  }
+  
+  .custom-cursor.hover {
+    transform: translate(-50%, -50%) scale(3);
+  }
+`;
 
 interface DirectionCarouselProps {
   directions: {
@@ -17,6 +37,8 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
   const [lastX, setLastX] = useState(0);
   const [lastTime, setLastTime] = useState(0);
   const [currentDirection, setCurrentDirection] = useState(0);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
@@ -179,15 +201,46 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
     }
   };
 
+  // Custom cursor handlers
+  const handleCursorMove = (e: React.MouseEvent) => {
+    setCursorPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleCursorEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleCursorLeave = () => {
+    setIsHovering(false);
+  };
+
   return (
     <div className="w-full">
+      {/* Custom cursor */}
+      <style>{cursorStyles}</style>
+      <div 
+        className={`custom-cursor ${isHovering ? 'hover' : ''}`}
+        style={{
+          left: cursorPosition.x,
+          top: cursorPosition.y,
+          display: isHovering ? 'block' : 'none'
+        }}
+      />
+      
       <div 
         ref={scrollRef}
-        className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none"
+        className="overflow-x-auto scrollbar-hide cursor-none select-none"
         onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
+        onMouseMove={(e) => {
+          handleMouseMove(e);
+          handleCursorMove(e);
+        }}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseLeave={(e) => {
+          handleMouseUp();
+          handleCursorLeave();
+        }}
+        onMouseEnter={handleCursorEnter}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -202,7 +255,7 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
                 <h3 className="text-lg font-diatype-mono font-normal text-white mb-4 text-center">
                   {direction.title}
                 </h3>
-                <div className="grid grid-cols-4 gap-8 md:gap-16">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-8 xl:gap-16">
                   {direction.images.map((image, phoneIndex) => (
                     <div 
                       key={phoneIndex}
@@ -211,11 +264,25 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
                       <img 
                         src={image} 
                         alt={`${direction.alt} - screen ${phoneIndex + 1}`}
-                        className="w-auto h-auto max-h-[812px] rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out border-[20px] border-[#141414] object-contain pointer-events-none"
+                        className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out border-[8px] md:border-[12px] lg:border-[16px] xl:border-[20px] border-[#141414] object-contain pointer-events-none"
                       />
                     </div>
                   ))}
                 </div>
+                
+                {/* Credit for Direction 2 */}
+                {index === 1 && (
+                  <div className="flex justify-center mt-4">
+                    <ImageCredit credit="Joshua Philippe" />
+                  </div>
+                )}
+                
+                {/* Credit for Direction 3 */}
+                {index === 2 && (
+                  <div className="flex justify-center mt-4">
+                    <ImageCredit credit="Logan" />
+                  </div>
+                )}
               </div>
             </div>
           ))}

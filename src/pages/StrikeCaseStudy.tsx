@@ -26,7 +26,15 @@ import buyBitcoin from '../assets/images/Buybitcoin.gif';
 import r1d1Home from '../assets/images/r1d1-home.png';
 import r1d1Btc from '../assets/images/r1d1-btc.png';
 import r1d1Transfer from '../assets/images/r1d1transfer.png';
-import r1d1Remit from '../assets/images/r1d1-remit.png';
+import r1d1Home2 from '../assets/images/r1d1-home2.gif';
+import r1d12Money from '../assets/images/r1d12-Money.png';
+import r1d2Bitcoin from '../assets/images/r1d2-Bitcoin.png';
+import r1d2Menu from '../assets/images/r1d2-Menu.png';
+import r1d2Valid from '../assets/images/r1d2-Valid.png';
+import r1d31 from '../assets/images/r1d3-1.png';
+import r1d32 from '../assets/images/r1d3-2.png';
+import r1d33 from '../assets/images/r1d3-3.png';
+import r1d34 from '../assets/images/r1d3-4.png';
 import { DirectionCarousel } from '../components/DirectionCarousel';
 
 export function StrikeCaseStudy() {
@@ -207,7 +215,7 @@ export function StrikeCaseStudy() {
           
           {/* Phone grid - reusing hero section behavior */}
           <div className="w-full">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-8 xl:gap-12">
               {[
                 { image: oldHometab, alt: 'Old home tab' },
                 { image: oldAccountTab, alt: 'Old account tab' },
@@ -221,7 +229,7 @@ export function StrikeCaseStudy() {
                     <img 
                       src={item.image} 
                       alt={item.alt}
-                      className="w-auto h-auto max-h-[812px] rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer border-[20px] border-[#141414]"
+                      className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer border-[8px] md:border-[12px] lg:border-[16px] xl:border-[20px] border-[#141414]"
                       onClick={() => openOldPhoneLightbox(index)}
                     />
                   ) : (
@@ -371,17 +379,17 @@ export function StrikeCaseStudy() {
                   From there, we built a system map. For me, that's like laying the foundation of a house. Without it, you risk jumping into high-fidelity screens without knowing how the rooms connect.
                 </p>
                 <div>
-                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey mb-4">
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-white mb-4">
                     The system map:
                   </p>
                   <div className="space-y-4">
-                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-white">
                       • Aligned the team on how the app should be organized
                     </p>
-                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-white">
                       • Helped us spot potential conflicts early
                     </p>
-                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    <p className="text-[1.6rem] leading-[1.6] font-diatype text-white">
                       • Became a single source of truth we could refer back to when details got messy
                     </p>
                   </div>
@@ -444,11 +452,18 @@ export function StrikeCaseStudy() {
             
             {/* Bitcoin GIF */}
             <div className="flex justify-center lg:justify-end">
-              <img 
-                src={buyBitcoin} 
-                alt="Bitcoin purchase animation"
-                className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
-              />
+              <a 
+                href="https://shotopop.com/strike" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src={buyBitcoin} 
+                  alt="Bitcoin purchase animation"
+                  className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
+                />
+              </a>
             </div>
           </div>
           
@@ -466,13 +481,13 @@ export function StrikeCaseStudy() {
       {/* Three Design Directions section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-6 md:px-12 lg:px-24 max-w-[1680px] mx-auto">
-                    <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
-            Three Design Directions
-          </h2>
-          <div className="space-y-6 mb-12">
-              <p className="text-[1.6rem] leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype text-secondary-grey">
-                Once we were confident in the content, we stepped into mid-fidelity designs. We ran two rounds of explorations, each time creating three distinct directions.
-              </p>
+                    <div className="space-y-6 mb-24">
+                              <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype font-light text-white">
+                  Once we were confident in the content and architecture, we stepped into mid-fidelity designs.
+                </p>
+                <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype font-light text-white">
+                  We ran two rounds of explorations, each time creating three distinct directions.
+                </p>
               <p className="text-[1.6rem] leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl font-diatype text-secondary-grey">
                 Why three? We had three designers focusing on visuals at that stage, and giving each person a direction allowed us to explore more ground. Leadership would pick a favorite, and we'd refine it further in the next round. There were no heated debates, just collaborative discussions and healthy feedback loops.
               </p>
@@ -490,21 +505,49 @@ export function StrikeCaseStudy() {
               directions={[
               {
                 title: "Direction 1",
-                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                images: [r1d1Home2, r1d1Home, r1d1Btc, r1d1Transfer],
                 alt: "Design direction 1 showing app screens"
               },
               {
                 title: "Direction 2", 
-                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                images: [r1d12Money, r1d2Bitcoin, r1d2Menu, r1d2Valid],
                 alt: "Design direction 2 showing app screens"
               },
               {
                 title: "Direction 3",
-                images: [r1d1Home, r1d1Btc, r1d1Transfer, r1d1Remit],
+                images: [r1d31, r1d32, r1d33, r1d34],
                 alt: "Design direction 3 showing app screens"
               }
             ]}
           />
+          
+          {/* Title and keyline with left margin for Round 2 */}
+          <div className="mb-12 md:mb-16 mt-20 md:mt-24">
+            <div className="w-16 h-px bg-[#FFC4C4] mb-6"></div>
+            <h3 className="text-[2rem] font-diatype-mono font-normal text-white">
+              Round 2
+            </h3>
+          </div>
+          
+          <DirectionCarousel 
+            directions={[
+            {
+              title: "Direction 1",
+              images: [r1d1Home2, r1d1Home, r1d1Btc, r1d1Transfer],
+              alt: "Design direction 1 showing app screens"
+            },
+            {
+              title: "Direction 2", 
+              images: [r1d12Money, r1d2Bitcoin, r1d2Menu, r1d2Valid],
+              alt: "Design direction 2 showing app screens"
+            },
+            {
+              title: "Direction 3",
+              images: [r1d31, r1d32, r1d33, r1d34],
+              alt: "Design direction 3 showing app screens"
+            }
+          ]}
+        />
         </div>
       </section>
     </div>
