@@ -9,7 +9,8 @@ export default {
         fountain: '#FFCE5E',
         strike: '#FFEDED',
         hero: '#BBFFCD',
-        aioz: '#EBF5EC'
+        aioz: '#EBF5EC',
+        'secondary-grey': 'rgba(255, 255, 255, 0.64)'
       },
       fontFamily: {
         'diatype': ['"ABC Diatype"', 'sans-serif'],

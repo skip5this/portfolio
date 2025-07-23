@@ -1,5 +1,21 @@
 @font-face {
   font-family: 'ABC Diatype Mono';
+  src: url('/fonts/ABCDiatypeMono-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype Mono';
+  src: url('/fonts/ABCDiatypeMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype Mono';
   src: url('/fonts/ABCDiatypeMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
@@ -72,4 +88,14 @@
 /* Custom Lightbox Styling */
 .yarl__root {
   --yarl__color_backdrop: #3C3C3C !important;
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }
