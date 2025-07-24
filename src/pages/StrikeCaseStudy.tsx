@@ -35,13 +35,33 @@ import r1d31 from '../assets/images/r1d3-1.png';
 import r1d32 from '../assets/images/r1d3-2.png';
 import r1d33 from '../assets/images/r1d3-3.png';
 import r1d34 from '../assets/images/r1d3-4.png';
+import r2d11 from '../assets/images/r2d1-1.png';
+import r2d12 from '../assets/images/r2d1-2.png';
+import r2d21 from '../assets/images/r2d2-1.png';
+import r2d22 from '../assets/images/r2d2-2.png';
+import r2d31 from '../assets/images/r2d3-1.png';
+import r2d32 from '../assets/images/r2d3-2.png';
+import planeTransition from '../assets/images/plane-transition.png';
+import wallPosters from '../assets/images/wallposters.png';
+import splashes from '../assets/images/splashes.png';
+import typeImage from '../assets/images/type.png';
+import accessibilityImage from '../assets/images/accessability.png';
+import semanticImage from '../assets/images/semantic.png';
+import tokensImage from '../assets/images/tokens.png';
+import annotationImage from '../assets/images/Annotation.png';
+import roadmapImage from '../assets/images/roadmap.png';
+import appInPhoneImage from '../assets/images/appinphone.png';
+import bootScreenImage from '../assets/images/bootscreen.png';
 import { DirectionCarousel } from '../components/DirectionCarousel';
+import { Round2Carousel } from '../components/Round2Carousel';
 
 export function StrikeCaseStudy() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [oldPhoneLightboxOpen, setOldPhoneLightboxOpen] = useState(false);
   const [oldPhoneLightboxIndex, setOldPhoneLightboxIndex] = useState(0);
+  const [designSystemLightboxOpen, setDesignSystemLightboxOpen] = useState(false);
+  const [designSystemLightboxIndex, setDesignSystemLightboxIndex] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -76,6 +96,11 @@ export function StrikeCaseStudy() {
   const openOldPhoneLightbox = (index: number) => {
     setOldPhoneLightboxIndex(index);
     setOldPhoneLightboxOpen(true);
+  };
+
+  const openDesignSystemLightbox = (index: number) => {
+    setDesignSystemLightboxIndex(index);
+    setDesignSystemLightboxOpen(true);
   };
 
   return (
@@ -136,6 +161,20 @@ export function StrikeCaseStudy() {
             { src: oldAccountTab },
             { src: oldLightning },
             { src: oldModal }
+          ]}
+        />
+
+        {/* Design System Lightbox */}
+        <Lightbox
+          open={designSystemLightboxOpen}
+          close={() => setDesignSystemLightboxOpen(false)}
+          index={designSystemLightboxIndex}
+          slides={[
+            { src: tokensImage },
+            { src: semanticImage },
+            { src: accessibilityImage },
+            { src: typeImage },
+            { src: annotationImage }
           ]}
         />
       </section>
@@ -327,6 +366,8 @@ export function StrikeCaseStudy() {
               </div>
             </div>
           </div>
+
+
         </div>
       </section>
 
@@ -529,25 +570,313 @@ export function StrikeCaseStudy() {
             </h3>
           </div>
           
-          <DirectionCarousel 
+          <Round2Carousel 
             directions={[
-            {
-              title: "Direction 1",
-              images: [r1d1Home2, r1d1Home, r1d1Btc, r1d1Transfer],
-              alt: "Design direction 1 showing app screens"
-            },
-            {
-              title: "Direction 2", 
-              images: [r1d12Money, r1d2Bitcoin, r1d2Menu, r1d2Valid],
-              alt: "Design direction 2 showing app screens"
-            },
-            {
-              title: "Direction 3",
-              images: [r1d31, r1d32, r1d33, r1d34],
-              alt: "Design direction 3 showing app screens"
-            }
-          ]}
-        />
+              {
+                title: "Direction 1\nSwiss Army Knife",
+                summary: "Planes as \"Cards\". Cards have preview and full states that allow for progressive disclosure (i.e, reduces cognitive overload). No real navigation, all content takes place on \"one page\". Secondary card surfaces are transparent that emphasize the layers. Background illustration will change between \"Dollars\" and \"Bitcoin\" to better help the user understand they are in a different \"section\".",
+                ratings: [
+                  {
+                    goal: "Increase volume to monetized features including Global Send, Pay in Store, and Buy Bitcoin.",
+                    rating: 4
+                  },
+                  {
+                    goal: "Make it easier for users to know at a single glance what all the key features of Strike are (e.g., Swiss army knife)",
+                    rating: 5
+                  },
+                  {
+                    goal: "Develop a new framework that better differentiates between Cash and Bitcoin so users aren't confused as to what currency they are sending / requesting.",
+                    rating: 4
+                  },
+                  {
+                    goal: "Develop a new information architecture that will gracefully scale to accommodate at least 3 new (not cash or bitcoin related) features",
+                    rating: 5
+                  }
+                ],
+                leftImage: r2d11,
+                rightImage: r2d12,
+                alt: "Design direction 1 showing app screens"
+              },
+              {
+                title: "Direction 2\nRestrained",
+                summary: "Planes as 'Pages'. Pages are one long scroll, there is no preview / full state. Primary and secondary actions are dictated by order of reveal. Visual transition between pages (friction) helps user better understand shift between Cash and Bitcoin. Restrained visual approach, no cards or surfaces. Pills are used to indicate 'pages' and 'categories'. Developing micro-animations and transitions between pages and cards will help us better convey to the user a change is taking place within app if we pursue a more minimal facing app aesthetic.",
+                ratings: [
+                  {
+                    goal: "Increase volume to monetized features including Global Send, Pay in Store, and Buy Bitcoin.",
+                    rating: 3
+                  },
+                  {
+                    goal: "Make it easier for users to know at a single glance what all the key features of Strike are (e.g., Swiss army knife)",
+                    rating: 2
+                  },
+                  {
+                    goal: "Develop a new framework that better differentiates between Cash and Bitcoin so users aren't confused as to what currency they are sending / requesting.",
+                    rating: 5
+                  },
+                  {
+                    goal: "Develop a new information architecture that will gracefully scale to accommodate at least 3 new (not cash or bitcoin related) features",
+                    rating: 3
+                  }
+                ],
+                leftImage: r2d21,
+                rightImage: r2d22,
+                alt: "Design direction 2 showing app screens"
+              },
+              {
+                title: "Direction 3\nPower Bar",
+                summary: "Planes as \"tabs\". \"Power bar\" breaks app into two distinct sections, should have some element of personalization that allows us to serve up repeated actions. All primary actions / information are displayed in card surfaces, all secondary actions are in labels.",
+                ratings: [
+                  {
+                    goal: "Increase volume to monetized features including Global Send, Pay in Store, and Buy Bitcoin.",
+                    rating: 5
+                  },
+                  {
+                    goal: "Make it easier for users to know at a single glance what all the key features of Strike are (e.g., Swiss army knife)",
+                    rating: 4
+                  },
+                  {
+                    goal: "Develop a new framework that better differentiates between Cash and Bitcoin so users aren't confused as to what currency they are sending / requesting.",
+                    rating: 5
+                  },
+                  {
+                    goal: "Develop a new information architecture that will gracefully scale to accommodate at least 3 new (not cash or bitcoin related) features",
+                    rating: 3
+                  }
+                ],
+                leftImage: r2d31,
+                rightImage: r2d32,
+                alt: "Design direction 3 showing app screens"
+              }
+            ]}
+          />
+          
+          {/* Plane Transition Image */}
+          <div className="mt-32 md:mt-40">
+            <img 
+              src={planeTransition} 
+              alt="Plane transition showing design evolution"
+              className="w-full h-auto object-contain rounded-lg"
+            />
+            
+            {/* Caption and Credit */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-sm">
+                Direction 2 transition experiments
+              </div>
+              <div className="text-secondary-grey font-diatype-mono text-sm">
+                Credit: Joshua Philippe
+              </div>
+            </div>
+          </div>
+
+          {/* Wall Posters Image */}
+          <div className="mt-32 md:mt-40">
+            <img 
+              src={wallPosters} 
+              alt="Wall posters showing design concepts"
+              className="w-full h-auto object-contain rounded-lg"
+            />
+            {/* Caption and Credit */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-sm">
+                Design concept posters
+              </div>
+              <div className="text-secondary-grey font-diatype-mono text-sm">
+                Credit: <a href="https://theafrix.co/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">The Afrix</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Evolving the Design System section */}
+          <div className="mt-32 md:mt-40">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Text content */}
+              <div>
+                <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
+                  Evolving the Design System
+                </h2>
+                <div className="space-y-6">
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    While we were exploring visuals and flows, we were also rethinking the design system. Thankfully, the old app—even if it wasn't the most beautiful—had a solid foundation. We took what worked, like the semantic color system, and typography stack we'd already built, and evolved it into something sharper and more modern.
+                  </p>
+                  
+                  <div>
+                    <h3 className="text-white font-diatype font-medium mb-4 text-[1.8rem]">We created:</h3>
+                    <ul className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
+                        <span>A robust color system with semantic tokens</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
+                        <span>A refined typography scale</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
+                        <span>Components tested for accessibility</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
+                        <span>Documentation to help engineering bring it all to life</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    There were debates over details—like how to handle table rows and specific UI patterns—but we worked through them as a team. In the end, we left the design system in a much stronger place.
+                  </p>
+                </div>
+              </div>
+              
+              {/* Splashes illustration */}
+              <div className="flex justify-center lg:justify-end">
+                <img 
+                  src={splashes} 
+                  alt="Abstract splashes illustration"
+                  className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Design System 2x2 Grid */}
+          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-6">
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <img 
+                  src={tokensImage} 
+                  alt="Design tokens and components"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(0)}
+                />
+              </div>
+              <div>
+                <img 
+                  src={semanticImage} 
+                  alt="Semantic color system"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(1)}
+                />
+              </div>
+              <div>
+                <img 
+                  src={accessibilityImage} 
+                  alt="Accessibility guidelines and testing"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(2)}
+                />
+              </div>
+              <div>
+                <img 
+                  src={typeImage} 
+                  alt="Typography system specifications"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(3)}
+                />
+              </div>
+              <div className="col-span-2">
+                <img 
+                  src={annotationImage} 
+                  alt="Design system annotations"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(4)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Wearing Two Hats section */}
+          <div className="mt-32 md:mt-40">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Text content */}
+              <div>
+                <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
+                  Wearing Two Hats
+                </h2>
+                <div className="space-y-6">
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    One of my biggest challenges—and biggest learnings—was balancing my role as both design leader and hands-on designer.
+                  </p>
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    I ran the project like clockwork: regular check-ins, clear schedules, and structured roadmaps. It gave me space to jump into design myself—to push pixels and contribute screens alongside.
+                  </p>
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    We synced closely with product to keep everything connected and ensure our work could actually be built.
+                  </p>
+                </div>
+              </div>
+              
+              {/* Splashes illustration */}
+              <div className="flex justify-center lg:justify-end">
+                <img 
+                  src={splashes} 
+                  alt="Abstract splashes illustration"
+                  className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Q1 2024 Roadmap */}
+          <div className="mt-32 md:mt-40">
+            <img 
+              src={roadmapImage} 
+              alt="Q1 2024 Mobile bluesky sprint roadmap"
+              className="w-full h-auto object-contain rounded-lg"
+            />
+          </div>
+
+          {/* Navigating Curveballs section */}
+          <div className="mt-32 md:mt-40">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Text content */}
+              <div>
+                <h2 className="text-[2rem] font-diatype-mono font-normal text-white mb-8">
+                  Navigating Curveballs
+                </h2>
+                <div className="space-y-6">
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    Halfway through, we hit two big curveballs: Layoffs reduced our product design team from five to three.
+                  </p>
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    A brand-new initiative landed on our plate: launching Strike in 65 additional countries and building a global wallet.
+                  </p>
+                  <p className="text-[1.6rem] leading-[1.6] font-diatype text-secondary-grey">
+                    It would have been easy to feel overwhelmed. But the team stayed motivated. We were excited about what we were building, and that sense of shared purpose kept us going—even during long days and high-pressure moments.
+                  </p>
+                </div>
+              </div>
+              
+              {/* Splashes illustration */}
+              <div className="flex justify-center lg:justify-end">
+                <img 
+                  src={splashes} 
+                  alt="Abstract splashes illustration"
+                  className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* App Icon and Boot Screen */}
+          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-6">
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <img 
+                  src={appInPhoneImage} 
+                  alt="Strike app icon in phone interface"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                />
+              </div>
+              <div>
+                <img 
+                  src={bootScreenImage} 
+                  alt="Strike app boot screen"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
