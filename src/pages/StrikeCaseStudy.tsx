@@ -374,6 +374,24 @@ export function StrikeCaseStudy() {
         </div>
       </section>
 
+      {/* Bitcoin hand separator */}
+      <div className="bg-black">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto flex justify-center">
+          <a 
+            href="https://shotopop.com/strike" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src={buyBitcoin} 
+              alt="Bitcoin purchase animation"
+              className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
+            />
+          </a>
+        </div>
+      </div>
+
       {/* Finding Clarity section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
