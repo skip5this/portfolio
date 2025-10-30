@@ -54,6 +54,9 @@ import appInPhoneImage from '../assets/images/appinphone.png';
 import bootScreenImage from '../assets/images/bootscreen.png';
 import systemMap2 from '../assets/images/system-map2.png';
 import midfi2 from '../assets/images/midfi-2.png';
+import bottomRowExps from '../assets/images/BottomRowExps.png';
+import testflightImage from '../assets/images/testflight.png';
+import storybookImage from '../assets/images/Storybook and project tracker.png';
 import { DirectionCarousel } from '../components/DirectionCarousel';
 import { Round2Carousel } from '../components/Round2Carousel';
 
@@ -232,11 +235,11 @@ export function StrikeCaseStudy() {
                     <img 
                       src={item.image} 
                       alt={item.alt}
-                      className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer border-[8px] md:border-[12px] lg:border-[16px] xl:border-[20px] border-[#141414]"
+                      className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer border-[4px] md:border-[8px] lg:border-[12px] xl:border-[16px] border-[#141414]"
                       onClick={() => openOldPhoneLightbox(index)}
                     />
                   ) : (
-                    <div className="w-auto h-auto max-h-[812px] bg-gray-800 rounded-[40px] flex items-center justify-center border-[20px] border-[#141414]">
+                    <div className="w-auto h-auto max-h-[812px] bg-gray-800 rounded-[40px] flex items-center justify-center border-[4px] md:border-[8px] lg:border-[12px] xl:border-[16px] border-[#141414]">
                       <span className="text-gray-400 text-sm">{item.alt}</span>
                     </div>
                   )}
@@ -289,7 +292,7 @@ export function StrikeCaseStudy() {
       {/* Stepping Up section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -335,7 +338,7 @@ export function StrikeCaseStudy() {
           </div>
           
           {/* Venn diagram and goals */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             {/* Venn diagram */}
             <div className="flex justify-center lg:justify-start h-full">
               <img 
@@ -395,7 +398,7 @@ export function StrikeCaseStudy() {
       {/* Finding Clarity section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -430,7 +433,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* System map image and text in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-6">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -481,7 +484,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* Text and Wireframe image in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-16 md:mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-16 md:mb-24">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -718,8 +721,8 @@ export function StrikeCaseStudy() {
           </div>
 
           {/* Design System 2x2 Grid */}
-          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-6">
-            <div className="grid grid-cols-2 gap-6">
+          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
               <div>
                 <img 
                   src={tokensImage} 
@@ -813,8 +816,8 @@ export function StrikeCaseStudy() {
           </div>
 
           {/* App Icon and Boot Screen */}
-          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-6">
-            <div className="grid grid-cols-2 gap-6">
+          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
               <div>
                 <img 
                   src={appInPhoneImage} 
@@ -828,6 +831,90 @@ export function StrikeCaseStudy() {
                   alt="Strike app boot screen"
                   className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Learning the Hard Way section */}
+      <section className="bg-black text-white py-20 md:py-32">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl">
+            <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
+              Learning the Hard Way
+            </h2>
+            <div className="space-y-8">
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Not everything went smoothly.
+              </p>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                During QA, we tried an experimental bottom navigation. It was a single flipper button to switch between pages. We thought it was clever. Engineering hated it.
+              </p>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Even though we tested it with users, the sample size was too small, and we were a little blinded by how cool we thought it was. Eventually, we admitted the truth: sometimes clarity beats cleverness. We switched back to a standard bottom nav. It was the right call.
+              </p>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                If I could go back, I'd skip the fancy nav entirely. I've learned it's better to be clear than clever.
+              </p>
+            </div>
+          </div>
+          
+          {/* Bottom row experiments image */}
+          <div className="mt-40 md:mt-48 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+            <img 
+              src={bottomRowExps} 
+              alt="Bottom navigation design experiments showing Card, Detached Pill, and Attached Tab approaches"
+              className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+            />
+          </div>
+
+          {/* TestFlight and Storybook images */}
+          <div className="mt-16 md:mt-24 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+              <img 
+                src={testflightImage} 
+                alt="TestFlight app showing Strike app builds"
+                className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+              />
+              <img 
+                src={storybookImage} 
+                alt="Storybook component library and project tracker"
+                className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Launch and looking back section */}
+      <section className="bg-black text-white py-20 md:py-32">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            {/* Text content */}
+            <div>
+              <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
+                Launch and looking back
+              </h2>
+              <div className="space-y-8">
+                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                  We made it. We launched on time. And seeing the new app live in the App Store—now with a 4.8-star rating—felt incredible.
+                </p>
+                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                  One of the proudest moments was watching Jack Mallers present our designs on stage at Bitcoin 2023. Seeing our screens up there, larger than life felt surreal.
+                </p>
+              </div>
+            </div>
+            
+            {/* Statistics box */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="bg-[#FFC4C4] rounded-[40px] md:rounded-[50px] lg:rounded-[60px] p-12 md:p-16 lg:p-20 xl:p-24 flex flex-col items-center justify-center min-w-[280px] md:min-w-[320px] lg:min-w-[380px] xl:min-w-[420px]">
+                <div className="text-black font-diatype font-medium text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4">
+                  4.8 / 5
+                </div>
+                <div className="text-black font-diatype text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                  21k reviews
+                </div>
               </div>
             </div>
           </div>
