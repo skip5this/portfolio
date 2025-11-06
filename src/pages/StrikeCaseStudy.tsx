@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
@@ -57,6 +57,9 @@ import midfi2 from '../assets/images/midfi-2.png';
 import bottomRowExps from '../assets/images/BottomRowExps.png';
 import testflightImage from '../assets/images/testflight.png';
 import storybookImage from '../assets/images/Storybook and project tracker.png';
+import fixTheMoneyWhite from '../assets/images/Fix the money white.png';
+import manuelaImage from '../assets/images/Manuela.png';
+import spotGif from '../assets/images/Spot.gif';
 import { DirectionCarousel } from '../components/DirectionCarousel';
 import { Round2Carousel } from '../components/Round2Carousel';
 
@@ -69,6 +72,8 @@ export function StrikeCaseStudy() {
   const [designSystemLightboxIndex, setDesignSystemLightboxIndex] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [quoteRotation, setQuoteRotation] = useState(-2);
+  const testimonialsSectionRef = useRef<HTMLDivElement>(null);
 
   const images = [strike1, strike2, strike3, strike4];
   const lightboxSlides = images.map(src => ({ src }));
@@ -92,6 +97,50 @@ export function StrikeCaseStudy() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Handle quote box rotation on scroll
+  useEffect(() => {
+    const handleQuoteRotation = () => {
+      if (!testimonialsSectionRef.current) return;
+
+      const section = testimonialsSectionRef.current;
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const viewportCenter = windowHeight / 2;
+      
+      // Calculate section position
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      const sectionCenter = sectionTop + sectionHeight / 2;
+      
+      // Calculate distance from section center to viewport center
+      // When section center is above viewport center, rotation starts at -2
+      // When section center is below viewport center, rotation ends at +2
+      const distanceFromCenter = sectionCenter - viewportCenter;
+      
+      // Normalize the distance: use section height + viewport height as the range
+      const maxDistance = (sectionHeight + windowHeight) / 2;
+      const normalizedDistance = distanceFromCenter / maxDistance;
+      
+      // Map normalized distance to rotation: -1 to +1 maps to -2 to +2 degrees
+      let progress = (normalizedDistance + 1) / 2; // Convert from [-1, 1] to [0, 1]
+      
+      // Clamp progress between 0 and 1
+      progress = Math.max(0, Math.min(1, progress));
+      
+      // Map from -2 to +2 degrees
+      const rotation = -2 + (progress * 4);
+      setQuoteRotation(rotation);
+    };
+
+    window.addEventListener('scroll', handleQuoteRotation, { passive: true });
+    window.addEventListener('resize', handleQuoteRotation, { passive: true });
+    handleQuoteRotation(); // Initial calculation
+    return () => {
+      window.removeEventListener('scroll', handleQuoteRotation);
+      window.removeEventListener('resize', handleQuoteRotation);
+    };
+  }, []);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -274,15 +323,14 @@ export function StrikeCaseStudy() {
               alt="Strike banner" 
               className="w-auto h-auto object-contain"
             />
-            <div className="mt-0 w-full flex justify-end">
-              <a 
-                href="https://theafrix.co/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <ImageCredit credit="The Afrix" />
-              </a>
+            {/* Caption and Credit */}
+            <div className="flex justify-between items-center mt-2 w-full">
+              <div className="text-white font-diatype-mono text-xs">
+                Example of the new Strike branding
+              </div>
+              <div className="text-gray-400 font-diatype-mono text-xs">
+                Credit: <a href="https://theafrix.co/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">The Afrix</a>
+              </div>
             </div>
           </div>
         </div>
@@ -901,14 +949,14 @@ export function StrikeCaseStudy() {
                   We made it. We launched on time. And seeing the new app live in the App Store—now with a 4.8-star rating—felt incredible.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  One of the proudest moments was watching Jack Mallers present our designs on stage at Bitcoin 2023. Seeing our screens up there, larger than life felt surreal.
+                  One of the proudest moments was watching <a href="https://www.youtube.com/watch?v=GbbRSsp4ocs&t=1045s" target="_blank" rel="noopener noreferrer" className="text-white hover:underline transition-colors">Jack Mallers present our designs on stage at the Bitcoin 2023 Conference</a>. Seeing our screens up there, larger than life felt surreal.
                 </p>
               </div>
             </div>
             
             {/* Statistics box */}
             <div className="flex justify-center lg:justify-end">
-              <div className="bg-[#FFC4C4] rounded-[40px] md:rounded-[50px] lg:rounded-[60px] p-12 md:p-16 lg:p-20 xl:p-24 flex flex-col items-center justify-center min-w-[280px] md:min-w-[320px] lg:min-w-[380px] xl:min-w-[420px]">
+              <div className="bg-strike rounded-[40px] md:rounded-[50px] lg:rounded-[60px] p-12 md:p-16 lg:p-20 xl:p-24 flex flex-col items-center justify-center min-w-[280px] md:min-w-[320px] lg:min-w-[380px] xl:min-w-[420px]">
                 <div className="text-black font-diatype font-medium text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4">
                   4.8 / 5
                 </div>
@@ -917,6 +965,134 @@ export function StrikeCaseStudy() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What I learned section */}
+      <section className="bg-black text-white py-20 md:py-32">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl">
+            <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
+              What I learned
+            </h2>
+            <div className="space-y-8">
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Leading the Strike mobile rebrand taught me a few things:
+              </p>
+              <ul className="space-y-2 text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <li className="flex items-start">
+                  <span className="mr-3 flex-shrink-0 mt-0 text-secondary-grey">•</span>
+                  <span><span className="text-white">Start alignment early.</span> It saves time later.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-3 flex-shrink-0 mt-0 text-secondary-grey">•</span>
+                  <span><span className="text-white">Clarity beats cleverness.</span> Every time.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-3 flex-shrink-0 mt-0 text-secondary-grey">•</span>
+                  <span><span className="text-white">You can balance leading and designing.</span> If you build good systems, both roles thrive.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-3 flex-shrink-0 mt-0 text-secondary-grey">•</span>
+                  <span><span className="text-white">Even big curveballs are manageable</span> when you have a team united by purpose.</span>
+                </li>
+              </ul>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Mostly, I learned I can lead big, complex projects, and that I can have fun doing it.
+              </p>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                I'm proud of what we built. And I'm even more excited for what comes next.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials and Graphics section */}
+      <section ref={testimonialsSectionRef} className="bg-black text-white py-20 md:py-32">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 items-stretch">
+            {/* Top-left: Manuela Rios Testimonial */}
+            <div 
+              className="md:col-span-2 bg-strike rounded-3xl md:rounded-[40px] p-8 md:p-10 lg:p-12 transition-transform duration-300 ease-out"
+              style={{ transform: `rotate(${quoteRotation}deg)` }}
+            >
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-diatype font-medium text-gray-700">
+                  The bottom line is that any company would be lucky to work with Scott.
+                </h3>
+                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                  I worked directly with Scott at Strike from 2021 to 2023. Scott's dedication to his craft, exceptional work ethic, and keen eye for design make him a standout professional in the industry. His expertise in UI design, design systems, and UX is truly remarkable, but what sets him apart is his innate ability to lead projects from inception to completion through great collaboration and effective project management.
+                </p>
+                <p className="text-sm md:text-base font-diatype text-gray-700">
+                  Manuela Rios - President at Strike
+                </p>
+              </div>
+            </div>
+
+            {/* Top-right: Manuela Rios Poster */}
+            <div className="flex items-stretch justify-center md:justify-end">
+              <img 
+                src={manuelaImage} 
+                alt="Manuela Rios spotlight poster" 
+                className="w-full h-full rounded-3xl md:rounded-[40px] object-cover"
+                style={{ objectPosition: 'top right' }}
+              />
+            </div>
+
+            {/* Bottom-left: Fix the money graphic */}
+            <div className="flex items-stretch justify-center md:justify-start">
+              <img 
+                src={fixTheMoneyWhite} 
+                alt="Fix the money, fix the world" 
+                className="w-full h-full rounded-3xl md:rounded-[40px] object-cover"
+              />
+            </div>
+
+            {/* Bottom-right: Joshua Phillipe Testimonial */}
+            <div 
+              className="md:col-span-2 bg-strike rounded-3xl md:rounded-[40px] p-8 md:p-10 lg:p-12 transition-transform duration-300 ease-out"
+              style={{ transform: `rotate(${quoteRotation}deg)` }}
+            >
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-diatype font-medium text-gray-700">
+                  Scott's impact on the team has been immense.
+                </h3>
+                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                  A highly talented product designer, his creativity, dedication, and work ethic left a lasting mark on Strike. Across both mobile and desktop platforms, he consistently delivered exceptional design work.
+                </p>
+                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                  His easygoing, collaborative nature made him approachable and helped foster a positive, enjoyable work environment. Even under pressure, Scott stayed calm and composed.
+                </p>
+                <p className="text-sm md:text-base font-diatype text-gray-700">
+                  Joshua Phillipe - Head of Design at Fold (ex Strike)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* That's all folks section */}
+      <section className="bg-black text-white py-32 md:py-48 lg:py-64">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          <div className="flex flex-col items-center justify-center space-y-12 md:space-y-16">
+            <a 
+              href="https://shotopop.com/strike" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={spotGif} 
+                alt="Spot character" 
+                className="w-auto h-auto max-w-[200px] md:max-w-[300px]"
+              />
+            </a>
+            <p className="text-sm md:text-base lg:text-lg xl:text-xl font-diatype text-white">
+              That's all folks
+            </p>
           </div>
         </div>
       </section>
