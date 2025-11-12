@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ImageCredit } from './ImageCredit';
+import grabCursor from '../assets/images/Cursor/Grab.svg';
+import grabbedCursor from '../assets/images/Cursor/Grabbed.svg';
 
 // Custom cursor styles
 const cursorStyles = `
@@ -13,10 +15,30 @@ const cursorStyles = `
     z-index: 9999;
     transition: transform 300ms ease;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .custom-cursor.hover {
     transform: translate(-50%, -50%) scale(3);
+  }
+  
+  .custom-cursor img {
+    width: 3px !important;
+    height: 3px !important;
+    max-width: 3px !important;
+    max-height: 3px !important;
+    opacity: 0.9;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  
+  .custom-cursor.hover img {
+    width: 9px !important;
+    height: 9px !important;
+    max-width: 9px !important;
+    max-height: 9px !important;
   }
 `;
 
@@ -223,9 +245,15 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
         style={{
           left: cursorPosition.x,
           top: cursorPosition.y,
-          display: isHovering ? 'block' : 'none'
+          display: isHovering ? 'flex' : 'none'
         }}
-      />
+      >
+        <img 
+          src={isDragging ? grabbedCursor : grabCursor} 
+          alt=""
+          style={{ pointerEvents: 'none' }}
+        />
+      </div>
       
       <div 
         ref={scrollRef}
@@ -255,7 +283,7 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
                 <h3 className="text-lg font-diatype-mono font-normal text-white mb-4 text-center">
                   {direction.title}
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-8 xl:gap-16">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4 xl:gap-6">
                   {direction.images.map((image, phoneIndex) => (
                     <div 
                       key={phoneIndex}
@@ -264,7 +292,7 @@ export function DirectionCarousel({ directions }: DirectionCarouselProps) {
                       <img 
                         src={image} 
                         alt={`${direction.alt} - screen ${phoneIndex + 1}`}
-                        className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out border-[8px] md:border-[12px] lg:border-[16px] xl:border-[20px] border-[#141414] object-contain pointer-events-none"
+                        className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out border-[4px] md:border-[6px] lg:border-[10px] xl:border-[14px] border-[#141414] object-contain pointer-events-none"
                       />
                     </div>
                   ))}

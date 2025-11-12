@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Round2Direction } from './Round2Direction';
+import grabCursor from '../assets/images/Cursor/Grab.svg';
+import grabbedCursor from '../assets/images/Cursor/Grabbed.svg';
 
 // Custom cursor styles
 const cursorStyles = `
@@ -13,10 +15,30 @@ const cursorStyles = `
     z-index: 9999;
     transition: transform 300ms ease;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .custom-cursor.hover {
     transform: translate(-50%, -50%) scale(3);
+  }
+  
+  .custom-cursor img {
+    width: 3px !important;
+    height: 3px !important;
+    max-width: 3px !important;
+    max-height: 3px !important;
+    opacity: 0.9;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  
+  .custom-cursor.hover img {
+    width: 9px !important;
+    height: 9px !important;
+    max-width: 9px !important;
+    max-height: 9px !important;
   }
 `;
 
@@ -232,9 +254,15 @@ export function Round2Carousel({ directions }: Round2CarouselProps) {
         style={{
           left: cursorPosition.x,
           top: cursorPosition.y,
-          display: isHovering ? 'block' : 'none'
+          display: isHovering ? 'flex' : 'none'
         }}
-      />
+      >
+        <img 
+          src={isDragging ? grabbedCursor : grabCursor} 
+          alt=""
+          style={{ pointerEvents: 'none' }}
+        />
+      </div>
       
       <div 
         ref={scrollRef}

@@ -60,6 +60,14 @@ import storybookImage from '../assets/images/Storybook and project tracker.png';
 import fixTheMoneyWhite from '../assets/images/Fix the money white.png';
 import manuelaImage from '../assets/images/Manuela.png';
 import spotGif from '../assets/images/Spot.gif';
+import payInStoreGif from '../assets/images/PayInStore.gif';
+import strikeCircleGuy from '../assets/images/strike-circle-guy.gif';
+import boltGuy from '../assets/images/bolt-guy.gif';
+import balloonsPhoneRight from '../assets/images/Balloonsphoneright.gif';
+import middlePhone from '../assets/images/Middlephone.gif';
+import paperplanePhone from '../assets/images/Paperplanephone.gif';
+import grabCursor from '../assets/images/Cursor/Grab.svg';
+import grabbedCursor from '../assets/images/Cursor/Grabbed.svg';
 import { DirectionCarousel } from '../components/DirectionCarousel';
 import { Round2Carousel } from '../components/Round2Carousel';
 
@@ -236,7 +244,7 @@ export function StrikeCaseStudy() {
       </section>
 
       {/* Introduction section */}
-      <section className="bg-black text-white pt-16 md:pt-24 pb-16 md:pb-24">
+      <section className="bg-black text-white pt-40 md:pt-48 pb-0">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* Strike logo */}
           <div className="mb-8">
@@ -252,13 +260,13 @@ export function StrikeCaseStudy() {
           
           {/* Introduction text */}
           <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
-            Strike is one of the world's leading Bitcoin companies, live in over 100+ countries and trusted by more than 1.5 million users. Its mission is simple but bold: change how money moves across the globe. But our mobile app wasn't keeping up.
+            Strike is one of the world's leading Bitcoin companies, available in over 100 countries and trusted by more than 1.5 million users. Its mission is bold yet simple: to change how money moves globally. But the mobile app had fallen behind—so we were brought in to rebrand it from the ground up.
           </p>
         </div>
       </section>
 
       {/* Phone showcase section */}
-      <section className="bg-black text-white py-20 md:py-32">
+      <section className="bg-black text-white pt-40 md:pt-48 pb-20 md:pb-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* Title and keyline with left margin */}
           <div className="mb-12 md:mb-16">
@@ -338,115 +346,101 @@ export function StrikeCaseStudy() {
       </section>
 
       {/* Stepping Up section */}
-      <section className="bg-black text-white py-20 md:py-32">
+      <section className="bg-black text-white pt-20 md:pt-32 pb-0">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
-            {/* Text content */}
-            <div>
-              <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
-                Stepping Up
-              </h2>
-              <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  I was excited to lead this mobile rebrand. It was one of the biggest projects I'd ever headed up, and I knew it would stretch me as both a designer and a leader.
-                </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  It was fast-paced, demanding, and incredibly fulfilling. We were a small, scrappy team working long days, driven by the belief that we could make something better. It became one of the products I'm most proud of in my career.
-                </p>
-              </div>
+          {/* Illustration */}
+          <div className="flex justify-start mb-12 md:mb-16">
+            <a 
+              href="https://shotopop.com/strike" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={boltCharacter} 
+                alt="Lightning character illustration"
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+              />
+            </a>
+          </div>
+          
+          {/* Text content */}
+          <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl">
+            <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
+              Stepping Up
+            </h2>
+            <div className="space-y-8">
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                I was excited to lead this mobile rebrand. It was one of the biggest projects I'd ever headed up, and I knew it would stretch me as both a designer and a leader.
+              </p>
+              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                It was fast-paced, demanding, and incredibly fulfilling. We were a small, scrappy team working long days, driven by the belief that we could make something better. It became one of the products I'm most proud of in my career.
+              </p>
             </div>
-            
-            {/* Illustration */}
-            <div className="flex justify-center lg:justify-end">
-              <a 
-                href="https://shotopop.com/strike" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <img 
-                  src={boltCharacter} 
-                  alt="Lightning character illustration"
-                  className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
-                />
-              </a>
-            </div>
+          </div>
+          
+          {/* Pink line */}
+          <div className="mt-40 md:mt-48">
+            <div className="w-16 h-px bg-[#FFC4C4]"></div>
           </div>
         </div>
       </section>
 
       {/* Setting the compass section */}
-      <section className="bg-black text-white py-20 md:py-32">
+      <section className="bg-black text-white pt-40 md:pt-48 pb-20 md:pb-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-          {/* Intro paragraph */}
-          <div className="mb-12 md:mb-16">
-            <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl font-diatype font-light text-white">
+          {/* Heading and intro paragraph */}
+          <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl mb-24 md:mb-32">
+            <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
+              Setting the compass
+            </h2>
+            <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
               Before diving in, I believe in setting clear goals. They're the compass that keeps the team aligned and the work focused. For this project, we zeroed in on three:
             </p>
           </div>
           
-          {/* Venn diagram and goals */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
-            {/* Venn diagram */}
-            <div className="flex justify-center lg:justify-start h-full">
-              <img 
-                src={goalsImage} 
-                alt="Project goals venn diagram"
-                className="w-auto h-full max-w-full object-contain"
-              />
-            </div>
-            
+          {/* Goals and Venn diagram */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Goals content */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl md:text-2xl font-diatype-mono font-normal text-white mb-4 tracking-wide">Business Goal</h3>
+                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Business Goal</h3>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Grow volume in features that drive revenue—global send, buying Bitcoin, and spending at merchants.
+                  Grow volume in revenue-driving features: global send, buy Bitcoin, and merchant spend.
                 </p>
               </div>
               
               <div>
-                <h3 className="text-xl md:text-2xl font-diatype-mono font-normal text-white mb-4 tracking-wide">User Goal</h3>
+                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">User Goal</h3>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Help users quickly find what they need so they can send funds, buy Bitcoin, and spend without friction.
+                  Help people find, send, buy, and spend—fast and friction-free.
                 </p>
               </div>
               
               <div>
-                <h3 className="text-xl md:text-2xl font-diatype-mono font-normal text-white mb-4 tracking-wide">Project Goal</h3>
+                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Project Goal</h3>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Create a new app framework that brings the brand to life and makes the experience simpler, clearer, and easier to navigate.
+                  Create an app framework that brings the brand to life while making navigation simpler and clearer.
                 </p>
               </div>
             </div>
+            
+            {/* Venn diagram */}
+            <div className="flex items-center justify-center lg:justify-end">
+              <img 
+                src={goalsImage} 
+                alt="Project goals venn diagram"
+                className="w-auto h-auto max-w-full object-contain"
+              />
+            </div>
           </div>
-
-
         </div>
       </section>
-
-      {/* Bitcoin hand separator */}
-      <div className="bg-black">
-        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto flex justify-center">
-          <a 
-            href="https://shotopop.com/strike" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <img 
-              src={buyBitcoin} 
-              alt="Bitcoin purchase animation"
-              className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
-            />
-          </a>
-        </div>
-      </div>
 
       {/* Finding Clarity section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -454,19 +448,19 @@ export function StrikeCaseStudy() {
               </h2>
               <div className="space-y-8">
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  We used card sorting to understand how people naturally group concepts. The sessions revealed a key insight: we needed to separate the cash (USD/USDT) side of the app from the Bitcoin side.
+                  Card sorting revealed how users naturally grouped concepts — and the insight was simple but powerful: cash (USD/USDT) and Bitcoin needed to live apart.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  These worlds were blended together, creating confusion. Once separated, it felt obvious. This insight led to a visual idea: a card-based UI where cash and Bitcoin lived on separate "planes," yet could still connect when needed.
+                  When these worlds were blended, people got confused. Once separated, the app felt intuitive.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  It offered clarity—and a certain elegance—that felt right for the brand.
+                  That realization inspired a card-based design: two distinct "planes" for cash and Bitcoin—connected when needed, yet clearly their own. Elegant, obvious, right for the brand.
                 </p>
               </div>
             </div>
             
             {/* Card sort image */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex items-center justify-center lg:justify-end">
               <img 
                 src={cardSort} 
                 alt="Card sorting results showing app categories"
@@ -481,7 +475,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* System map image and text in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-6">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -514,7 +508,7 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* System map image */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex items-center justify-center lg:justify-end">
               <img 
                 src={systemMap2} 
                 alt="System map showing app architecture and user flows"
@@ -532,7 +526,7 @@ export function StrikeCaseStudy() {
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
           {/* Text and Wireframe image in two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-16 md:mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-16 md:mb-24">
             {/* Text content */}
             <div>
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
@@ -546,7 +540,7 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* Wireframe image */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex items-center justify-center lg:justify-end">
               <img 
                 src={midfi2} 
                 alt="Mid-fidelity wireframes showing app flows and user journeys"
@@ -563,7 +557,23 @@ export function StrikeCaseStudy() {
       {/* Three Design Directions section */}
       <section className="bg-black text-white py-20 md:py-32">
         <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
-                    <div className="space-y-6 mb-24">
+          {/* Bitcoin hand illustration */}
+          <div className="flex justify-start mb-12 md:mb-16">
+            <a 
+              href="https://shotopop.com/strike" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={buyBitcoin} 
+                alt="Bitcoin purchase animation"
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+              />
+            </a>
+          </div>
+          
+          <div className="space-y-6">
                               <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl font-diatype font-light text-white">
                   Once we were confident in the content and architecture, we stepped into mid-fidelity designs.
                 </p>
@@ -576,7 +586,7 @@ export function StrikeCaseStudy() {
                         </div>
             
             {/* Title and keyline with left margin */}
-            <div className="mb-12 md:mb-16">
+            <div className="mt-40 md:mt-48 mb-12 md:mb-16">
               <div className="w-16 h-px bg-[#FFC4C4] mb-6"></div>
               <h3 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white">
                 Round 1
@@ -604,7 +614,7 @@ export function StrikeCaseStudy() {
           />
           
           {/* Title and keyline with left margin for Round 2 */}
-          <div className="mb-12 md:mb-16 mt-20 md:mt-24">
+          <div className="mb-12 md:mb-16 mt-40 md:mt-48">
             <div className="w-16 h-px bg-[#FFC4C4] mb-6"></div>
             <h3 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white">
               Round 2
@@ -730,6 +740,22 @@ export function StrikeCaseStudy() {
 
           {/* Evolving the Design System section */}
           <div className="mt-40 md:mt-48">
+            {/* Spot gif illustration */}
+            <div className="flex justify-start mb-12 md:mb-16">
+              <a 
+                href="https://shotopop.com/strike" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src={spotGif} 
+                  alt="Spot character"
+                  className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+                />
+              </a>
+            </div>
+            
             <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl">
               <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
                 Evolving the Design System
@@ -825,7 +851,7 @@ export function StrikeCaseStudy() {
                   One of my biggest challenges—and biggest learnings—was balancing my role as both design leader and hands-on designer.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  I ran the project like clockwork: regular check-ins, clear schedules, and structured roadmaps. It gave me space to jump into design myself—to push pixels and contribute screens alongside.
+                  I ran the project like clockwork: <span className="text-white">regular check-ins, clear schedules, and structured roadmaps</span>. It gave me space to jump into design myself—to push pixels and contribute screens alongside.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   We synced closely with product to keep everything connected and ensure our work could actually be built.
@@ -851,10 +877,10 @@ export function StrikeCaseStudy() {
               </h2>
               <div className="space-y-8">
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Halfway through, we hit two big curveballs: Layoffs reduced our product design team from five to three.
+                  Halfway through, we hit two big curveballs: <span className="text-white">Layoffs reduced our product design team from five to three.</span>
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  A brand-new initiative landed on our plate: launching Strike in 65 additional countries and building a global wallet.
+                  A brand-new initiative landed on our plate: <span className="text-white">launching Strike in 65 additional countries</span> and building a global wallet.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   It would have been easy to feel overwhelmed. But the team stayed motivated. We were excited about what we were building, and that sense of shared purpose kept us going—even during long days and high-pressure moments.
@@ -903,7 +929,7 @@ export function StrikeCaseStudy() {
                 Even though we tested it with users, the sample size was too small, and we were a little blinded by how cool we thought it was. Eventually, we admitted the truth: sometimes clarity beats cleverness. We switched back to a standard bottom nav. It was the right call.
               </p>
               <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                If I could go back, I'd skip the fancy nav entirely. I've learned it's better to be clear than clever.
+                If I could go back, I'd skip the fancy nav entirely. I've learned <span className="text-white">it's better to be clear than clever</span>.
               </p>
             </div>
           </div>
@@ -964,6 +990,29 @@ export function StrikeCaseStudy() {
                   21k reviews
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Phone GIFs section */}
+      <section className="bg-black text-white pt-40 md:pt-48 pb-20 md:pb-32">
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+          {/* Phone grid */}
+          <div className="bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+              {[
+                { image: paperplanePhone, alt: 'Paper plane phone animation' },
+                { image: middlePhone, alt: 'Middle phone animation' },
+                { image: balloonsPhoneRight, alt: 'Balloons phone animation' }
+              ].map((item, index) => (
+                <img 
+                  key={index}
+                  src={item.image} 
+                  alt={item.alt}
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                />
+              ))}
             </div>
           </div>
         </div>
