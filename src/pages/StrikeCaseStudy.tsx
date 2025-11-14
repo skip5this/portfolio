@@ -70,6 +70,7 @@ import grabCursor from '../assets/images/Cursor/Grab.svg';
 import grabbedCursor from '../assets/images/Cursor/Grabbed.svg';
 import { DirectionCarousel } from '../components/DirectionCarousel';
 import { Round2Carousel } from '../components/Round2Carousel';
+import { Footer } from '../components/Footer';
 
 export function StrikeCaseStudy() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -880,7 +881,7 @@ export function StrikeCaseStudy() {
                   Halfway through, we hit two big curveballs: <span className="text-white">Layoffs reduced our product design team from five to three.</span>
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  A brand-new initiative landed on our plate: <span className="text-white">launching Strike in 65 additional countries</span> and building a global wallet.
+                  A brand-new initiative landed on our plate: <span className="text-white">launching Strike in 65 additional countries</span> and <span className="text-white">building a global wallet</span> — all ahead of a major Bitcoin Conference presentation just two months away.
                 </p>
                 <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   It would have been easy to feel overwhelmed. But the team stayed motivated. We were excited about what we were building, and that sense of shared purpose kept us going—even during long days and high-pressure moments.
@@ -1145,6 +1146,7 @@ export function StrikeCaseStudy() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 } 
