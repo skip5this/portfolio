@@ -261,7 +261,7 @@ export function StrikeCaseStudy() {
           
           {/* Introduction text */}
           <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
-            Strike is one of the world's leading Bitcoin companies, available in over 100 countries and trusted by more than 1.5 million users. Its mission is bold yet simple: to change how money moves globally. But the mobile app had fallen behind—so we were brought in to rebrand it from the ground up.
+            Strike is one of the world's leading Bitcoin companies, available in over 100 countries and trusted by more than 1.5 million users. Its mission is bold yet simple: to change how money moves globally. But the mobile app had fallen behind—so we were brought in to apply a recent rebrand from the ground up.
           </p>
         </div>
       </section>
