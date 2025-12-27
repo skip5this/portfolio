@@ -121,7 +121,7 @@ export function Round2Direction({
         {/* Key Concepts - Mobile: order 3, Desktop: column 1, row 2 (middle) */}
         <div className="order-3 lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3 lg:mt-4">
           <h4 className="text-white font-diatype font-medium mb-4">Key Concepts</h4>
-          <div className="text-secondary-grey font-diatype text-sm leading-relaxed space-y-2">
+          <div className="text-secondary-grey font-diatype text-base leading-relaxed space-y-2">
             {summary.split('. ').map((point, index) => (
               point.trim() && (
                 <div key={index} className="flex items-start">
@@ -144,7 +144,7 @@ export function Round2Direction({
                   <div className="flex text-sm mb-2">
                     {renderStars(item.rating)}
                   </div>
-                  <p className="text-secondary-grey font-diatype text-sm leading-relaxed">
+                  <p className="text-secondary-grey font-diatype text-base leading-relaxed">
                     {item.goal}
                   </p>
                 </div>

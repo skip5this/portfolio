@@ -284,7 +284,7 @@ export function StrikeCaseStudy() {
           <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-diatype-mono font-normal mb-6">Introduction</h2>
           
           {/* Introduction text */}
-          <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
+          <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
             Strike is one of the world's leading Bitcoin companies, available in over 100 countries and trusted by more than 1.5 million users. Its mission is bold yet simple: to change how money moves globally. But the mobile app had fallen behind—so we were brought in to apply a recent rebrand from the ground up.
           </p>
         </div>
@@ -404,10 +404,10 @@ export function StrikeCaseStudy() {
               Stepping Up
             </h2>
             <div className="space-y-8">
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 I was excited to lead this mobile rebrand. It was one of the biggest projects I'd ever headed up, and I knew it would stretch me as both a designer and a leader.
               </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 It was fast-paced, demanding, and incredibly fulfilling. We were a small, scrappy team working long days, driven by the belief that we could make something better. It became one of the products I'm most proud of in my career.
               </p>
             </div>
@@ -428,7 +428,7 @@ export function StrikeCaseStudy() {
             <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10 tracking-wide">
               Setting the compass
             </h2>
-            <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+            <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
               Before diving in, I believe in setting clear goals. They're the compass that keeps the team aligned and the work focused. For this project, we zeroed in on three:
             </p>
           </div>
@@ -438,22 +438,22 @@ export function StrikeCaseStudy() {
             {/* Goals content */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Business Goal</h3>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Business Goal</h3>
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Grow volume in revenue-driving features: global send, buy Bitcoin, and merchant spend.
                 </p>
               </div>
               
               <div>
-                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">User Goal</h3>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">User Goal</h3>
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Help people find, send, buy, and spend—fast and friction-free.
                 </p>
               </div>
               
               <div>
-                <h3 className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Project Goal</h3>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Project Goal</h3>
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Create an app framework that brings the brand to life while making navigation simpler and clearer.
                 </p>
               </div>
@@ -486,13 +486,13 @@ export function StrikeCaseStudy() {
                 Finding Clarity
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Card sorting revealed how users naturally grouped concepts — and the insight was simple but powerful: cash (USD/USDT) and Bitcoin needed to live apart.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   When these worlds were blended, people got confused. Once separated, the app felt intuitive.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   That realization inspired a card-based design: two distinct "planes" for cash and Bitcoin—connected when needed, yet clearly their own. Elegant, obvious, right for the brand.
                 </p>
               </div>
@@ -526,26 +526,26 @@ export function StrikeCaseStudy() {
                 Building the Blueprint
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   From there, we built a system map. For me, that's like laying the foundation of a house. Without it, you risk jumping into high-fidelity screens without knowing how the rooms connect.
                 </p>
                 <div>
-                  <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-white mb-4">
+                  <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-white mb-4">
                     The system map:
                   </p>
                   <div className="space-y-2">
-                    <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                    <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                       • Aligned the team on how the app should be organized
                     </p>
-                    <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                    <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                       • Helped us spot potential conflicts early
                     </p>
-                    <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                    <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                       • Became a single source of truth we could refer back to when details got messy
                     </p>
                   </div>
                 </div>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   It wasn't fixed in stone, but it gave everyone—from design to product to engineering—a shared vision for how the new app could work.
                 </p>
               </div>
@@ -582,7 +582,7 @@ export function StrikeCaseStudy() {
                 Exploring the Design
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Next, we moved into low-fidelity wireframes, deliberately keeping things rough so we could focus on content and flow before worrying about visuals. FigJam was our tool of choice because it kept us constrained to simple shapes and text, forcing clarity.
                 </p>
               </div>
@@ -634,7 +634,7 @@ export function StrikeCaseStudy() {
                 <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl font-diatype font-light text-white">
                   We ran two rounds of explorations, each time creating three distinct directions.
                 </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl font-diatype text-secondary-grey">
                 Why three? We had three designers focusing on visuals at that stage, and giving each person a direction allowed us to explore more ground. Leadership would pick a favorite, and we'd refine it further in the next round. There were no heated debates, just collaborative discussions and healthy feedback loops.
               </p>
                         </div>
@@ -815,13 +815,13 @@ export function StrikeCaseStudy() {
                 Evolving the Design System
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   While we were exploring visuals and flows, we were also rethinking the design system. Thankfully, the old app—even if it wasn't the most beautiful—had a solid foundation. We took what worked, like the semantic color system, and typography stack we'd already built, and evolved it into something sharper and more modern.
                 </p>
                 
                 <div>
                   <h3 className="text-white font-diatype font-medium mb-4 text-lg md:text-xl lg:text-[1.5rem] xl:text-[1.8rem]">We created:</h3>
-                  <ul className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-secondary-grey space-y-2">
+                  <ul className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-secondary-grey space-y-2">
                     <li className="flex items-start">
                       <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
                       <span>A robust color system with semantic tokens</span>
@@ -841,7 +841,7 @@ export function StrikeCaseStudy() {
                   </ul>
                 </div>
                 
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   There were debates over details—like how to handle table rows and specific UI patterns—but we worked through them as a team. In the end, we left the design system in a much stronger place.
                 </p>
               </div>
@@ -912,13 +912,13 @@ export function StrikeCaseStudy() {
                 Wearing Two Hats
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   One of my biggest challenges—and biggest learnings—was balancing my role as both design leader and hands-on designer.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   I ran the project like clockwork: <span className="text-white">regular check-ins, clear schedules, and structured roadmaps</span>. It gave me space to jump into design myself—to push pixels and contribute screens alongside.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   We synced closely with product to keep everything connected and ensure our work could actually be built.
                 </p>
               </div>
@@ -947,13 +947,13 @@ export function StrikeCaseStudy() {
                 Navigating Curveballs
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   Halfway through, we hit two big curveballs: <span className="text-white">Layoffs reduced our product design team from five to three.</span>
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   A brand-new initiative landed on our plate: <span className="text-white">launching Strike in 65 additional countries</span> and <span className="text-white">building a global wallet</span> — all ahead of a major Bitcoin Conference presentation just two months away.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   It would have been easy to feel overwhelmed. But the team stayed motivated. We were excited about what we were building, and that sense of shared purpose kept us going—even during long days and high-pressure moments.
                 </p>
               </div>
@@ -1001,16 +1001,16 @@ export function StrikeCaseStudy() {
               Learning the Hard Way
             </h2>
             <div className="space-y-8">
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 Not everything went smoothly.
               </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 During QA, we tried an experimental bottom navigation. It was a single flipper button to switch between pages. We thought it was clever. Engineering hated it.
               </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 Even though we tested it with users, the sample size was too small, and we were a little blinded by how cool we thought it was. Eventually, we admitted the truth: sometimes clarity beats cleverness. We switched back to a standard bottom nav. It was the right call.
               </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 If I could go back, I'd skip the fancy nav entirely. I've learned <span className="text-white">it's better to be clear than clever</span>.
               </p>
             </div>
@@ -1075,10 +1075,10 @@ export function StrikeCaseStudy() {
                 Launch and looking back
               </h2>
               <div className="space-y-8">
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   We made it. We launched on time. And seeing the new app live in the App Store—now with a 4.8-star rating—felt incredible.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                   One of the proudest moments was watching <a href="https://www.youtube.com/watch?v=GbbRSsp4ocs&t=1045s" target="_blank" rel="noopener noreferrer" className="text-white hover:underline transition-colors">Jack Mallers present our designs on stage at the Bitcoin 2023 Conference</a>. Seeing our screens up there, larger than life felt surreal.
                 </p>
               </div>
@@ -1130,10 +1130,10 @@ export function StrikeCaseStudy() {
               What I learned
             </h2>
             <div className="space-y-8">
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 Leading the Strike mobile rebrand taught me a few things:
               </p>
-              <ul className="space-y-2 text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <ul className="space-y-2 text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 <li className="flex items-start">
                   <span className="mr-3 flex-shrink-0 mt-0 text-secondary-grey">•</span>
                   <span><span className="text-white">Start alignment early.</span> It saves time later.</span>
@@ -1151,10 +1151,10 @@ export function StrikeCaseStudy() {
                   <span><span className="text-white">Even big curveballs are manageable</span> when you have a team united by purpose.</span>
                 </li>
               </ul>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 Mostly, I learned I can lead big, complex projects, and that I can have fun doing it.
               </p>
-              <p className="text-base md:text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
                 I'm proud of what we built. And I'm even more excited for what comes next.
               </p>
             </div>
@@ -1184,7 +1184,7 @@ export function StrikeCaseStudy() {
                 <h3 className="text-lg md:text-xl lg:text-2xl font-diatype font-medium text-gray-700">
                   The bottom line is that any company would be lucky to work with Scott.
                 </h3>
-                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                <p className="text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
                   I worked directly with Scott at Strike from 2021 to 2023. Scott's dedication to his craft, exceptional work ethic, and keen eye for design make him a standout professional in the industry. His expertise in UI design, design systems, and UX is truly remarkable, but what sets him apart is his innate ability to lead projects from inception to completion through great collaboration and effective project management.
                 </p>
                 <p className="text-sm md:text-base font-diatype text-gray-700">
@@ -1221,10 +1221,10 @@ export function StrikeCaseStudy() {
                 <h3 className="text-lg md:text-xl lg:text-2xl font-diatype font-medium text-gray-700">
                   Scott's impact on the team has been immense.
                 </h3>
-                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                <p className="text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
                   A highly talented product designer, his creativity, dedication, and work ethic left a lasting mark on Strike. Across both mobile and desktop platforms, he consistently delivered exceptional design work.
                 </p>
-                <p className="text-base md:text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
+                <p className="text-lg lg:text-xl leading-relaxed font-diatype text-gray-700">
                   His easygoing, collaborative nature made him approachable and helped foster a positive, enjoyable work environment. Even under pressure, Scott stayed calm and composed.
                 </p>
                 <p className="text-sm md:text-base font-diatype text-gray-700">
