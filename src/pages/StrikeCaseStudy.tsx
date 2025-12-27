@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
-import { ImageCredit } from '../components/ImageCredit';
 
 // Import Strike project images
 import strike1 from '../assets/images/strike1.png';
@@ -82,6 +81,7 @@ export function StrikeCaseStudy() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [quoteRotation, setQuoteRotation] = useState(-2);
+  const [bgCircleScale, setBgCircleScale] = useState(0);
   const testimonialsSectionRef = useRef<HTMLDivElement>(null);
 
   const images = [strike1, strike2, strike3, strike4];
@@ -149,6 +149,30 @@ export function StrikeCaseStudy() {
       window.removeEventListener('scroll', handleQuoteRotation);
       window.removeEventListener('resize', handleQuoteRotation);
     };
+  }, []);
+
+  // Handle background circle animation on scroll
+  useEffect(() => {
+    const handleBgAnimation = () => {
+      if (!testimonialsSectionRef.current) return;
+      const rect = testimonialsSectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate scroll progress through the section
+      // Start growing when about 50% of the section is visible in the viewport
+      // Only reach full coverage when the viewport is about 50% past the section
+      const fillStart = windowHeight - (rect.height * 0.5);
+      const fillEnd = -(rect.height * 0.5); 
+      
+      let progress = (fillStart - rect.top) / (fillStart - fillEnd);
+      progress = Math.max(0, Math.min(1, progress));
+      
+      setBgCircleScale(progress);
+    };
+
+    window.addEventListener('scroll', handleBgAnimation, { passive: true });
+    handleBgAnimation();
+    return () => window.removeEventListener('scroll', handleBgAnimation);
   }, []);
 
   const openLightbox = (index: number) => {
@@ -305,6 +329,15 @@ export function StrikeCaseStudy() {
               ))}
             </div>
           </div>
+          {/* Caption and Credit */}
+          <div className="flex justify-between items-center mt-2">
+            <div className="text-white font-diatype-mono text-xs">
+              Our starting point
+            </div>
+            <div className="text-gray-400 font-diatype-mono text-xs">
+              Credit: Namson Le
+            </div>
+          </div>
         </div>
       </section>
 
@@ -427,12 +460,17 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* Venn diagram */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <img 
-                src={goalsImage} 
-                alt="Project goals venn diagram"
-                className="w-auto h-auto max-w-full object-contain"
-              />
+            <div className="flex flex-col items-center lg:items-end justify-center">
+              <div className="inline-block">
+                <img 
+                  src={goalsImage} 
+                  alt="Project goals venn diagram"
+                  className="w-auto h-auto max-w-full object-contain"
+                />
+                <div className="mt-2 text-white font-diatype-mono text-xs text-left">
+                  Our target
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -461,12 +499,17 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* Card sort image */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <img 
-                src={cardSort} 
-                alt="Card sorting results showing app categories"
-                className="w-auto h-auto max-w-full object-contain"
-              />
+            <div className="flex flex-col items-center lg:items-end justify-center">
+              <div className="inline-block">
+                <img 
+                  src={cardSort} 
+                  alt="Card sorting results showing app categories"
+                  className="w-auto h-auto max-w-full object-contain"
+                />
+                <div className="mt-2 text-white font-diatype-mono text-xs text-left">
+                  Card sorting
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -509,13 +552,18 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* System map image */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <img 
-                src={systemMap2} 
-                alt="System map showing app architecture and user flows"
-                className="w-full h-auto max-w-full object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                onClick={() => openDesignSystemLightbox(5)}
-              />
+            <div className="flex flex-col items-center lg:items-end justify-center">
+              <div className="inline-block">
+                <img 
+                  src={systemMap2} 
+                  alt="System map showing app architecture and user flows"
+                  className="w-full h-auto max-w-full object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(5)}
+                />
+                <div className="mt-2 text-white font-diatype-mono text-xs text-left">
+                  System map
+                </div>
+              </div>
             </div>
           </div>
           
@@ -541,13 +589,18 @@ export function StrikeCaseStudy() {
             </div>
             
             {/* Wireframe image */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <img 
-                src={midfi2} 
-                alt="Mid-fidelity wireframes showing app flows and user journeys"
-                className="w-full h-auto max-w-full object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                onClick={() => openDesignSystemLightbox(6)}
-              />
+            <div className="flex flex-col items-center lg:items-end justify-center">
+              <div className="inline-block">
+                <img 
+                  src={midfi2} 
+                  alt="Mid-fidelity wireframes showing app flows and user journeys"
+                  className="w-full h-auto max-w-full object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  onClick={() => openDesignSystemLightbox(6)}
+                />
+                <div className="mt-2 text-white font-diatype-mono text-xs text-left">
+                  Figjam wireframes
+                </div>
+              </div>
             </div>
           </div>
           
@@ -716,7 +769,7 @@ export function StrikeCaseStudy() {
                 Direction 2 transition experiments
               </div>
               <div className="text-gray-400 font-diatype-mono text-xs">
-                Credit: Joshua Philippe
+                Shoutout: Joshua Philippe
               </div>
             </div>
           </div>
@@ -796,47 +849,58 @@ export function StrikeCaseStudy() {
           </div>
 
           {/* Design System 2x2 Grid */}
-          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
-            <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
-              <div>
-                <img 
-                  src={tokensImage} 
-                  alt="Design tokens and components"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                  onClick={() => openDesignSystemLightbox(0)}
-                />
+          <div className="mt-32 md:mt-40">
+            <div className="bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+                <div>
+                  <img 
+                    src={tokensImage} 
+                    alt="Design tokens and components"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                    onClick={() => openDesignSystemLightbox(0)}
+                  />
+                </div>
+                <div>
+                  <img 
+                    src={semanticImage} 
+                    alt="Semantic color system"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                    onClick={() => openDesignSystemLightbox(1)}
+                  />
+                </div>
+                <div>
+                  <img 
+                    src={accessibilityImage} 
+                    alt="Accessibility guidelines and testing"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                    onClick={() => openDesignSystemLightbox(2)}
+                  />
+                </div>
+                <div>
+                  <img 
+                    src={typeImage} 
+                    alt="Typography system specifications"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                    onClick={() => openDesignSystemLightbox(3)}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <img 
+                    src={annotationImage} 
+                    alt="Design system annotations"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                    onClick={() => openDesignSystemLightbox(4)}
+                  />
+                </div>
               </div>
-              <div>
-                <img 
-                  src={semanticImage} 
-                  alt="Semantic color system"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                  onClick={() => openDesignSystemLightbox(1)}
-                />
+            </div>
+            {/* Caption and Shoutout */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-xs">
+                Design system examples
               </div>
-              <div>
-                <img 
-                  src={accessibilityImage} 
-                  alt="Accessibility guidelines and testing"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                  onClick={() => openDesignSystemLightbox(2)}
-                />
-              </div>
-              <div>
-                <img 
-                  src={typeImage} 
-                  alt="Typography system specifications"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                  onClick={() => openDesignSystemLightbox(3)}
-                />
-              </div>
-              <div className="col-span-2">
-                <img 
-                  src={annotationImage} 
-                  alt="Design system annotations"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                  onClick={() => openDesignSystemLightbox(4)}
-                />
+              <div className="text-gray-400 font-diatype-mono text-xs">
+                Shoutout: Namson Le, Joshua Philippe, The Afrix
               </div>
             </div>
           </div>
@@ -868,6 +932,12 @@ export function StrikeCaseStudy() {
               alt="Q1 2024 Mobile bluesky sprint roadmap"
               className="w-full h-auto object-contain rounded-lg"
             />
+            {/* Caption */}
+            <div className="flex justify-start items-center mt-2">
+              <div className="text-white font-diatype-mono text-xs">
+                Roadmap
+              </div>
+            </div>
           </div>
 
           {/* Navigating Curveballs section */}
@@ -891,21 +961,32 @@ export function StrikeCaseStudy() {
           </div>
 
           {/* App Icon and Boot Screen */}
-          <div className="mt-32 md:mt-40 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
-            <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
-              <div>
-                <img 
-                  src={appInPhoneImage} 
-                  alt="Strike app icon in phone interface"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                />
+          <div className="mt-32 md:mt-40">
+            <div className="bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+                <div>
+                  <img 
+                    src={appInPhoneImage} 
+                    alt="Strike app icon in phone interface"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  />
+                </div>
+                <div>
+                  <img 
+                    src={bootScreenImage} 
+                    alt="Strike app boot screen"
+                    className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                  />
+                </div>
               </div>
-              <div>
-                <img 
-                  src={bootScreenImage} 
-                  alt="Strike app boot screen"
-                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                />
+            </div>
+            {/* Caption and Credit */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-xs">
+                App icon and start screen
+              </div>
+              <div className="text-gray-400 font-diatype-mono text-xs">
+                Credit: Joshua Philippe
               </div>
             </div>
           </div>
@@ -936,27 +1017,49 @@ export function StrikeCaseStudy() {
           </div>
           
           {/* Bottom row experiments image */}
-          <div className="mt-40 md:mt-48 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
-            <img 
-              src={bottomRowExps} 
-              alt="Bottom navigation design experiments showing Card, Detached Pill, and Attached Tab approaches"
-              className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-            />
+          <div className="mt-40 md:mt-48">
+            <div className="bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+              <img 
+                src={bottomRowExps} 
+                alt="Bottom navigation design experiments showing Card, Detached Pill, and Attached Tab approaches"
+                className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+              />
+            </div>
+            {/* Caption and Credit */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-xs">
+                Bottom bar explorations
+              </div>
+              <div className="text-gray-400 font-diatype-mono text-xs">
+                Credit: Joshua Philippe
+              </div>
+            </div>
           </div>
 
           {/* TestFlight and Storybook images */}
-          <div className="mt-16 md:mt-24 bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
-              <img 
-                src={testflightImage} 
-                alt="TestFlight app showing Strike app builds"
-                className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-              />
-              <img 
-                src={storybookImage} 
-                alt="Storybook component library and project tracker"
-                className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-              />
+          <div className="mt-16 md:mt-24">
+            <div className="bg-[#141414] rounded-lg p-4 md:p-5 lg:p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+                <img 
+                  src={testflightImage} 
+                  alt="TestFlight app showing Strike app builds"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                />
+                <img 
+                  src={storybookImage} 
+                  alt="Storybook component library and project tracker"
+                  className="w-full h-auto object-contain rounded-lg hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
+                />
+              </div>
+            </div>
+            {/* Caption and Shoutout */}
+            <div className="flex justify-between items-center mt-2">
+              <div className="text-white font-diatype-mono text-xs">
+                Design QA
+              </div>
+              <div className="text-gray-400 font-diatype-mono text-xs">
+                Shoutout: Namson Le, Joshua Philippe, and Gina Baker
+              </div>
             </div>
           </div>
         </div>
@@ -1060,8 +1163,17 @@ export function StrikeCaseStudy() {
       </section>
 
       {/* Testimonials and Graphics section */}
-      <section ref={testimonialsSectionRef} className="bg-black text-white py-20 md:py-32">
-        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto">
+      <section ref={testimonialsSectionRef} className="bg-black text-white py-20 md:py-32 relative overflow-hidden">
+        {/* Growing Background Circle with Sharp Edges */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            backgroundColor: '#FFC4C4',
+            clipPath: `circle(${bgCircleScale * 150}% at 50% 50%)`, // 150% ensures it covers the corners
+            willChange: 'clip-path'
+          }}
+        />
+        <div className="px-8 md:px-16 lg:px-32 xl:px-48 max-w-[1680px] mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 items-stretch">
             {/* Top-left: Manuela Rios Testimonial */}
             <div 
