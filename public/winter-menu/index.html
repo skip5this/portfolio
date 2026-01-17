@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #F8F6F2;
+      color: #1E1E1E;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .serves {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 60px;
+      max-width: 480px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 48px;
+      margin-bottom: 12px;
+      color: #004FFF;
+    }
+
+    .dish {
+      font-size: 17px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dish.clickable {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .dish.clickable:hover {
+      opacity: 0.6;
+    }
+
+    .dish.clickable::after {
+      content: "→";
+      font-size: 14px;
+      color: #888;
+    }
+
+    .dish-name {
+      flex: 1;
+    }
+
+    .dish-ingredients {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .cats {
+      width: 200px;
+      margin-top: 80px;
+      display: block;
+      margin-left: -24px;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 100;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Drawer */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 520px;
+      height: 100%;
+      background: #F8F6F2;
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      z-index: 101;
+      overflow-y: auto;
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-content {
+      padding: 40px 32px 60px;
+    }
+
+    .drawer-close {
+      position: sticky;
+      top: 0;
+      background: #F8F6F2;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: flex-end;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .drawer-close button {
+      background: none;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      color: #1E1E1E;
+      padding: 8px 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .drawer-close button:hover {
+      opacity: 0.6;
+    }
+
+    .drawer h2 {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .drawer-meta {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 32px;
+    }
+
+    .drawer-description {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      color: #444;
+    }
+
+    .drawer-section {
+      margin-bottom: 36px;
+    }
+
+    .drawer-section h3 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: #1E1E1E;
+    }
+
+    .drawer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .drawer-section li {
+      font-size: 15px;
+      padding: 6px 0;
+      color: #333;
+    }
+
+    .drawer-section ol {
+      padding-left: 20px;
+    }
+
+    .drawer-section ol li {
+      margin-bottom: 12px;
+    }
+
+    .instruction-header {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: #1E1E1E;
+    }
+
+    .instruction-header strong {
+      font-weight: 600;
+    }
+
+    .drawer-note {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    .drawer-source {
+      font-size: 13px;
+      color: #888;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .drawer-source a {
+      color: #1E1E1E;
+      text-decoration: underline;
+    }
+
+    .drawer-source a:hover {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .drawer {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Birthday 2026</h1>
+
+    <p class="serves">Serves 8</p>
+    <p class="intro">
+      A winter dinner for the people we like most. Everything made by hand,
+      with love, and probably a little too much garlic.
+    </p>
+
+    <div class="section-title">Snacks</div>
+
+    <div class="dish clickable" data-recipe="olives">
+      <div>
+        <div class="dish-name">Olives</div>
+        <div class="dish-ingredients">Orange | Grapefruit | Chile arbol | Rosemary | Garlic</div>
+      </div>
+    </div>
+
+    <div class="dish clickable" data-recipe="anchovies">
+      <div>
+        <div class="dish-name">Anchovies</div>
+        <div class="dish-ingredients">Vinegar | Salt | Potato chips</div>
+      </div>
+    </div>
+
+    <div class="section-title">Salad</div>
+
+    <div class="dish clickable" data-recipe="salad">
+      <div>
+        <div class="dish-name">Fennel &amp; Citrus</div>
+        <div class="dish-ingredients">Blood orange | Cara Cara | Grapefruit | Pomelo | Olive</div>
+      </div>
+    </div>
+
+    <div class="section-title">Mains</div>
+
+    <div class="dish clickable" data-recipe="steelhead">
+      <div>
+        <div class="dish-name">Steelhead Trout</div>
+        <div class="dish-ingredients">Celery root cream | Pistachio | Fennel oil</div>
+      </div>
+    </div>
+
+    <div class="dish clickable" data-recipe="prawns">
+      <div>
+        <div class="dish-name">Prawns</div>
+        <div class="dish-ingredients">Orange | Cumin | Garlic | Rosemary</div>
+      </div>
+    </div>
+
+    <div class="section-title">Sides</div>
+
+    <div class="dish clickable" data-recipe="potatoes">
+      <div>
+        <div class="dish-name">Greek Potatoes</div>
+        <div class="dish-ingredients">Lemon | Oregano | Mustard</div>
+      </div>
+    </div>
+
+    <div class="dish clickable" data-recipe="carrots">
+      <div>
+        <div class="dish-name">Slow-Cooked Carrots</div>
+        <div class="dish-ingredients">Squash vinegar</div>
+      </div>
+    </div>
+
+    <div class="dish clickable" data-recipe="onions">
+      <div>
+        <div class="dish-name">Pickled Red Onion</div>
+        <div class="dish-ingredients">Celery vinegar</div>
+      </div>
+    </div>
+
+    <div class="section-title">Sweet</div>
+
+    <div class="dish clickable" data-recipe="cake">
+      <div>
+        <div class="dish-name">Flourless Chocolate Cake</div>
+        <div class="dish-ingredients">Coconut cream | Orange</div>
+      </div>
+    </div>
+
+    <img src="cats.png" alt="Two fluffy cats" class="cats">
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="drawer" id="drawer">
+    <div class="drawer-close">
+      <button id="closeDrawer">Close</button>
+    </div>
+    <div class="drawer-content" id="drawerContent">
+      <!-- Recipe content loaded here -->
+    </div>
+  </div>
+
+  <script>
+    const recipes = {
+      olives: {
+        title: "Fancy Citrusy Olives",
+        meta: "Serves 6-8",
+        description: "Warm, citrus-infused olives that are far better than they have any right to be. Castelvetrano olives gently warmed in olive oil with chiles, lemon, orange, and grapefruit peel. Simple but fancy.",
+        source: {
+          text: "Nothing Fancy by Alison Roman",
+          url: "https://www.amazon.com/Nothing-Fancy-Unfussy-Having-People/dp/0451497015"
+        },
+        ingredients: [
+          "1 lemon",
+          "1 orange",
+          "¼ cup olive oil",
+          "4 whole chiles de arbol (or ½ tsp crushed red pepper)",
+          "Peel of 1 grapefruit",
+          "1 pound unpitted Castelvetrano olives"
+        ],
+        instructions: [
+          "Halve and thinly slice one half of each lemon and orange, saving the other halves for juicing.",
+          "Warm the olive oil in a small pot over medium heat. Add the chiles, lemon and orange slices, and grapefruit peel. Let sizzle a minute or two, then add the olives.",
+          "Reduce the heat to the lowest possible setting and let the olives hang out for 10 minutes to 1 hour, stirring occasionally.",
+          "Let cool to room temperature, then squeeze in the lemon and orange juice from the remaining halves. Serve with citrus peels and all."
+        ],
+        notes: "Can be made up to a month ahead — refrigerate and gently rewarm before serving."
+      },
+      anchovies: {
+        title: "Spicy Marinated Anchovies with Potato Chips",
+        meta: "Serves 4-8",
+        description: "A perfect snack inspired by a perfect afternoon in Sicily. Briny anchovies marinated in vinegar with spicy chiles, eaten on crispy potato chips. Aperol spritzes are optional but recommended.",
+        source: {
+          text: "Nothing Fancy by Alison Roman",
+          url: "https://www.amazon.com/Nothing-Fancy-Unfussy-Having-People/dp/0451497015"
+        },
+        ingredients: [
+          "1-2 tins or 1 jar of anchovy fillets",
+          "¼ cup distilled white vinegar",
+          "4 Calabrian chiles, pepperoncini, or guindilla peppers, thinly sliced (or crushed red pepper flakes)",
+          "Potato chips (Kettle, Cape Cod, or similar — whole chips, no crumbs)"
+        ],
+        instructions: [
+          "Drain the anchovies of their oil. Transfer to a plate or shallow bowl and cover with the vinegar.",
+          "Scatter the chiles over the anchovies. Let sit for at least 10 minutes, up to 1 hour.",
+          "Eat the anchovies on potato chips, like an American tourist in Italy."
+        ],
+        notes: "Use whole, sturdy potato chips — no crumbs allowed."
+      },
+      salad: {
+        title: "Fennel, Orange, Grapefruit & Olive Salad",
+        meta: "Serves 8",
+        description: "A bright, refreshing salad with shaved fennel, citrus segments, and briny olives. The anise note of fennel echoes the steelhead's fennel frond oil, while the citrus connects to the prawns.",
+        ingredients: [
+          "2 large fennel bulbs, shaved thin",
+          "3 oranges (blood orange, cara cara)",
+          "2 grapefruits",
+          "1 pomelo",
+          "1 cup olives (Castelvetrano or Kalamata), halved",
+          "¼ cup extra virgin olive oil",
+          "2 tbsp fresh citrus juice",
+          "Flaky salt and black pepper"
+        ],
+        instructions: [
+          "Cut top and bottom off citrus. Stand on cutting board, slice away peel and pith following the curve.",
+          "Cut into wheels or segment over a bowl to catch the juice.",
+          "Remove tough outer layer of fennel. Halve, remove core, shave very thin with a mandoline.",
+          "Place fennel in ice water for 10 minutes to crisp up, then drain and pat dry.",
+          "Whisk olive oil, reserved citrus juice, salt and pepper for the dressing.",
+          "Arrange fennel on a platter, layer citrus segments on top, scatter olives.",
+          "Drizzle with dressing, finish with flaky salt and pepper."
+        ],
+        notes: "Assemble just before serving so fennel stays crisp."
+      },
+      steelhead: {
+        title: "Slow-Roasted Steelhead Trout",
+        meta: "Serves 8-10",
+        description: "Slow-roasted steelhead emerges silky and just-set, its rich fat gently rendered at low heat. Served with a dairy-free celery root sauce enriched with roasted garlic and white miso, vibrant fennel frond oil floated on top, and olive oil toasted pistachios.",
+        ingredients: [
+          "3.7 lbs steelhead trout fillet, skin-on",
+          "2 tbsp olive oil",
+          "4-5 sprigs fresh thyme",
+          "Flaky salt and black pepper",
+          "",
+          "For the sauce:",
+          "1.5 lbs celery root, cubed",
+          "1 head roasted garlic",
+          "1 tbsp white miso paste",
+          "2-3 tbsp olive oil",
+          "1 tbsp lemon juice",
+          "",
+          "For the fennel frond oil:",
+          "62g fennel fronds (feathery tops only)",
+          "180ml neutral oil (grapeseed or light olive)",
+          "Pinch of salt",
+          "",
+          "¾ cup toasted pistachios"
+        ],
+        instructions: [
+          "<strong>Fennel Oil (make ahead)</strong>",
+          "Blanch fronds in boiling water for 15 seconds, then plunge into ice bath.",
+          "Squeeze fronds completely dry. Blend with neutral oil and a pinch of salt on high for 2-3 minutes until bright green.",
+          "Strain through cheesecloth — don't press, let it drip for clearest oil. Refrigerate.",
+          "",
+          "<strong>Fish</strong>",
+          "Remove from fridge 45 minutes before cooking to temper.",
+          "Preheat oven to 275°F.",
+          "Place fish skin-side down on parchment-lined sheet pan.",
+          "Rub with olive oil, season with salt and pepper, lay thyme on top.",
+          "Roast 25-35 minutes until fish reaches 120-125°F. Flesh should be just opaque and silky.",
+          "Rest 5 minutes before serving.",
+          "",
+          "<strong>To Serve</strong>",
+          "Warm the celery root sauce gently, pour into a pitcher, float fennel oil on top.",
+          "Scatter pistachios over fish. Guests pour sauce over their portions."
+        ],
+        notes: "Check fish temp early — carryover cooking continues after removal. Fennel oil can be made 2 days ahead."
+      },
+      prawns: {
+        title: "Oven-Roasted Prawns",
+        meta: "Serves 8-10 as a side",
+        description: "Prawns roasted gently at low temperature with winter citrus, warm cumin, garlic, and rosemary. The cumin adds a subtle North African warmth that elevates simple roasted prawns.",
+        ingredients: [
+          "1 lb prawns, peeled and deveined",
+          "1 large orange (zest + juice)",
+          "1 tsp cumin seeds (or ¾ tsp ground)",
+          "4-5 garlic cloves, thinly sliced",
+          "2-3 rosemary sprigs, leaves chopped",
+          "3 tbsp extra virgin olive oil",
+          "Pinch of chili flake",
+          "Flaky salt and black pepper"
+        ],
+        instructions: [
+          "Zest the orange, then juice it. Reserve half the juice for finishing.",
+          "Combine olive oil, orange zest, half the juice, cumin, garlic, rosemary, chili, salt and pepper in a baking dish.",
+          "Add prawns, toss to coat. Marinate 15-30 minutes max (citrus will start to 'cook' them).",
+          "Roast at 275°F for 10-12 minutes until prawns are pink, opaque, and just starting to curl.",
+          "Finish with reserved fresh orange juice and flaky salt."
+        ],
+        notes: "Don't over-marinate — 30 minutes max or the citrus will cure the prawns."
+      },
+      potatoes: {
+        title: "World's Best Greek Potatoes",
+        meta: "Serves 8 — Prep day before",
+        description: "Crispy, tangy, garlicky Greek potatoes marinated overnight in olive oil, lemon, mustard, and oregano. The baking soda creates an irresistible extra crispy layer on the bottoms.",
+        ingredients: [
+          "1 kg Russet potatoes, peeled and quartered",
+          "2 heaping tbsp minced garlic",
+          "2 heaping tbsp yellow mustard",
+          "⅓ cup fresh lemon juice",
+          "1 heaping tbsp dried oregano",
+          "½ cup extra virgin olive oil",
+          "1 tsp sea salt",
+          "1 tsp black pepper",
+          "1 tsp baking soda"
+        ],
+        instructions: [
+          "Bring a large pot of water to boil. Add salt and baking soda.",
+          "Add potatoes and boil for exactly 2 minutes. Drain and rinse with cold water.",
+          "Whisk together olive oil, garlic, mustard, lemon juice, oregano, salt and pepper in a casserole dish.",
+          "Add potatoes, coat thoroughly. Cover and refrigerate overnight.",
+          "Day of: Preheat oven to 390°F.",
+          "Cover dish and bake 1 hour. Uncover and bake 45 minutes more.",
+          "Never flip the potatoes during cooking. Season with flaky salt before serving."
+        ],
+        notes: "Never flip the potatoes — the bottoms are where the magic happens."
+      },
+      carrots: {
+        title: "Slow-Cooked Carrots",
+        meta: "Serves 8",
+        description: "Carrots cooked low and slow until they transform into something golden, jammy, and reminiscent of golden raisins. The long, gentle cooking caramelizes their natural sugars.",
+        ingredients: [
+          "2 lbs carrots (medium-sized, sweet ones)",
+          "3-4 tbsp extra virgin olive oil",
+          "Squash vinegar",
+          "Flaky salt"
+        ],
+        instructions: [
+          "Peel carrots. Slice on a bias or into thin strips.",
+          "Heat olive oil in a large pan over low heat.",
+          "Add carrots in a single layer.",
+          "Cook slowly for 30-50 minutes, turning every 6-7 minutes.",
+          "Carrots are done when golden and jammy, like golden raisins.",
+          "Finish with flaky salt and a light coating of squash vinegar."
+        ],
+        notes: "Low and slow — the carrots should never sizzle aggressively."
+      },
+      onions: {
+        title: "Quick Pickled Red Onions",
+        meta: "Makes about 2 cups",
+        description: "Bright, tangy pickled onions that add a pop of color and acidity to any dish.",
+        ingredients: [
+          "2 medium red onions, thinly sliced",
+          "1 cup celery vinegar (or white wine vinegar)",
+          "1 tbsp sugar",
+          "1 tsp salt",
+          "½ cup warm water"
+        ],
+        instructions: [
+          "Slice onions as thin as possible.",
+          "Dissolve sugar and salt in warm water, add vinegar.",
+          "Pour over onions in a jar, making sure they're submerged.",
+          "Let sit at least 30 minutes, or refrigerate overnight for best results."
+        ],
+        notes: "These keep for weeks in the fridge."
+      },
+      cake: {
+        title: "Flourless Chocolate Cake",
+        meta: "Serves 10-12",
+        description: "A rich, fudgy flourless chocolate cake baked in a water bath for an impossibly creamy texture. Dense, intensely chocolatey, and naturally gluten-free. Uses coconut oil for dairy-free.",
+        ingredients: [
+          "340g dark chocolate (70%), chopped",
+          "225g coconut oil",
+          "5 eggs",
+          "210g sugar (70g + 140g)",
+          "100ml water",
+          "",
+          "For the topper:",
+          "1 can coconut cream, refrigerated overnight",
+          "Zest of 1 orange",
+          "1 tbsp powdered sugar"
+        ],
+        instructions: [
+          "Preheat oven to 140°C / 284°F. Grease and line a 25cm cake pan.",
+          "Melt chocolate and coconut oil in a double boiler. Set aside.",
+          "Beat eggs with 70g sugar for 8 minutes until thick and ribbony.",
+          "Heat remaining 140g sugar with water until dissolved. Add to chocolate.",
+          "Fold chocolate mixture into eggs on low speed — don't overmix.",
+          "Pour into pan. Place in a water bath (hot water ¾ up the sides).",
+          "Bake 50 minutes. Center should jiggle slightly.",
+          "Cool completely in pan. For topper: whip solid coconut cream, fold in orange zest and sugar."
+        ],
+        notes: "Don't overbake — it firms up as it cools. Best at room temperature."
+      }
+    };
+
+    const overlay = document.getElementById('overlay');
+    const drawer = document.getElementById('drawer');
+    const drawerContent = document.getElementById('drawerContent');
+    const closeBtn = document.getElementById('closeDrawer');
+
+    function openDrawer(recipeId) {
+      const recipe = recipes[recipeId];
+      if (!recipe) return;
+
+      let ingredientsList = recipe.ingredients.map(i =>
+        i === '' ? '</ul><ul>' : `<li>${i}</li>`
+      ).join('');
+
+      let instructionsList = recipe.instructions.map((inst, i) => {
+        if (inst === '') return '</ol><ol>';
+        if (inst.startsWith('<strong>')) return `</ol><p class="instruction-header">${inst}</p><ol>`;
+        return `<li>${inst}</li>`;
+      }).join('');
+
+      drawerContent.innerHTML = `
+        <h2>${recipe.title}</h2>
+        <p class="drawer-meta">${recipe.meta}</p>
+        <p class="drawer-description">${recipe.description}</p>
+
+        <div class="drawer-section">
+          <h3>Ingredients</h3>
+          <ul>${ingredientsList}</ul>
+        </div>
+
+        <div class="drawer-section">
+          <h3>Instructions</h3>
+          <ol>${instructionsList}</ol>
+        </div>
+
+        ${recipe.notes ? `<p class="drawer-note">${recipe.notes}</p>` : ''}
+        ${recipe.source ? `<p class="drawer-source">From: <a href="${recipe.source.url}" target="_blank">${recipe.source.text}</a></p>` : ''}
+      `;
+
+      overlay.classList.add('active');
+      drawer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      overlay.classList.remove('active');
+      drawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.dish.clickable').forEach(dish => {
+      dish.addEventListener('click', () => {
+        const recipeId = dish.dataset.recipe;
+        openDrawer(recipeId);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  </script>
+</body>
+</html>
