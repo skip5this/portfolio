@@ -103,6 +103,52 @@
       margin-left: -24px;
     }
 
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 246, 242, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo {
+      font-size: 16px;
+      text-decoration: none;
+      color: #666;
+      transition: color 0.2s ease;
+    }
+
+    .header-logo:hover {
+      color: #333;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      font-size: 14px;
+      color: #1E1E1E;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.6;
+    }
+
     /* Overlay */
     .overlay {
       position: fixed;
@@ -274,6 +320,17 @@
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo">🧄🍊🫒</a>
+      <nav class="header-nav">
+        <a href="/#projects">Projects</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="container">
     <h1>Winter Menu 2026</h1>
 
