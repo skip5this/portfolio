@@ -52,6 +52,16 @@
       max-width: 480px;
     }
 
+    .flavor-link {
+      color: #1E1E1E;
+      text-decoration: underline;
+      transition: opacity 0.2s ease;
+    }
+
+    .flavor-link:hover {
+      opacity: 0.6;
+    }
+
     .section-title {
       font-size: 11px;
       font-weight: 600;
@@ -116,10 +126,16 @@
     .header-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 16px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .header-inner {
+        padding: 16px 64px;
+      }
     }
 
     .header-logo {
@@ -139,14 +155,15 @@
     }
 
     .header-nav a {
-      font-size: 14px;
+      font-family: "ABC Diatype", sans-serif;
+      font-size: 16px;
       color: #1E1E1E;
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s ease;
     }
 
     .header-nav a:hover {
-      opacity: 0.6;
+      color: #4B5563;
     }
 
     /* Overlay */
@@ -317,9 +334,99 @@
         max-width: 100%;
       }
     }
+
+    /* Background effects */
+    .gradient-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float 25s ease-in-out infinite;
+    }
+
+    .gradient-orb-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(59, 130, 246, 0.2);
+      top: -100px;
+      right: -50px;
+      animation-delay: 0s;
+    }
+
+    .gradient-orb-2 {
+      width: 450px;
+      height: 450px;
+      background: rgba(168, 85, 247, 0.15);
+      bottom: -100px;
+      left: -50px;
+      animation-delay: -8s;
+    }
+
+    .gradient-orb-3 {
+      width: 350px;
+      height: 350px;
+      background: rgba(34, 211, 238, 0.12);
+      top: 50%;
+      left: 30%;
+      animation-delay: -16s;
+    }
+
+    .dot-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 1;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .dot-grid-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 1;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+      background-size: 20px 20px;
+      mask-image: radial-gradient(circle 120px at center, black 0%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle 120px at center, black 0%, transparent 100%);
+      mask-size: 100% 100%;
+      -webkit-mask-size: 100% 100%;
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(40px, -40px) scale(1.1);
+      }
+      66% {
+        transform: translate(-30px, 30px) scale(0.9);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Background effects -->
+  <div class="gradient-mesh">
+    <div class="gradient-orb gradient-orb-1"></div>
+    <div class="gradient-orb gradient-orb-2"></div>
+    <div class="gradient-orb gradient-orb-3"></div>
+  </div>
+  <div class="dot-grid"></div>
+  <div class="dot-grid-glow" id="dotGridGlow"></div>
+
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="Home">
@@ -343,6 +450,10 @@
     <p class="intro">
       An exploration of the flavor matrix—pairing ingredients that share
       hidden molecular connections. Made with love and probably too much garlic.
+    </p>
+
+    <p style="font-size: 15px; color: #666; margin-top: -40px; margin-bottom: 60px;">
+      I used my vibe coded <a href="https://flavor-pairings.vercel.app/" target="_blank" class="flavor-link">Flavour Pairings App</a> to help with the menu.
     </p>
 
     <div class="section-title">Snacks</div>
@@ -731,6 +842,16 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeDrawer();
+    });
+
+    // Mouse glow effect for dot grid
+    const dotGridGlow = document.getElementById('dotGridGlow');
+    document.addEventListener('mousemove', (e) => {
+      if (dotGridGlow) {
+        const mask = `radial-gradient(circle 120px at ${e.clientX}px ${e.clientY}px, black 0%, transparent 100%)`;
+        dotGridGlow.style.maskImage = mask;
+        dotGridGlow.style.webkitMaskImage = mask;
+      }
     });
   </script>
 </body>

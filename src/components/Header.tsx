@@ -101,7 +101,7 @@ export function Header() {
   return (
     <header className={`sticky top-0 z-10 backdrop-blur-sm shadow-sm transition-colors duration-300 ${getHeaderBackground()}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
-        <a href="/winter-menu" className="font-diatype font-medium text-gray-500 hover:text-gray-600 transition-colors">🧄🍊🫒</a>
+        <a href="/winter-menu/index.html" className="font-diatype font-medium text-gray-500 hover:text-gray-600 transition-colors">🧄🍊🫒</a>
         {/* Mobile menu button */}
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
