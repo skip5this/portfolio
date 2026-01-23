@@ -16,7 +16,6 @@ import oldAccountTab from '../assets/images/old-Account tab.png';
 import oldLightning from '../assets/images/old-Lightning.png';
 import oldModal from '../assets/images/old-modal.png';
 import boltCharacter from '../assets/images/bolt-character.gif';
-import goalsImage from '../assets/images/Goals.png';
 import cardSort from '../assets/images/card-sort.png';
 
 import dontTrustVerify from '../assets/images/Don\'t trust verify.png';
@@ -433,44 +432,27 @@ export function StrikeCaseStudy() {
             </p>
           </div>
           
-          {/* Goals and Venn diagram */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            {/* Goals content */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Business Goal</h3>
-                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Grow volume in revenue-driving features: global send, buy Bitcoin, and merchant spend.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">User Goal</h3>
-                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Help people find, send, buy, and spend—fast and friction-free.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Project Goal</h3>
-                <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
-                  Create an app framework that brings the brand to life while making navigation simpler and clearer.
-                </p>
-              </div>
+          {/* Goals - 3 columns on desktop/tablet, 1 column on mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Business Goal</h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Grow volume in revenue-driving features: global send, buy Bitcoin, and merchant spend.
+              </p>
             </div>
-            
-            {/* Venn diagram */}
-            <div className="flex flex-col items-center lg:items-end justify-center">
-              <div className="inline-block">
-                <img 
-                  src={goalsImage} 
-                  alt="Project goals venn diagram"
-                  className="w-auto h-auto max-w-full object-contain"
-                />
-                <div className="mt-2 text-white font-diatype-mono text-xs text-left">
-                  Our target
-                </div>
-              </div>
+
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">User Goal</h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Help people find, send, buy, and spend—fast and friction-free.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">Project Goal</h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.7] font-diatype text-secondary-grey">
+                Create an app framework that brings the brand to life while making navigation simpler and clearer.
+              </p>
             </div>
           </div>
         </div>

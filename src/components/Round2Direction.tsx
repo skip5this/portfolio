@@ -80,80 +80,81 @@ export function Round2Direction({
 
   return (
     <div className="w-full">
-      {/* Mobile: flex-col, Desktop: grid */}
-      <div className="flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-[auto_1fr_auto] gap-8 lg:gap-12">
-        {/* Direction Title - Mobile: order 1, Desktop: column 1, row 1 */}
-        <div className="order-1 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2">
-          <h3 className="text-lg font-diatype-mono font-normal mb-6 lg:mb-4 whitespace-pre-line">
+      {/* Top section: Title + Key Concepts on left, Phones on right */}
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* Left column: Title and Key Concepts */}
+        <div className="order-1 lg:col-start-1 lg:col-end-2">
+          {/* Direction Title */}
+          <h3 className="text-lg font-diatype-mono font-normal mb-6 lg:mb-8 whitespace-pre-line">
             {title.split('\n').map((line, index) => (
               <div key={index} className={index === 0 ? 'text-secondary-grey' : 'text-white'}>
                 {line}
               </div>
             ))}
           </h3>
+
+          {/* Key Concepts */}
+          <div>
+            <h4 className="text-white font-diatype font-medium mb-4">Key Concepts</h4>
+            <div className="text-secondary-grey font-diatype text-base leading-relaxed space-y-2">
+              {summary.split('. ').map((point, index) => (
+                point.trim() && (
+                  <div key={index} className="flex items-start">
+                    <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
+                    <span className="flex-1">{point.trim()}</span>
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
         </div>
-        
-        {/* Phone images - Mobile: order 2, Desktop: columns 2-3, rows 1-3 (spans all rows) */}
-        <div ref={phonesSectionRef} className="order-2 lg:col-start-2 lg:col-end-4 lg:row-start-1 lg:row-end-4 grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 xl:gap-12 lg:self-start">
+
+        {/* Phone images - columns 2-3 */}
+        <div ref={phonesSectionRef} className="order-2 lg:col-start-2 lg:col-end-4 grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 xl:gap-12 lg:self-start">
           {/* Left phone image */}
           <div className="flex flex-col items-start transition-transform duration-300 ease-out" style={{ transform: `rotate(${phoneRotation}deg)` }}>
             <div className="text-white font-diatype text-sm mb-2">Cash Surface</div>
             <div className="w-full max-w-[400px] h-px bg-white/20 mb-6"></div>
-            <img 
-              src={leftImage} 
+            <img
+              src={leftImage}
               alt={`${alt} - left screen`}
               className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] object-contain pointer-events-none"
             />
           </div>
-          
+
           {/* Right phone image */}
           <div className="flex flex-col items-start transition-transform duration-300 ease-out" style={{ transform: `rotate(${phoneRotation}deg)` }}>
             <div className="text-white font-diatype text-sm mb-2">Bitcoin Surface</div>
             <div className="w-full max-w-[400px] h-px bg-white/20 mb-6"></div>
-            <img 
-              src={rightImage} 
+            <img
+              src={rightImage}
               alt={`${alt} - right screen`}
               className="w-auto h-auto max-h-[812px] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] object-contain pointer-events-none"
             />
           </div>
         </div>
-        
-        {/* Key Concepts - Mobile: order 3, Desktop: column 1, row 2 (middle) */}
-        <div className="order-3 lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3 lg:mt-4">
-          <h4 className="text-white font-diatype font-medium mb-4">Key Concepts</h4>
-          <div className="text-secondary-grey font-diatype text-base leading-relaxed space-y-2">
-            {summary.split('. ').map((point, index) => (
-              point.trim() && (
-                <div key={index} className="flex items-start">
-                  <span className="text-secondary-grey mr-3 flex-shrink-0 mt-0">•</span>
-                  <span className="flex-1">{point.trim()}</span>
+      </div>
+
+      {/* Ratings - horizontal row below */}
+      <div className="mt-12 lg:mt-16">
+        <h4 className="text-white font-diatype font-medium mb-6">Project Goals</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {ratings.map((item, index) => (
+            <div key={index} className="flex">
+              <div className="w-px bg-white/20 mr-4 flex-shrink-0 self-stretch"></div>
+              <div className="flex-1">
+                <div className="flex text-sm mb-2">
+                  {renderStars(item.rating)}
                 </div>
-              )
-            ))}
-          </div>
-        </div>
-        
-        {/* Ratings - Mobile: order 4, Desktop: column 1, row 3 (bottom) */}
-        <div className="order-4 lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:mt-4 lg:mb-4">
-          <h4 className="text-white font-diatype font-medium mb-4">Project Goals</h4>
-          <div className="space-y-4">
-            {ratings.map((item, index) => (
-              <div key={index} className="flex">
-                <div className="w-px bg-white/20 mr-4 flex-shrink-0 self-stretch"></div>
-                <div className="flex-1">
-                  <div className="flex text-sm mb-2">
-                    {renderStars(item.rating)}
-                  </div>
-                  <p className="text-secondary-grey font-diatype text-base leading-relaxed">
-                    {item.goal}
-                  </p>
-                </div>
+                <p className="text-secondary-grey font-diatype text-sm leading-relaxed">
+                  {item.goal}
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-      
+
       {/* Credit */}
       {credit && (
         <div className="flex justify-center mt-6">
