@@ -1194,7 +1194,7 @@ export function StrikeCaseStudy() {
               />
             </div>
 
-            {/* Bottom-right: Joshua Phillipe Testimonial */}
+            {/* Bottom-right: Joshua Philippe Testimonial */}
             <div 
               className="md:col-span-2 bg-strike rounded-3xl md:rounded-[40px] p-8 md:p-10 lg:p-12 transition-transform duration-300 ease-out"
               style={{ transform: `rotate(${quoteRotation}deg)` }}
@@ -1210,7 +1210,7 @@ export function StrikeCaseStudy() {
                   His easygoing, collaborative nature made him approachable and helped foster a positive, enjoyable work environment. Even under pressure, Scott stayed calm and composed.
                 </p>
                 <p className="text-sm md:text-base font-diatype text-gray-700">
-                  Joshua Phillipe - Head of Design at Fold (ex Strike)
+                  Joshua Philippe - Head of Design at Fold (ex Strike)
                 </p>
               </div>
             </div>
