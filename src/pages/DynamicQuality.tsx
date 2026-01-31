@@ -2,21 +2,61 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Play, Music, Calendar, Clock } from 'lucide-react';
 
-// Episode data - we'll expand this later
+// Episode data
 const episodes = [
   {
     id: 1,
-    title: "Dynamic Quality #47",
-    date: "January 2026",
+    title: "Dynamic Quality 8",
+    date: "2023",
     duration: "2:00:00",
-    mixcloudUrl: "https://www.mixcloud.com/dynamicquality/",
-    artwork: null, // Will add artwork later
+    mixcloudPath: "/dynamicquality/dynamicquality8/",
+    description: "Another quality mix",
+    tags: ["house", "soul", "electronic"],
+    tracklist: []
+  },
+  {
+    id: 2,
+    title: "Dynamic Quality 7 — Best DQ tracks of 2022",
+    date: "January 2023",
+    duration: "2:13:49",
+    mixcloudPath: "/dynamicquality/dynamicquality7-20230106-035737/",
+    description: "The best tracks we played last year. All quality, always dynamic.",
+    tags: ["house", "pop", "art rock", "soul", "r&b"],
     tracklist: [
-      { artist: "Artist Name", title: "Track Title", album: "Album Name" },
-      // Add more tracks
+      { artist: "Talk Talk", title: "I Believe in You" },
+      { artist: "Nick Hakim", title: "Slid Under" },
+      { artist: "Julia Jacklin", title: "Lydia Wears a Cross" },
+      { artist: "Prince", title: "Mary Don't You Weep" },
+      { artist: "Lana Del Rey", title: "Mariners Apartment Complex" },
+      { artist: "The Impressions", title: "People Get Ready" },
+      { artist: "Nick Hakim", title: "QADIR" },
+      { artist: "Marvin Gaye", title: "Is That Enough" },
+      { artist: "Isabelle Antena", title: "Ten Minutes" },
+      { artist: "CASISDEAD", title: "Traction Control" },
+      { artist: "Curtis Mayfield", title: "Do Do Wap Is Strong in Here" },
+      { artist: "Marvin Gaye", title: "\"T\" Plays It Cool" },
+      { artist: "Mk.gee", title: "cz" },
+      { artist: "FKA twigs", title: "Meta Angel" },
+      { artist: "ROSALÍA", title: "DIABLO" },
+      { artist: "Sudan Archives", title: "Homesick (Gorgeous & Arrogant)" },
+      { artist: "Yaya Bey", title: "Intro" },
+      { artist: "Destiny's Child & Static", title: "Say My Name (Timbaland Remix)" },
+      { artist: "Kenny Beats", title: "Still" },
+      { artist: "Bones", title: "Glovebox" },
+      { artist: "Sunday Service", title: "Father Stretch" },
+      { artist: "Joy", title: "The Time Is Right" },
+      { artist: "Omar S", title: "What's Good for the Goose (Dub Mix)" },
+      { artist: "Joy Orbison", title: "Better" },
+      { artist: "Rimbaudian", title: "She Taught Me How to Love" },
+      { artist: "Omar S", title: "Money Hit the Floor" },
+      { artist: "Troialexis & Omar S", title: "Can't Explain (R&B Mix)" },
+      { artist: "Yaya Bey", title: "Pour Up" },
+      { artist: "Sade", title: "I Couldn't Love You More (Mr. K Edit)" },
+      { artist: "Jeshi feat. Obongjayar & WESTSIDE BOOGIE", title: "Protein v2" },
+      { artist: "Hailu Mergia", title: "Yefikir Enguroguro" },
+      { artist: "Taylor Swift", title: "Happiness" },
     ]
   },
-  // Add more episodes
 ];
 
 /**
@@ -67,20 +107,61 @@ function MixcloudPlayer({ url, size = 'classic' }: { url: string; size?: 'pictur
 }
 
 /**
+ * Tracklist Component
+ */
+function Tracklist({ tracks }: { tracks: { artist: string; title: string }[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const displayTracks = expanded ? tracks : tracks.slice(0, 5);
+  
+  if (tracks.length === 0) return null;
+  
+  return (
+    <div className="mt-4 pt-4 border-t border-white/10">
+      <h4 className="text-white/60 text-xs uppercase tracking-wider mb-3">Tracklist</h4>
+      <ul className="space-y-2">
+        {displayTracks.map((track, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm">
+            <span className="text-white/30 w-5 text-right flex-shrink-0">{i + 1}</span>
+            <div>
+              <span className="text-white">{track.artist}</span>
+              <span className="text-white/40"> — </span>
+              <span className="text-white/60">{track.title}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {tracks.length > 5 && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="mt-3 text-white/40 hover:text-white/60 text-sm transition-colors"
+        >
+          {expanded ? '← Show less' : `+ ${tracks.length - 5} more tracks`}
+        </button>
+      )}
+    </div>
+  );
+}
+
+/**
  * Episode Card Component
  */
-function EpisodeCard({ episode }: { episode: typeof episodes[0] }) {
+function EpisodeCard({ episode, featured = false }: { episode: typeof episodes[0]; featured?: boolean }) {
+  const [showTracklist, setShowTracklist] = useState(false);
+  
   return (
-    <GlassPanel className="p-6 hover:bg-white/10 transition-colors">
+    <GlassPanel className={`p-6 ${featured ? '' : 'hover:bg-white/10'} transition-colors`}>
       <div className="flex items-start gap-4">
         {/* Placeholder artwork */}
-        <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="w-20 h-20 md:w-24 md:h-24 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
           <Music className="w-8 h-8 text-white/40" />
         </div>
         
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white mb-2">{episode.title}</h3>
-          <div className="flex items-center gap-4 text-white/60 text-sm mb-4">
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg md:text-xl font-semibold text-white mb-1 truncate">{episode.title}</h3>
+          {episode.description && (
+            <p className="text-white/50 text-sm mb-2 line-clamp-2">{episode.description}</p>
+          )}
+          <div className="flex flex-wrap items-center gap-3 text-white/60 text-sm mb-4">
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
               {episode.date}
@@ -91,15 +172,42 @@ function EpisodeCard({ episode }: { episode: typeof episodes[0] }) {
             </span>
           </div>
           
-          {/* Mini player preview */}
+          {/* Tags */}
+          {episode.tags && episode.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {episode.tags.slice(0, 4).map((tag) => (
+                <span key={tag} className="px-2 py-1 bg-white/5 rounded text-white/40 text-xs">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {/* Actions */}
           <div className="flex items-center gap-2">
-            <button className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-sm transition-colors">
+            <a 
+              href={`https://www.mixcloud.com${episode.mixcloudPath}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-sm transition-colors"
+            >
               <Play className="w-4 h-4" fill="currentColor" />
-              Play
-            </button>
+              Play on Mixcloud
+            </a>
+            {episode.tracklist.length > 0 && (
+              <button
+                onClick={() => setShowTracklist(!showTracklist)}
+                className="px-4 py-2 text-white/60 hover:text-white text-sm transition-colors"
+              >
+                {showTracklist ? 'Hide' : 'Tracklist'}
+              </button>
+            )}
           </div>
         </div>
       </div>
+      
+      {/* Tracklist */}
+      {showTracklist && <Tracklist tracks={episode.tracklist} />}
     </GlassPanel>
   );
 }
