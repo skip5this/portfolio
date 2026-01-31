@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Copy, Check } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { AnimatedLink } from '../components/AnimatedLink';
+import { GradientOrbSubtle } from '../components/GradientOrb';
 
 export function LoopIn() {
   const [copiedMcp, setCopiedMcp] = useState(false);
@@ -31,13 +32,13 @@ export function LoopIn() {
 
   return (
     <div className="font-sans text-gray-800 bg-[#0c0c0c] min-h-screen">
-      {/* Header */}
-      <header className="bg-[#0c0c0c] border-b border-white/10 fixed top-0 left-0 right-0 z-50">
+      {/* Header - frosted glass effect */}
+      <header className="bg-white/10 backdrop-blur-xl border-b border-white/10 fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link 
               to="/" 
-              className="flex items-center space-x-2 text-white/60 hover:text-white transition-colors"
+              className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Portfolio</span>
@@ -46,26 +47,29 @@ export function LoopIn() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="pt-40 md:pt-48 pb-20 px-8 md:px-16 lg:px-32 xl:px-48">
-        <div className="max-w-[1680px] mx-auto">
+      {/* Hero Section - Light theme with animated gradient */}
+      <section className="px-8 md:px-16 lg:px-32 xl:px-48 relative h-screen flex items-center justify-center">
+        {/* Animated gradient background */}
+        <GradientOrbSubtle />
+        
+        <div className="max-w-4xl mx-auto relative z-10 text-left">
           {/* Logo/Icon */}
           <div className="mb-8">
             <span className="text-5xl">🔗</span>
           </div>
           
           {/* Title */}
-          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-diatype-mono font-normal text-white mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-diatype-mono font-normal text-gray-900 mb-6">
             LoopIn
           </h1>
           
           {/* Tagline - large statement */}
-          <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-10">
+          <p className="text-xl md:text-2xl lg:text-3xl xl:text-[2.8rem] leading-[1.4] md:leading-[1.35] lg:leading-[1.3] xl:leading-[1.25] tracking-[-0.02em] font-diatype font-light text-gray-900 max-w-4xl mb-10">
             Tighten the loop between your browser and Claude Code.
           </p>
           
           {/* Value prop */}
-          <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-white/60 max-w-3xl">
+          <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed md:leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-gray-700 max-w-3xl">
             Click any element on any webpage. Add context. Send it directly to Claude Code. 
             No more screenshots, copy-pasting HTML, or describing UI manually.
           </p>
