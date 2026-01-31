@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Copy, Check } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { AnimatedLink } from '../components/AnimatedLink';
 
 export function LoopIn() {
   const [copiedMcp, setCopiedMcp] = useState(false);
@@ -246,21 +247,19 @@ export function LoopIn() {
             Built for Claude Code users. Works anywhere—capture from production sites, competitor UIs, or design inspiration.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <a 
-              href="https://github.com/skip5this/LoopIn" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-white hover:bg-white/90 text-black font-diatype font-medium rounded-lg transition-colors"
+          <div className="flex flex-col sm:flex-row items-start gap-6">
+            <AnimatedLink 
+              href="https://github.com/skip5this/LoopIn"
+              className="text-lg lg:text-xl font-diatype text-white hover:text-white/80 transition-colors"
             >
               View on GitHub
-            </a>
-            <Link 
+            </AnimatedLink>
+            <AnimatedLink 
               to="/loopin/case-study"
-              className="inline-flex items-center px-6 py-3 border border-white/20 hover:border-white/40 text-white font-diatype font-medium rounded-lg transition-colors"
+              className="text-lg lg:text-xl font-diatype text-white/60 hover:text-white transition-colors"
             >
-              Read the case study →
-            </Link>
+              Read the case study
+            </AnimatedLink>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { AnimatedLink } from '../components/AnimatedLink';
 
 export function LoopInCaseStudy() {
   return (
@@ -276,21 +277,19 @@ export function LoopInCaseStudy() {
             Want to try it yourself?
           </p>
           
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Link 
+          <div className="flex flex-col sm:flex-row items-start gap-6">
+            <AnimatedLink 
               to="/loopin"
-              className="inline-flex items-center px-6 py-3 bg-[#635bff] hover:bg-[#5046e5] text-white font-diatype font-medium rounded-lg transition-colors"
+              className="text-lg lg:text-xl font-diatype text-white hover:text-white/80 transition-colors"
             >
               Get LoopIn
-            </Link>
-            <a 
-              href="https://github.com/skip5this/LoopIn" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 border border-white/20 hover:border-white/40 text-white font-diatype font-medium rounded-lg transition-colors"
+            </AnimatedLink>
+            <AnimatedLink 
+              href="https://github.com/skip5this/LoopIn"
+              className="text-lg lg:text-xl font-diatype text-white/60 hover:text-white transition-colors"
             >
               View on GitHub
-            </a>
+            </AnimatedLink>
           </div>
         </div>
       </section>
