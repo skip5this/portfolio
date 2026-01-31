@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { StrikeCaseStudy } from './pages/StrikeCaseStudy';
+import { LoopIn } from './pages/LoopIn';
+import { LoopInCaseStudy } from './pages/LoopInCaseStudy';
 
 export function App() {
   return (
@@ -9,6 +11,8 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/strike-case-study" element={<StrikeCaseStudy />} />
+        <Route path="/loopin" element={<LoopIn />} />
+        <Route path="/loopin/case-study" element={<LoopInCaseStudy />} />
       </Routes>
     </Router>
   );
