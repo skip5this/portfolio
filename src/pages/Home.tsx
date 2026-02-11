@@ -6,6 +6,9 @@ import { Footer } from '../components/Footer';
 import { RecentWorks } from '../components/RecentWorks';
 import { ProjectFeature } from '../components/ProjectFeature';
 import { DesktopProjectFeature } from '../components/DesktopProjectFeature';
+import { AIPortalImageWarhol } from '../components/AIPortalImageWarhol';
+import { AIPortalImageWarholBlue } from '../components/AIPortalImageWarholBlue';
+import { AIPortalImageWarholYellow } from '../components/AIPortalImageWarholYellow';
 
 // Import all project images
 import strike1 from '../assets/images/strike1.png';
@@ -20,12 +23,28 @@ import aioz1 from '../assets/images/AiozNetwork-1.png';
 import aioz2 from '../assets/images/aioz2.png';
 import aioz3 from '../assets/images/aioz3.png';
 
-export function Home() {
+type AIVariant = 'dark' | 'blue' | 'yellow';
+
+interface HomeProps {
+  aiVariant?: AIVariant;
+}
+
+const AISection: React.FC<{ variant: AIVariant }> = ({ variant }) => {
+  switch (variant) {
+    case 'blue': return <AIPortalImageWarholBlue />;
+    case 'yellow': return <AIPortalImageWarholYellow />;
+    case 'dark': 
+    default: return <AIPortalImageWarhol />;
+  }
+};
+
+export function Home({ aiVariant = 'dark' }: HomeProps) {
   return (
     <div className="font-sans text-gray-800 bg-white">
       <Header />
       <main>
         <RecentWorks />
+        <AISection variant={aiVariant} />
         <ProjectFeature 
           title="Strike"
           year="2021-23"
@@ -54,4 +73,4 @@ export function Home() {
       <Footer />
     </div>
   );
-} 
+}

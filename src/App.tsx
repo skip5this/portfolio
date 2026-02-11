@@ -10,7 +10,10 @@ export function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home aiVariant="dark" />} />
+        <Route path="/v/dark" element={<Home aiVariant="dark" />} />
+        <Route path="/v/blue" element={<Home aiVariant="blue" />} />
+        <Route path="/v/yellow" element={<Home aiVariant="yellow" />} />
         <Route path="/strike-case-study" element={<StrikeCaseStudy />} />
         <Route path="/loopin" element={<LoopIn />} />
         <Route path="/loopin/case-study" element={<LoopInCaseStudy />} />

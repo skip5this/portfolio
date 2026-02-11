@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { AnimatedLink } from '../components/AnimatedLink';
+import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 
 export function LoopInCaseStudy() {
   return (
@@ -209,12 +210,7 @@ export function LoopInCaseStudy() {
             </p>
           </div>
           
-          {/* Architecture diagram placeholder */}
-          <div className="bg-white/5 rounded-2xl p-8 border border-white/10 max-w-4xl">
-            <p className="text-white/30 font-diatype-mono text-sm text-center py-16">
-              [ Architecture diagram: Browser → MCP Server → Claude Code ]
-            </p>
-          </div>
+          <ArchitectureDiagram />
         </div>
       </section>
 
@@ -255,17 +251,42 @@ export function LoopInCaseStudy() {
         </div>
       </section>
 
-      {/* Reflection - Coming Soon */}
+      {/* Reflections */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="bg-white/5 rounded-2xl p-8 md:p-12 border border-white/10 max-w-3xl">
-            <p className="text-white/40 font-diatype-mono text-sm mb-4">Coming soon</p>
-            <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype font-normal text-white mb-4">
-              Reflections
-            </h2>
-            <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-white/60">
-              What I learned about designing for AI workflows, building with AI collaborators, and bridging the gap between visual design and code.
-            </p>
+          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          
+          <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
+            Reflections
+          </h2>
+          
+          <div className="max-w-3xl space-y-12">
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">
+                AI agents need senses, not just instructions
+              </h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-white/60">
+                The biggest friction in working with coding agents isn't capability—it's perception. Claude can write any CSS you describe, but it can't see the result. LoopIn taught me that the next wave of AI tools won't just be smarter—they'll be more connected to the world they're changing.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">
+                Design the seams, not just the surfaces
+              </h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-white/60">
+                The interesting design problem wasn't the UI of the extension—it was the handoff between human and AI. When does the human point? When does the AI act? How much context is enough? These seams between human intent and AI action are where the real design work lives.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-lg lg:text-xl xl:text-[1.75rem] font-diatype font-normal text-white mb-4">
+                Building with AI changes how you think about building
+              </h3>
+              <p className="text-lg lg:text-xl xl:text-[1.75rem] leading-relaxed lg:leading-relaxed xl:leading-[1.6] font-diatype text-white/60">
+                LoopIn was built through conversation with an AI coding agent—the same kind of agent it's designed to help. That feedback loop shaped the product. Every friction I felt while building became a feature I added. The best way to design for AI workflows is to live inside one.
+              </p>
+            </div>
           </div>
         </div>
       </section>

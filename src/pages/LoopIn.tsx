@@ -4,6 +4,7 @@ import { ArrowLeft, Copy, Check } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { AnimatedLink } from '../components/AnimatedLink';
 import { GradientOrbSubtle } from '../components/GradientOrb';
+import { LoopInTerminalDemo } from '../components/LoopInTerminalDemo';
 
 export function LoopIn() {
   const [copiedMcp, setCopiedMcp] = useState(false);
@@ -126,13 +127,7 @@ export function LoopIn() {
       {/* Demo Placeholder */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48">
         <div className="max-w-[1680px] mx-auto">
-          <div className="bg-white/5 rounded-2xl p-8 md:p-12 border border-white/10 max-w-4xl">
-            <div className="aspect-video bg-white/5 rounded-lg flex items-center justify-center">
-              <p className="text-white/40 font-diatype-mono text-sm">
-                [ Demo GIF coming soon ]
-              </p>
-            </div>
-          </div>
+          <LoopInTerminalDemo />
         </div>
       </section>
 
