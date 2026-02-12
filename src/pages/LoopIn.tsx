@@ -54,7 +54,7 @@ export function LoopIn() {
             LoopIn
           </h1>
           
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.5] tracking-[-0.02em] font-diatype font-light text-white/90 max-w-4xl mb-8">
+          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.65] tracking-[-0.02em] font-diatype font-light text-white/90 max-w-4xl mb-8">
             Tighten the loop between your browser and your agent.
           </p>
           
@@ -222,7 +222,7 @@ export function LoopIn() {
       {/* CTA */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/[0.06]">
         <div className="max-w-[1680px] mx-auto">
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.5] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-12">
+          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.65] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-12">
             Built for Claude Code users. Works anywhere — capture from production sites, competitor UIs, or design inspiration.
           </p>
           
