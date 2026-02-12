@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Copy, Check, Github } from 'lucide-react';
+import { ArrowLeft, Copy, Check } from 'lucide-react';
 import { Footer } from '../components/Footer';
-import { AnimatedLink } from '../components/AnimatedLink';
 import { LoopInTerminalDemo } from '../components/LoopInTerminalDemo';
 
 export function LoopIn() {
@@ -31,218 +30,388 @@ export function LoopIn() {
   };
 
   return (
-    <div className="font-sans text-gray-800 bg-[#0c0c0c] min-h-screen">
-      {/* Header */}
-      <header className="bg-[#0c0c0c]/80 backdrop-blur-xl border-b border-white/[0.06] fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link 
-              to="/" 
-              className="flex items-center space-x-2 text-white/40 hover:text-white/80 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-diatype">Back</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen" style={{
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif",
+      background: '#09090b',
+      color: '#fafafa',
+      WebkitFontSmoothing: 'antialiased',
+      lineHeight: 1.6,
+    }}>
 
-      {/* Hero — Typography-driven, full dark */}
-      <section className="pt-48 pb-32 md:pt-56 md:pb-40 px-8 md:px-16 lg:px-32 xl:px-48">
-        <div className="max-w-5xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-diatype-mono font-normal text-white mb-8 tracking-[-0.03em]">
-            LoopIn
+      {/* Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8" style={{
+        background: 'rgba(9,9,11,0.85)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        padding: '1.25rem 2rem',
+      }}>
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 no-underline transition-colors"
+          style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
+          onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back</span>
+        </Link>
+        <div className="flex items-center gap-5">
+          <Link
+            to="/loopin/case-study"
+            className="no-underline transition-colors"
+            style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+          >
+            Case Study
+          </Link>
+          <a
+            href="https://github.com/skip5this/LoopIn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="no-underline transition-colors flex items-center gap-1.5"
+            style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="min-h-screen flex flex-col justify-center items-center text-center" style={{ padding: '6rem 2rem 4rem' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          {/* Tag */}
+          <p style={{
+            fontSize: '0.8rem',
+            color: 'rgba(255,255,255,0.35)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '2rem',
+          }}>
+            Chrome Extension · MCP Server · Open Source
+          </p>
+
+          {/* Title */}
+          <h1 style={{
+            fontSize: 'clamp(2.75rem, 10vw, 5rem)',
+            fontWeight: 600,
+            lineHeight: 1.08,
+            letterSpacing: '-0.035em',
+            marginBottom: '1.5rem',
+          }}>
+            Click it.<br />Send it.<br />Fix it.
           </h1>
-          
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.75] tracking-[-0.02em] font-diatype font-light text-white/90 max-w-4xl mb-8">
-            Tighten the loop between your browser and your agent.
-          </p>
-          
-          <p className="text-lg md:text-xl font-diatype text-white/40 max-w-2xl leading-[1.75]">
-            Click any element on any webpage. Add context. Send it straight to your coding agent. No more screenshots or copy-pasting HTML.
-          </p>
-        </div>
-      </section>
 
-      {/* How It Works — tight, confident */}
-      <section className="py-24 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/[0.06]">
-        <div className="max-w-[1680px] mx-auto">
-          <div className="w-12 h-px bg-[#635bff] mb-6"></div>
-          
-          <h2 className="text-lg md:text-xl font-diatype-mono font-normal text-white/50 mb-20 uppercase tracking-[0.1em]">
-            How it works
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20">
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Click any element
-              </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
-                Toggle capture mode and click on anything. LoopIn grabs the HTML, computed styles, and selector automatically.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Add context
-              </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
-                Tell your agent what you want. "Make this button green." "Fix the alignment." "Add a hover effect."
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Claude sees it
-              </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
-                Your agent gets the element data via MCP. It sees exactly what you see — selector, styles, and all.
-              </p>
-            </div>
+          {/* Lead */}
+          <p style={{
+            fontSize: '1.2rem',
+            color: 'rgba(255,255,255,0.6)',
+            maxWidth: 440,
+            margin: '0 auto 3rem',
+            lineHeight: 1.6,
+          }}>
+            Tighten the loop between your browser and your agent. Click any element, add context, send it directly.
+          </p>
+
+          {/* Install command */}
+          <div 
+            className="inline-flex items-center gap-3 cursor-pointer transition-colors"
+            style={{
+              background: '#111113',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 8,
+              padding: '0.875rem 1.5rem',
+              fontFamily: "'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', monospace",
+              fontSize: '0.95rem',
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText('git clone https://github.com/skip5this/LoopIn');
+            }}
+          >
+            <span style={{ color: 'rgba(255,255,255,0.35)' }}>$</span>
+            <span style={{ color: '#4ade80' }}>git clone</span>
+            <span style={{ color: 'rgba(255,255,255,0.6)' }}>https://github.com/skip5this/LoopIn</span>
           </div>
+
+          <p style={{
+            marginTop: '1.25rem',
+            fontSize: '0.8rem',
+            color: 'rgba(255,255,255,0.35)',
+          }}>
+            Load as unpacked extension in Chrome. Connect to <a href="https://claude.ai/code" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Claude Code</a> via MCP.
+          </p>
         </div>
       </section>
 
-      {/* Demo — with context */}
-      <section className="py-24 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48">
-        <div className="max-w-[1680px] mx-auto">
-          <div className="w-12 h-px bg-[#635bff] mb-6"></div>
-          
-          <h2 className="text-lg md:text-xl font-diatype-mono font-normal text-white/50 mb-12 uppercase tracking-[0.1em]">
-            See it in action
-          </h2>
-          
+      {/* Terminal Demo */}
+      <section style={{ padding: '0 1.5rem' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
           <LoopInTerminalDemo />
         </div>
       </section>
 
-      {/* Get Started — merged installation + quick start */}
-      <section className="py-24 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/[0.06]">
-        <div className="max-w-[1680px] mx-auto">
-          <div className="w-12 h-px bg-[#635bff] mb-6"></div>
-          
-          <h2 className="text-lg md:text-xl font-diatype-mono font-normal text-white/50 mb-20 uppercase tracking-[0.1em]">
-            Get started
-          </h2>
-          
-          <div className="max-w-3xl space-y-20">
-            {/* Step 1: Clone */}
-            <div>
-              <div className="text-sm font-diatype-mono text-[#635bff] mb-3">01</div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Clone the repo
-              </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75] mb-6">
-                Load the extension folder in Chrome via <code className="bg-white/[0.06] px-2 py-0.5 rounded text-sm text-white/60">chrome://extensions</code> with Developer mode enabled.
-              </p>
-              <a 
-                href="https://github.com/skip5this/LoopIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/[0.06] hover:bg-white/[0.1] text-white/80 font-diatype text-sm rounded-lg transition-colors border border-white/[0.06]"
+      {/* Divider */}
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
+
+      {/* How It Works */}
+      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+        <h2 style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.12em',
+          color: 'rgba(255,255,255,0.35)',
+          textAlign: 'center',
+          marginBottom: '3rem',
+        }}>
+          How it works
+        </h2>
+
+        <div className="grid grid-cols-3 gap-8 text-center">
+          <div>
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>01</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Click</h3>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+              Toggle capture mode. Click any element on any page.
+            </p>
+          </div>
+          <div>
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>02</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Annotate</h3>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+              Add context. "Make this green." "Fix the spacing."
+            </p>
+          </div>
+          <div>
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>03</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Send</h3>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+              Your agent gets the HTML, styles, and selector via MCP.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
+
+      {/* What Gets Captured */}
+      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+        <h2 style={{
+          fontSize: '1.75rem',
+          fontWeight: 600,
+          letterSpacing: '-0.02em',
+          textAlign: 'center',
+          marginBottom: '2.5rem',
+        }}>
+          Everything your agent needs.
+        </h2>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 1,
+          background: 'rgba(255,255,255,0.08)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 10,
+          overflow: 'hidden',
+        }}>
+          {[
+            { label: 'HTML', title: 'Element', desc: 'Tag, classes, inner content.' },
+            { label: 'CSS', title: 'Styles', desc: 'Computed colors, spacing, layout.' },
+            { label: 'DOM', title: 'Selector', desc: 'Unique path to the element.' },
+          ].map((item, i) => (
+            <div key={i} style={{ background: '#111113', padding: '1.5rem' }}>
+              <p style={{
+                fontFamily: "'SF Mono', monospace",
+                fontSize: '0.8rem',
+                color: '#635bff',
+                marginBottom: '0.5rem',
+              }}>{item.label}</p>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 500, marginBottom: '0.4rem' }}>{item.title}</h3>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Divider */}
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
+
+      {/* Setup */}
+      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+        <h2 style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.12em',
+          color: 'rgba(255,255,255,0.35)',
+          textAlign: 'center',
+          marginBottom: '3rem',
+        }}>
+          Setup
+        </h2>
+
+        <div className="space-y-12">
+          {/* Step 1 */}
+          <div className="text-center">
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>01</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Load the extension</h3>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
+              Clone the repo. Open <span style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.85rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>chrome://extensions</span>, enable Developer mode, load the <span style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.85rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>extension/</span> folder.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div className="text-center">
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>02</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.75rem' }}>Add to Claude Code</h3>
+            <div className="relative text-left">
+              <pre style={{
+                background: '#111113',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 8,
+                padding: '1rem 1.25rem',
+                fontFamily: "'SF Mono', SFMono-Regular, ui-monospace, monospace",
+                fontSize: '0.85rem',
+                lineHeight: 1.6,
+                color: 'rgba(255,255,255,0.7)',
+                overflowX: 'auto',
+              }}>
+                {mcpConfig}
+              </pre>
+              <button
+                onClick={copyMcpConfig}
+                className="absolute top-3 right-3 p-2 rounded-lg transition-colors"
+                style={{ background: 'rgba(255,255,255,0.06)' }}
               >
-                <Github className="w-4 h-4" />
-                View on GitHub
-              </a>
+                {copiedMcp ? (
+                  <Check className="w-4 h-4 text-green-400" />
+                ) : (
+                  <Copy className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                )}
+              </button>
             </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="text-center">
+            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>03</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.75rem' }}>Start capturing</h3>
             
-            {/* Step 2: MCP Config */}
-            <div>
-              <div className="text-sm font-diatype-mono text-[#635bff] mb-3">02</div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Add to Claude Code
-              </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75] mb-6">
-                Add this to your <code className="bg-white/[0.06] px-2 py-0.5 rounded text-sm text-white/60">~/.claude.json</code>:
-              </p>
-              <div className="relative">
-                <pre className="bg-white/[0.03] text-white/70 p-6 rounded-lg font-diatype-mono text-sm overflow-x-auto border border-white/[0.06]">
-                  {mcpConfig}
-                </pre>
-                <button
-                  onClick={copyMcpConfig}
-                  className="absolute top-4 right-4 p-2 bg-white/[0.06] hover:bg-white/[0.1] rounded-lg transition-colors"
+            {/* Keyboard shortcut */}
+            <div className="flex items-center justify-between text-left" style={{
+              background: '#111113',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 8,
+              padding: '0.75rem 1.25rem',
+              marginBottom: '1rem',
+            }}>
+              <span style={{ fontSize: '0.95rem' }}>Toggle capture mode</span>
+              <kbd style={{
+                fontFamily: "'SF Mono', monospace",
+                fontSize: '0.8rem',
+                color: 'rgba(255,255,255,0.6)',
+                background: 'rgba(255,255,255,0.06)',
+                padding: '4px 10px',
+                borderRadius: 6,
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}>⌘ Shift C</kbd>
+            </div>
+
+            {/* Example prompts */}
+            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>
+              Try asking your agent:
+            </p>
+            <div className="space-y-2 text-left">
+              {[
+                "What did I just capture?",
+                "List all my captures",
+                "Any pending tasks?"
+              ].map((prompt, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center justify-between cursor-pointer transition-colors group"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.04)',
+                    borderRadius: 8,
+                    padding: '0.65rem 1rem',
+                  }}
+                  onClick={() => copyPrompt(prompt)}
                 >
-                  {copiedMcp ? (
-                    <Check className="w-4 h-4 text-green-400" />
+                  <code style={{
+                    fontFamily: "'SF Mono', monospace",
+                    fontSize: '0.85rem',
+                    color: 'rgba(255,255,255,0.5)',
+                  }}>{prompt}</code>
+                  {copiedPrompt === prompt ? (
+                    <Check className="w-3.5 h-3.5 text-green-400" />
                   ) : (
-                    <Copy className="w-4 h-4 text-white/40" />
+                    <Copy className="w-3.5 h-3.5 opacity-20 group-hover:opacity-40 transition-opacity" />
                   )}
-                </button>
-              </div>
-            </div>
-            
-            {/* Step 3: Use it */}
-            <div>
-              <div className="text-sm font-diatype-mono text-[#635bff] mb-3">03</div>
-              <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
-                Start capturing
-              </h3>
-              
-              {/* Keyboard shortcut */}
-              <div className="bg-white/[0.03] rounded-lg p-5 border border-white/[0.06] mb-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-white font-diatype text-sm">Toggle capture mode</span>
-                  </div>
-                  <kbd className="px-3 py-1.5 bg-white/[0.06] rounded-md text-white/60 font-diatype-mono text-xs border border-white/[0.06]">
-                    ⌘ Shift C
-                  </kbd>
                 </div>
-              </div>
-              
-              {/* Example prompts */}
-              <p className="text-sm font-diatype text-white/30 mb-4">Try asking your agent:</p>
-              <div className="space-y-2">
-                {[
-                  "What did I just capture?",
-                  "List all my captures",
-                  "Any pending tasks?"
-                ].map((prompt, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center justify-between bg-white/[0.03] rounded-lg px-4 py-3 group cursor-pointer hover:bg-white/[0.06] transition-colors border border-white/[0.04]"
-                    onClick={() => copyPrompt(prompt)}
-                  >
-                    <code className="text-white/50 font-diatype-mono text-sm">{prompt}</code>
-                    {copiedPrompt === prompt ? (
-                      <Check className="w-3.5 h-3.5 text-green-400" />
-                    ) : (
-                      <Copy className="w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-colors" />
-                    )}
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-32 md:py-40 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/[0.06]">
-        <div className="max-w-[1680px] mx-auto">
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.75] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-12">
-            Built for Claude Code users. Works anywhere — capture from production sites, competitor UIs, or design inspiration.
+      <section className="text-center" style={{
+        padding: '6rem 1.5rem',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+      }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          <h2 style={{
+            fontSize: '1.75rem',
+            fontWeight: 600,
+            letterSpacing: '-0.02em',
+            marginBottom: '0.5rem',
+          }}>
+            Built for agents.
+          </h2>
+          <p style={{
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '1rem',
+            marginBottom: '2rem',
+          }}>
+            Works anywhere — production sites, competitor UIs, design inspiration.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <a 
+
+          <div className="flex items-center justify-center gap-4">
+            <a
               href="https://github.com/skip5this/LoopIn"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#635bff] hover:bg-[#5046e5] text-white font-diatype font-medium text-sm rounded-lg transition-colors"
+              className="transition-opacity"
+              style={{
+                padding: '0.8rem 1.25rem',
+                background: '#fafafa',
+                color: '#09090b',
+                fontWeight: 600,
+                border: 'none',
+                borderRadius: 6,
+                fontSize: '0.9rem',
+                textDecoration: 'none',
+                display: 'inline-block',
+              }}
             >
-              <Github className="w-4 h-4" />
               View on GitHub
             </a>
-            <AnimatedLink 
+            <Link
               to="/loopin/case-study"
-              arrow={false}
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-diatype text-white/40 hover:text-white/70 transition-colors"
+              className="transition-colors"
+              style={{
+                padding: '0.8rem 1.25rem',
+                color: 'rgba(255,255,255,0.6)',
+                fontSize: '0.9rem',
+                textDecoration: 'none',
+              }}
             >
-              Read the case study
-            </AnimatedLink>
+              Read the case study →
+            </Link>
           </div>
         </div>
       </section>
