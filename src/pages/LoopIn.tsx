@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Copy, Check, Github, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Github } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { AnimatedLink } from '../components/AnimatedLink';
 import { LoopInTerminalDemo } from '../components/LoopInTerminalDemo';
@@ -238,10 +238,10 @@ export function LoopIn() {
             </a>
             <AnimatedLink 
               to="/loopin/case-study"
+              arrow={false}
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-diatype text-white/40 hover:text-white/70 transition-colors"
             >
               Read the case study
-              <ExternalLink className="w-3.5 h-3.5" />
             </AnimatedLink>
           </div>
         </div>
