@@ -54,11 +54,11 @@ export function LoopIn() {
             LoopIn
           </h1>
           
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.2] tracking-[-0.02em] font-diatype font-light text-white/90 max-w-4xl mb-8">
-            Tighten the loop between your browser and Claude Code.
+          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.35] tracking-[-0.02em] font-diatype font-light text-white/90 max-w-4xl mb-8">
+            Tighten the loop between your browser and your agent.
           </p>
           
-          <p className="text-lg md:text-xl font-diatype text-white/40 max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-xl font-diatype text-white/40 max-w-2xl leading-[1.75]">
             Click any element on any webpage. Add context. Send it straight to your coding agent. No more screenshots or copy-pasting HTML.
           </p>
         </div>
@@ -78,7 +78,7 @@ export function LoopIn() {
               <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
                 Click any element
               </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-relaxed">
+              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
                 Toggle capture mode and click on anything. LoopIn grabs the HTML, computed styles, and selector automatically.
               </p>
             </div>
@@ -87,7 +87,7 @@ export function LoopIn() {
               <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
                 Add context
               </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-relaxed">
+              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
                 Tell your agent what you want. "Make this button green." "Fix the alignment." "Add a hover effect."
               </p>
             </div>
@@ -96,7 +96,7 @@ export function LoopIn() {
               <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
                 Claude sees it
               </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-relaxed">
+              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75]">
                 Your agent gets the element data via MCP. It sees exactly what you see — selector, styles, and all.
               </p>
             </div>
@@ -133,7 +133,7 @@ export function LoopIn() {
               <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
                 Clone the repo
               </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-relaxed mb-6">
+              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75] mb-6">
                 Load the extension folder in Chrome via <code className="bg-white/[0.06] px-2 py-0.5 rounded text-sm text-white/60">chrome://extensions</code> with Developer mode enabled.
               </p>
               <a 
@@ -153,7 +153,7 @@ export function LoopIn() {
               <h3 className="text-2xl lg:text-3xl font-diatype font-normal text-white mb-4">
                 Add to Claude Code
               </h3>
-              <p className="text-base lg:text-lg font-diatype text-white/40 leading-relaxed mb-6">
+              <p className="text-base lg:text-lg font-diatype text-white/40 leading-[1.75] mb-6">
                 Add this to your <code className="bg-white/[0.06] px-2 py-0.5 rounded text-sm text-white/60">~/.claude.json</code>:
               </p>
               <div className="relative">
@@ -222,7 +222,7 @@ export function LoopIn() {
       {/* CTA */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/[0.06]">
         <div className="max-w-[1680px] mx-auto">
-          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.2] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-12">
+          <p className="text-2xl md:text-3xl lg:text-4xl xl:text-[3rem] leading-[1.35] tracking-[-0.02em] font-diatype font-light text-white max-w-4xl mb-12">
             Built for Claude Code users. Works anywhere — capture from production sites, competitor UIs, or design inspiration.
           </p>
           
