@@ -188,7 +188,7 @@ export function LoopIn() {
             <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>03</p>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Send</h3>
             <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-              Your agent gets the HTML, styles, and selector via MCP.
+              Your agent gets HTML, styles, a11y data, and React components via MCP.
             </p>
           </div>
         </div>
@@ -222,6 +222,9 @@ export function LoopIn() {
             { label: 'HTML', title: 'Element', desc: 'Tag, classes, inner content.' },
             { label: 'CSS', title: 'Styles', desc: 'Computed colors, spacing, layout.' },
             { label: 'DOM', title: 'Selector', desc: 'Unique path to the element.' },
+            { label: 'A11Y', title: 'Accessibility', desc: 'ARIA roles, labels, and attributes.' },
+            { label: 'JSX', title: 'Components', desc: 'React component hierarchy via fiber tree.' },
+            { label: 'CTX', title: 'Context', desc: 'Heading context, data attributes.' },
           ].map((item, i) => (
             <div key={i} style={{ background: '#111113', padding: '1.5rem' }}>
               <p style={{
