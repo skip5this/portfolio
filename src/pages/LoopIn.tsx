@@ -225,6 +225,9 @@ export function LoopIn() {
             { label: 'A11Y', title: 'Accessibility', desc: 'ARIA roles, labels, and attributes.' },
             { label: 'JSX', title: 'Components', desc: 'React component hierarchy via fiber tree.' },
             { label: 'CTX', title: 'Context', desc: 'Heading context, data attributes.' },
+            { label: 'TXT', title: 'Text Select', desc: 'Highlight and capture text passages.' },
+            { label: 'FRZ', title: 'Freeze', desc: 'Pause animations to capture exact states.' },
+            { label: 'LOG', title: 'Task List', desc: 'Track all captures in a live session panel.' },
           ].map((item, i) => (
             <div key={i} style={{ background: '#111113', padding: '1.5rem' }}>
               <p style={{
