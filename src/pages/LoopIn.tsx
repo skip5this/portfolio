@@ -1,12 +1,324 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Copy, Check } from 'lucide-react';
+import { ArrowLeft, ChevronDown, X } from 'lucide-react';
 import { Footer } from '../components/Footer';
-import { LoopInTerminalDemo } from '../components/LoopInTerminalDemo';
 
-export function LoopIn() {
+/* ─── Interactive Demo Component ─── */
+
+interface CapturedElement {
+  tag: string;
+  selector: string;
+  dimensions: { width: number; height: number };
+  text: string;
+  html: string;
+  rect: DOMRect;
+}
+
+function InteractiveDemo() {
+  const demoRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState<{ rect: DOMRect; tag: string } | null>(null);
+  const [captured, setCaptured] = useState<CapturedElement | null>(null);
+  const [showSource, setShowSource] = useState(false);
+  const [instruction, setInstruction] = useState('');
+
+  const getRelativeRect = useCallback((rect: DOMRect) => {
+    if (!demoRef.current) return { top: 0, left: 0, width: 0, height: 0 };
+    const parent = demoRef.current.getBoundingClientRect();
+    return {
+      top: rect.top - parent.top,
+      left: rect.left - parent.left,
+      width: rect.width,
+      height: rect.height,
+    };
+  }, []);
+
+  const handleMouseOver = useCallback((e: React.MouseEvent) => {
+    if (captured) return;
+    const target = e.target as HTMLElement;
+    if (!target.dataset.demo) return;
+    e.stopPropagation();
+    setHovered({ rect: target.getBoundingClientRect(), tag: target.tagName.toLowerCase() });
+  }, [captured]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!captured) setHovered(null);
+  }, [captured]);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.dataset.demo) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = target.getBoundingClientRect();
+    const tag = target.tagName.toLowerCase();
+    const classes = target.className ? `.${target.className.split(' ').slice(0, 2).join('.')}` : '';
+    setCaptured({
+      tag,
+      selector: `${tag}${classes}`,
+      dimensions: { width: Math.round(rect.width), height: Math.round(rect.height) },
+      text: target.textContent?.slice(0, 80) || '',
+      html: target.outerHTML.slice(0, 200),
+      rect,
+    });
+    setHovered(null);
+  }, []);
+
+  const close = () => {
+    setCaptured(null);
+    setShowSource(false);
+    setInstruction('');
+  };
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {/* Demo label */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12,
+      }}>
+        <span style={{
+          display: 'inline-block', width: 6, height: 6, borderRadius: '50%',
+          background: '#4ade80', animation: 'pulse 2s infinite',
+        }} />
+        <span style={{
+          fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)',
+          fontFamily: "'SF Mono', monospace", letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+        }}>
+          Live demo — hover &amp; click elements below
+        </span>
+      </div>
+
+      {/* Demo area */}
+      <div
+        ref={demoRef}
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        style={{
+          position: 'relative',
+          background: '#111113',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 10,
+          padding: '2rem',
+          cursor: captured ? 'default' : 'crosshair',
+          userSelect: 'none',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Mock UI elements */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+          <div data-demo="true" style={{
+            width: 32, height: 32, borderRadius: 8,
+            background: 'linear-gradient(135deg, #6366f1, #635bff)',
+          }} />
+          <div>
+            <h4 data-demo="true" style={{ fontSize: '0.95rem', fontWeight: 600, margin: 0, color: '#fafafa' }}>
+              Acme Dashboard
+            </h4>
+            <p data-demo="true" style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+              Settings → Profile
+            </p>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}>
+          <button data-demo="true" style={{
+            padding: '8px 16px', borderRadius: 6,
+            background: '#6366f1', border: 'none', color: '#fff',
+            fontSize: '0.85rem', fontWeight: 500, cursor: 'crosshair',
+          }}>Save changes</button>
+          <button data-demo="true" style={{
+            padding: '8px 16px', borderRadius: 6,
+            background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
+            color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', cursor: 'crosshair',
+          }}>Cancel</button>
+        </div>
+
+        <div data-demo="true" style={{
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 8, padding: '12px 16px',
+          fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)',
+        }}>
+          Your profile has been updated successfully. Changes will take effect on next login.
+        </div>
+
+        {/* Hover overlay */}
+        {hovered && demoRef.current && (() => {
+          const r = getRelativeRect(hovered.rect);
+          return (
+            <div style={{
+              position: 'absolute',
+              top: r.top, left: r.left,
+              width: r.width, height: r.height,
+              border: '1.5px solid #6366f1',
+              background: 'rgba(99,102,241,0.08)',
+              borderRadius: 4,
+              pointerEvents: 'none',
+              transition: 'all 0.1s ease',
+            }}>
+              <span style={{
+                position: 'absolute', top: -22, left: 0,
+                background: '#6366f1', color: '#fff',
+                fontSize: '0.65rem', fontWeight: 600,
+                padding: '2px 6px', borderRadius: 3,
+                fontFamily: "'SF Mono', monospace",
+              }}>{hovered.tag}</span>
+            </div>
+          );
+        })()}
+      </div>
+
+      {/* Capture dialog */}
+      {captured && (
+        <div style={{
+          position: 'absolute', bottom: -8, right: -8,
+          width: 340, maxWidth: 'calc(100% - 16px)',
+          background: '#111113',
+          border: '0.5px solid rgba(255,255,255,0.1)',
+          borderRadius: 10,
+          padding: '1.25rem',
+          zIndex: 10,
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        }}>
+          {/* Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{
+                background: '#6366f1', color: '#fff',
+                fontSize: '0.7rem', fontWeight: 600,
+                padding: '2px 8px', borderRadius: 4,
+                fontFamily: "'SF Mono', monospace",
+                textTransform: 'uppercase',
+              }}>{captured.tag}</span>
+              <span style={{
+                fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)',
+                fontFamily: "'SF Mono', monospace",
+              }}>Element captured</span>
+            </div>
+            <button onClick={close} style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'rgba(255,255,255,0.4)', padding: 4,
+            }}>
+              <X size={14} />
+            </button>
+          </div>
+
+          {/* Selector */}
+          <div style={{
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.06)',
+            borderRadius: 6, padding: '8px 10px', marginBottom: 12,
+            fontFamily: "'SF Mono', monospace", fontSize: '0.75rem',
+            color: 'rgba(255,255,255,0.6)', wordBreak: 'break-all',
+          }}>
+            {captured.selector}
+          </div>
+
+          {/* Dimensions */}
+          <div style={{
+            display: 'flex', gap: 16, marginBottom: 12,
+            fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)',
+            fontFamily: "'SF Mono', monospace",
+          }}>
+            <span>{captured.dimensions.width} × {captured.dimensions.height}px</span>
+          </div>
+
+          {/* Source toggle */}
+          <button
+            onClick={() => setShowSource(!showSource)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: '#6366f1', fontSize: '0.75rem',
+              fontFamily: "'SF Mono', monospace",
+              padding: 0, marginBottom: showSource ? 8 : 12,
+              display: 'flex', alignItems: 'center', gap: 4,
+            }}
+          >
+            <ChevronDown size={12} style={{
+              transform: showSource ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.15s ease',
+            }} />
+            View source
+          </button>
+          {showSource && (
+            <pre style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: 6, padding: '8px 10px', marginBottom: 12,
+              fontFamily: "'SF Mono', monospace", fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.5)', overflowX: 'auto',
+              whiteSpace: 'pre-wrap', wordBreak: 'break-all',
+              maxHeight: 80,
+            }}>
+              {captured.html}
+            </pre>
+          )}
+
+          {/* Instruction input */}
+          <textarea
+            value={instruction}
+            onChange={e => setInstruction(e.target.value)}
+            placeholder="Add context... &quot;Make this green&quot;"
+            style={{
+              width: '100%', background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: 6, padding: '8px 10px',
+              fontFamily: "-apple-system, sans-serif",
+              fontSize: '0.8rem', color: '#fafafa',
+              resize: 'none', height: 56, marginBottom: 12,
+              outline: 'none',
+            }}
+          />
+
+          {/* Buttons */}
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button
+              title="Demo mode — install LoopIn to capture for real"
+              style={{
+                flex: 1, padding: '8px 0', borderRadius: 6,
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem',
+                fontWeight: 500, cursor: 'not-allowed',
+              }}
+            >Capture only</button>
+            <button
+              title="Demo mode — install LoopIn to send to your agent"
+              style={{
+                flex: 1, padding: '8px 0', borderRadius: 6,
+                background: 'rgba(99,102,241,0.3)',
+                border: '1px solid rgba(99,102,241,0.4)',
+                color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem',
+                fontWeight: 500, cursor: 'not-allowed',
+              }}
+            >Send</button>
+          </div>
+
+          <p style={{
+            fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)',
+            textAlign: 'center', marginTop: 8, marginBottom: 0,
+          }}>
+            This is a demo. Install LoopIn to capture &amp; send to your agent.
+          </p>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ─── Collapsible Install Section ─── */
+
+function CollapsibleInstall() {
+  const [open, setOpen] = useState(false);
   const [copiedMcp, setCopiedMcp] = useState(false);
-  const [copiedPrompt, setCopiedPrompt] = useState<string | null>(null);
 
   const mcpConfig = `{
   "mcpServers": {
@@ -17,18 +329,122 @@ export function LoopIn() {
   }
 }`;
 
-  const copyMcpConfig = () => {
-    navigator.clipboard.writeText(mcpConfig);
-    setCopiedMcp(true);
-    setTimeout(() => setCopiedMcp(false), 2000);
-  };
+  return (
+    <div style={{ maxWidth: 640, margin: '0 auto' }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: '100%', background: 'none', border: 'none',
+          cursor: 'pointer', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', gap: 8, padding: '1rem 0',
+          color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem',
+        }}
+      >
+        <span>Can't wait? Install from source</span>
+        <ChevronDown size={14} style={{
+          transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s ease',
+        }} />
+      </button>
 
-  const copyPrompt = (prompt: string) => {
-    navigator.clipboard.writeText(prompt);
-    setCopiedPrompt(prompt);
-    setTimeout(() => setCopiedPrompt(null), 2000);
-  };
+      {open && (
+        <div style={{ padding: '0 0 2rem', animation: 'fadeIn 0.2s ease' }}>
+          <div className="space-y-8" style={{ textAlign: 'center' }}>
+            {/* Step 1 */}
+            <div>
+              <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.5rem' }}>01</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '0.4rem', color: '#fafafa' }}>Clone &amp; load extension</h3>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, marginBottom: '1rem' }}>
+                Clone the repo. Open <code style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.8rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>chrome://extensions</code>, enable Developer mode, load the <code style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.8rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>extension/</code> folder.
+              </p>
+              <div
+                className="inline-flex items-center gap-3 cursor-pointer"
+                style={{
+                  background: '#111113',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 8,
+                  padding: '0.75rem 1.25rem',
+                  fontFamily: "'SF Mono', monospace",
+                  fontSize: '0.85rem',
+                }}
+                onClick={() => navigator.clipboard.writeText('git clone https://github.com/skip5this/LoopIn')}
+              >
+                <span style={{ color: 'rgba(255,255,255,0.35)' }}>$</span>
+                <span style={{ color: '#4ade80' }}>git clone</span>
+                <span style={{ color: 'rgba(255,255,255,0.6)' }}>https://github.com/skip5this/LoopIn</span>
+              </div>
+            </div>
 
+            {/* Step 2 */}
+            <div>
+              <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.5rem' }}>02</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '0.75rem', color: '#fafafa' }}>Add MCP config</h3>
+              <div className="relative text-left">
+                <pre style={{
+                  background: '#111113',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 8,
+                  padding: '1rem 1.25rem',
+                  fontFamily: "'SF Mono', monospace",
+                  fontSize: '0.8rem',
+                  lineHeight: 1.6,
+                  color: 'rgba(255,255,255,0.6)',
+                  overflowX: 'auto',
+                }}>
+                  {mcpConfig}
+                </pre>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(mcpConfig);
+                    setCopiedMcp(true);
+                    setTimeout(() => setCopiedMcp(false), 2000);
+                  }}
+                  className="absolute top-3 right-3 p-2 rounded-lg transition-colors"
+                  style={{ background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer', color: copiedMcp ? '#4ade80' : 'rgba(255,255,255,0.4)' }}
+                >
+                  {copiedMcp ? '✓' : '⎘'}
+                </button>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div>
+              <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.5rem' }}>03</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '0.4rem', color: '#fafafa' }}>Start capturing</h3>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: 12,
+                background: '#111113',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 8,
+                padding: '0.6rem 1rem',
+              }}>
+                <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Toggle capture mode</span>
+                <kbd style={{
+                  fontFamily: "'SF Mono', monospace", fontSize: '0.75rem',
+                  color: 'rgba(255,255,255,0.5)',
+                  background: 'rgba(255,255,255,0.06)',
+                  padding: '3px 8px', borderRadius: 4,
+                  border: '1px solid rgba(255,255,255,0.06)',
+                }}>⌘ Shift C</kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ─── Main Page ─── */
+
+export function LoopIn() {
   return (
     <div className="min-h-screen" style={{
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif",
@@ -39,14 +455,14 @@ export function LoopIn() {
     }}>
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8" style={{
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style={{
         background: 'rgba(9,9,11,0.85)',
         backdropFilter: 'blur(16px)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
         padding: '1.25rem 2rem',
       }}>
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="flex items-center gap-2 no-underline transition-colors"
           style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
           onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
@@ -81,75 +497,71 @@ export function LoopIn() {
       </nav>
 
       {/* Hero */}
-      <section className="min-h-screen flex flex-col justify-center items-center text-center" style={{ padding: '6rem 2rem 4rem' }}>
-        <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          {/* Tag */}
-          <p style={{
-            fontSize: '0.8rem',
-            color: 'rgba(255,255,255,0.35)',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
+      <section style={{ padding: '8rem 1.5rem 4rem' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+          {/* Chrome Web Store badge */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            background: 'rgba(99,102,241,0.1)',
+            border: '1px solid rgba(99,102,241,0.2)',
+            borderRadius: 100, padding: '6px 16px',
             marginBottom: '2rem',
           }}>
-            Chrome Extension · MCP Server · Open Source
-          </p>
+            <span style={{
+              width: 6, height: 6, borderRadius: '50%',
+              background: '#6366f1', display: 'inline-block',
+            }} />
+            <span style={{
+              fontSize: '0.8rem', color: '#6366f1',
+              fontWeight: 500, letterSpacing: '0.02em',
+            }}>Coming to Chrome Web Store</span>
+          </div>
 
           {/* Title */}
           <h1 style={{
-            fontSize: 'clamp(2.75rem, 10vw, 5rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
             fontWeight: 600,
             lineHeight: 1.08,
             letterSpacing: '-0.035em',
             marginBottom: '1.5rem',
           }}>
-            Click it.<br />Send it.<br />Fix it.
+            Give your AI<br />agent eyes.
           </h1>
 
           {/* Lead */}
           <p style={{
-            fontSize: '1.2rem',
-            color: 'rgba(255,255,255,0.6)',
-            maxWidth: 440,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.55)',
+            maxWidth: 480,
+            margin: '0 auto 1rem',
+            lineHeight: 1.6,
+          }}>
+            Your AI coding agent is powerful but blind. It can write code, refactor components, and debug — but it can't see what you're looking at in the browser.
+          </p>
+          <p style={{
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.75)',
+            maxWidth: 480,
             margin: '0 auto 3rem',
             lineHeight: 1.6,
           }}>
-            Tighten the loop between your browser and your agent. Click any element, add context, send it directly.
+            LoopIn fixes that. Point. Click. Your agent gets full context — DOM, styles, accessibility data, component hierarchy.
           </p>
 
-          {/* Install command */}
-          <div 
-            className="inline-flex items-center gap-3 cursor-pointer transition-colors"
-            style={{
-              background: '#111113',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 8,
-              padding: '0.875rem 1.5rem',
-              fontFamily: "'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', monospace",
-              fontSize: '0.95rem',
-            }}
-            onClick={() => {
-              navigator.clipboard.writeText('git clone https://github.com/skip5this/LoopIn');
-            }}
-          >
-            <span style={{ color: 'rgba(255,255,255,0.35)' }}>$</span>
-            <span style={{ color: '#4ade80' }}>git clone</span>
-            <span style={{ color: 'rgba(255,255,255,0.6)' }}>https://github.com/skip5this/LoopIn</span>
-          </div>
-
           <p style={{
-            marginTop: '1.25rem',
             fontSize: '0.8rem',
-            color: 'rgba(255,255,255,0.35)',
+            color: 'rgba(255,255,255,0.3)',
+            marginBottom: '0.5rem',
           }}>
-            Load as unpacked extension in Chrome. Connect to <a href="https://claude.ai/code" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Claude Code</a> via MCP.
+            Chrome Extension · MCP Server · Open Source
           </p>
         </div>
       </section>
 
-      {/* Terminal Demo */}
-      <section style={{ padding: '0 1.5rem' }}>
-        <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <LoopInTerminalDemo />
+      {/* Interactive Demo */}
+      <section style={{ padding: '0 1.5rem 5rem' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <InteractiveDemo />
         </div>
       </section>
 
@@ -157,7 +569,7 @@ export function LoopIn() {
       <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
 
       {/* How It Works */}
-      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+      <section style={{ padding: '5rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
         <h2 style={{
           fontSize: '0.75rem',
           textTransform: 'uppercase',
@@ -169,38 +581,86 @@ export function LoopIn() {
           How it works
         </h2>
 
-        <div className="grid grid-cols-3 gap-8 text-center">
-          <div>
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>01</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Click</h3>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-              Toggle capture mode. Click any element on any page.
-            </p>
-          </div>
-          <div>
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>02</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Annotate</h3>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-              Add context. "Make this green." "Fix the spacing."
-            </p>
-          </div>
-          <div>
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>03</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Send</h3>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-              Your agent gets HTML, styles, a11y data, and React components via MCP.
-            </p>
-          </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          gap: '2rem',
+          textAlign: 'center',
+        }}>
+          {[
+            { step: '01', title: 'Activate', desc: 'Toggle capture mode with ⌘⇧C or the extension icon.' },
+            { step: '02', title: 'Click', desc: 'Click any element. LoopIn captures DOM, styles, a11y data, and React components.' },
+            { step: '03', title: 'Send', desc: 'Add context and send directly to your agent via MCP. Zero copy-paste.' },
+          ].map(item => (
+            <div key={item.step}>
+              <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', marginBottom: '0.75rem' }}>{item.step}</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '0.4rem' }}>{item.title}</h3>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{item.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Divider */}
       <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
 
-      {/* What Gets Captured */}
-      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+      {/* Architecture Flow */}
+      <section style={{ padding: '5rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
         <h2 style={{
-          fontSize: '1.75rem',
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.12em',
+          color: 'rgba(255,255,255,0.35)',
+          textAlign: 'center',
+          marginBottom: '2.5rem',
+        }}>
+          Architecture
+        </h2>
+
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          gap: 0, flexWrap: 'wrap',
+        }}>
+          {[
+            { label: 'Browser', sub: 'Chrome Extension' },
+            { label: 'WebSocket', sub: 'Local server' },
+            { label: 'MCP Server', sub: 'stdio' },
+            { label: 'AI Agent', sub: 'Claude / Cursor / etc.' },
+          ].map((item, i, arr) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{
+                background: '#111113',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 8,
+                padding: '0.75rem 1.25rem',
+                textAlign: 'center',
+                minWidth: 100,
+              }}>
+                <p style={{ fontSize: '0.85rem', fontWeight: 500, margin: 0, color: '#fafafa' }}>{item.label}</p>
+                <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)', margin: 0, fontFamily: "'SF Mono', monospace" }}>{item.sub}</p>
+              </div>
+              {i < arr.length - 1 && (
+                <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.85rem', padding: '0 8px' }}>→</span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p style={{
+          fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)',
+          textAlign: 'center', marginTop: '1.5rem',
+        }}>
+          All data stays local. Nothing leaves your machine.
+        </p>
+      </section>
+
+      {/* Divider */}
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
+
+      {/* Feature Grid */}
+      <section style={{ padding: '5rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
+        <h2 style={{
+          fontSize: '1.5rem',
           fontWeight: 600,
           letterSpacing: '-0.02em',
           textAlign: 'center',
@@ -222,197 +682,97 @@ export function LoopIn() {
             { label: 'HTML', title: 'Element', desc: 'Tag, classes, inner content.' },
             { label: 'CSS', title: 'Styles', desc: 'Computed colors, spacing, layout.' },
             { label: 'DOM', title: 'Selector', desc: 'Unique path to the element.' },
-            { label: 'A11Y', title: 'Accessibility', desc: 'ARIA roles, labels, and attributes.' },
-            { label: 'JSX', title: 'Components', desc: 'React component hierarchy via fiber tree.' },
+            { label: 'A11Y', title: 'Accessibility', desc: 'ARIA roles, labels, attributes.' },
+            { label: 'JSX', title: 'Components', desc: 'React hierarchy via fiber tree.' },
             { label: 'CTX', title: 'Context', desc: 'Heading context, data attributes.' },
-            { label: 'TXT', title: 'Text Select', desc: 'Highlight and capture text passages.' },
-            { label: 'FRZ', title: 'Freeze', desc: 'Pause animations to capture exact states.' },
-            { label: 'LOG', title: 'Task List', desc: 'Track all captures in a live session panel.' },
+            { label: 'TXT', title: 'Text Select', desc: 'Highlight and capture text.' },
+            { label: 'FRZ', title: 'Freeze', desc: 'Pause animations mid-state.' },
+            { label: 'LOG', title: 'Task List', desc: 'Track captures in a session panel.' },
           ].map((item, i) => (
-            <div key={i} style={{ background: '#111113', padding: '1.5rem' }}>
+            <div key={i} style={{ background: '#111113', padding: '1.25rem' }}>
               <p style={{
                 fontFamily: "'SF Mono', monospace",
-                fontSize: '0.8rem',
+                fontSize: '0.75rem',
                 color: '#635bff',
-                marginBottom: '0.5rem',
+                marginBottom: '0.4rem',
               }}>{item.label}</p>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 500, marginBottom: '0.4rem' }}>{item.title}</h3>
-              <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{item.desc}</p>
+              <h3 style={{ fontSize: '0.95rem', fontWeight: 500, marginBottom: '0.3rem' }}>{item.title}</h3>
+              <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>{item.desc}</p>
             </div>
           ))}
         </div>
+
+        <p style={{
+          fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)',
+          textAlign: 'center', marginTop: '2rem', lineHeight: 1.6,
+          maxWidth: 440, marginLeft: 'auto', marginRight: 'auto',
+        }}>
+          Built for builders working with Claude, Cursor, Copilot, or any MCP-compatible agent.
+        </p>
       </section>
 
       {/* Divider */}
       <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
 
-      {/* Setup */}
-      <section style={{ padding: '6rem 1.5rem', maxWidth: 640, margin: '0 auto' }}>
-        <h2 style={{
-          fontSize: '0.75rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.12em',
-          color: 'rgba(255,255,255,0.35)',
-          textAlign: 'center',
-          marginBottom: '3rem',
-        }}>
-          Setup
-        </h2>
-
-        <div className="space-y-12">
-          {/* Step 1 */}
-          <div className="text-center">
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>01</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.4rem' }}>Load the extension</h3>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-              Clone the repo. Open <span style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.85rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>chrome://extensions</span>, enable Developer mode, load the <span style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.85rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>extension/</span> folder.
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="text-center">
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>02</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.75rem' }}>Add to Claude Code</h3>
-            <div className="relative text-left">
-              <pre style={{
-                background: '#111113',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 8,
-                padding: '1rem 1.25rem',
-                fontFamily: "'SF Mono', SFMono-Regular, ui-monospace, monospace",
-                fontSize: '0.85rem',
-                lineHeight: 1.6,
-                color: 'rgba(255,255,255,0.7)',
-                overflowX: 'auto',
-              }}>
-                {mcpConfig}
-              </pre>
-              <button
-                onClick={copyMcpConfig}
-                className="absolute top-3 right-3 p-2 rounded-lg transition-colors"
-                style={{ background: 'rgba(255,255,255,0.06)' }}
-              >
-                {copiedMcp ? (
-                  <Check className="w-4 h-4 text-green-400" />
-                ) : (
-                  <Copy className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="text-center">
-            <p style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>03</p>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 500, marginBottom: '0.75rem' }}>Start capturing</h3>
-            
-            {/* Keyboard shortcut */}
-            <div className="flex items-center justify-between text-left" style={{
-              background: '#111113',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 8,
-              padding: '0.75rem 1.25rem',
-              marginBottom: '1rem',
-            }}>
-              <span style={{ fontSize: '0.95rem' }}>Toggle capture mode</span>
-              <kbd style={{
-                fontFamily: "'SF Mono', monospace",
-                fontSize: '0.8rem',
-                color: 'rgba(255,255,255,0.6)',
-                background: 'rgba(255,255,255,0.06)',
-                padding: '4px 10px',
-                borderRadius: 6,
-                border: '1px solid rgba(255,255,255,0.06)',
-              }}>⌘ Shift C</kbd>
-            </div>
-
-            {/* Example prompts */}
-            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.75rem' }}>
-              Try asking your agent:
-            </p>
-            <div className="space-y-2 text-left">
-              {[
-                "What did I just capture?",
-                "List all my captures",
-                "Any pending tasks?"
-              ].map((prompt, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center justify-between cursor-pointer transition-colors group"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.04)',
-                    borderRadius: 8,
-                    padding: '0.65rem 1rem',
-                  }}
-                  onClick={() => copyPrompt(prompt)}
-                >
-                  <code style={{
-                    fontFamily: "'SF Mono', monospace",
-                    fontSize: '0.85rem',
-                    color: 'rgba(255,255,255,0.5)',
-                  }}>{prompt}</code>
-                  {copiedPrompt === prompt ? (
-                    <Check className="w-3.5 h-3.5 text-green-400" />
-                  ) : (
-                    <Copy className="w-3.5 h-3.5 opacity-20 group-hover:opacity-40 transition-opacity" />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="text-center" style={{
-        padding: '6rem 1.5rem',
-        borderTop: '1px solid rgba(255,255,255,0.08)',
-      }}>
+      <section className="text-center" style={{ padding: '5rem 1.5rem' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <h2 style={{
-            fontSize: '1.75rem',
-            fontWeight: 600,
-            letterSpacing: '-0.02em',
-            marginBottom: '0.5rem',
-          }}>
-            Built for agents.
-          </h2>
-          <p style={{
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: '1rem',
+          {/* Chrome Web Store banner */}
+          <div style={{
+            background: '#111113',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 12,
+            padding: '2.5rem 2rem',
             marginBottom: '2rem',
           }}>
-            Works anywhere — production sites, competitor UIs, design inspiration.
-          </p>
-
-          <div className="flex items-center justify-center gap-4">
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              marginBottom: '1rem',
+            }}>
+              {/* Chrome icon */}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
+                <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,0.3)" />
+              </svg>
+              <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>Chrome Web Store</span>
+            </div>
+            <h2 style={{
+              fontSize: '1.5rem', fontWeight: 600,
+              letterSpacing: '-0.02em', marginBottom: '0.5rem',
+            }}>
+              Coming soon.
+            </h2>
+            <p style={{
+              color: 'rgba(255,255,255,0.45)', fontSize: '0.9rem',
+              marginBottom: '1.5rem',
+            }}>
+              LoopIn is being prepared for the Chrome Web Store. One-click install, auto-updates.
+            </p>
             <a
               href="https://github.com/skip5this/LoopIn"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity"
               style={{
-                padding: '0.8rem 1.25rem',
+                display: 'inline-block',
+                padding: '0.75rem 1.5rem',
                 background: '#fafafa',
                 color: '#09090b',
                 fontWeight: 600,
-                border: 'none',
                 borderRadius: 6,
                 fontSize: '0.9rem',
                 textDecoration: 'none',
-                display: 'inline-block',
               }}
             >
-              View on GitHub
+              Star on GitHub
             </a>
+          </div>
+
+          {/* Secondary links */}
+          <div className="flex items-center justify-center gap-4">
             <Link
               to="/loopin/case-study"
-              className="transition-colors"
               style={{
-                padding: '0.8rem 1.25rem',
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: '0.9rem',
+                color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem',
                 textDecoration: 'none',
               }}
             >
@@ -420,6 +780,14 @@ export function LoopIn() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Divider */}
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', maxWidth: 640, margin: '0 auto' }} />
+
+      {/* Collapsed install section */}
+      <section style={{ padding: '2rem 1.5rem 4rem' }}>
+        <CollapsibleInstall />
       </section>
 
       <Footer />
