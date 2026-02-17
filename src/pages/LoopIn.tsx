@@ -1140,8 +1140,10 @@ export function LoopIn() {
               to="/loopin/case-study"
               style={{
                 color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem',
-                textDecoration: 'none',
+                textDecoration: 'none', transition: 'color 0.15s ease',
               }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.9)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
             >
               Read the case study →
             </Link>
