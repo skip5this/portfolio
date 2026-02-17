@@ -262,7 +262,7 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
         }}>
           <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: '0.8rem', color: '#fafafa', fontWeight: 500 }}>Captures ({captures.length})</span>
-            <button onClick={onSendAll} style={{
+            <button onClick={() => { onSendAll(); setShowList(false); }} style={{
               padding: '4px 12px', borderRadius: 6, background: '#9E96B8', border: 'none',
               color: '#1a1a1a', fontSize: '0.7rem', fontWeight: 500, cursor: 'pointer',
             }}>Send all</button>
