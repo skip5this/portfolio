@@ -383,7 +383,7 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
         }} style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: 8, borderRadius: 10, border: 'none', cursor: 'pointer',
-          background: showList ? 'rgba(6,182,212,0.15)' : 'transparent',
+          background: showList ? 'rgba(158,150,184,0.12)' : 'transparent',
           color: showList ? '#9E96B8' : 'rgba(255,255,255,0.45)',
           transition: 'all 0.15s ease', position: 'relative',
         }}
