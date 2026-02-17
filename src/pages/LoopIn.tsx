@@ -409,11 +409,12 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
         <button onClick={() => { setShowSettings(!showSettings); setShowList(false); }} style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: 8, borderRadius: 10, border: 'none', cursor: 'pointer',
-          background: 'transparent', color: 'rgba(255,255,255,0.45)',
+          background: showSettings ? 'rgba(158,150,184,0.12)' : 'transparent',
+          color: showSettings ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.45)',
           transition: 'all 0.15s ease',
         }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.8)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; }}
+          onMouseEnter={e => { if (!showSettings) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.8)'; } }}
+          onMouseLeave={e => { if (!showSettings) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; } }}
           title="Settings"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
