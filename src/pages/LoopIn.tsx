@@ -630,8 +630,8 @@ function CollapsibleInstall() {
           color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem',
           transition: 'all 0.15s ease',
         }}
-        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'transparent'; }}
+        onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.9)'; }}
+        onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
       >
         <span>Can't wait? Install from source</span>
         <ChevronDown size={14} style={{
