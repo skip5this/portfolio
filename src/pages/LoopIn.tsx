@@ -305,7 +305,7 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
               Add LoopIn as an MCP server in your agent's config to send captures directly.
             </p>
             <div style={{
-              background: 'rgba(158,150,184,0.12)', border: '1px solid rgba(158,150,184,0.15)',
+              background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)',
               borderRadius: 8, padding: '10px 12px', marginBottom: 12,
             }}>
               <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)', margin: '0 0 6px', fontFamily: "'SF Mono', monospace" }}>Server address</p>
