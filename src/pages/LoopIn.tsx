@@ -822,7 +822,7 @@ export function LoopIn() {
       <PageOverlay tweaks={tweaks} active={captureActive && !captured} onHoverChange={setHoveredTag} />
 
       {/* Dev Tweaks Panel (remove before production) */}
-      <DevTweaksPanel tweaks={tweaks} onChange={updateTweak} onReset={resetTweaks} />
+      {/* <DevTweaksPanel tweaks={tweaks} onChange={updateTweak} onReset={resetTweaks} /> */}
 
       {/* LoopIn Toolbar + Capture Panel */}
       <LoopInToolbar
