@@ -775,19 +775,11 @@ export function LoopIn() {
       const rect = target.getBoundingClientRect();
       const tag = target.tagName.toLowerCase();
       const classes = target.className && typeof target.className === 'string' ? `.${target.className.split(' ').slice(0, 2).join('.')}` : '';
-      // Check for video context — if target is or is inside a video, or any video is playing
+      // Only include video frame data when clicking directly on a video element
       let videoFrame: CapturedElement['videoFrame'] | undefined;
       const videoEl = target.tagName === 'VIDEO' ? target as HTMLVideoElement : target.closest('video') as HTMLVideoElement | null;
       if (videoEl) {
         videoFrame = { currentTime: videoEl.currentTime, duration: videoEl.duration, paused: videoEl.paused };
-      } else {
-        // Check nearest video on page
-        const allVideos = document.querySelectorAll('video');
-        allVideos.forEach(v => {
-          if (!v.paused) {
-            videoFrame = { currentTime: v.currentTime, duration: v.duration, paused: v.paused };
-          }
-        });
       }
 
       setCaptured({
