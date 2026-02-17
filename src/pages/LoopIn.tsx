@@ -187,7 +187,7 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
           top: captured.posY,
           left: captured.posX,
           width: 340, maxWidth: 'calc(100vw - 40px)', zIndex: 10000,
-          background: '#0a0a0f', borderRadius: 14,
+          background: '#111116', borderRadius: 14,
           boxShadow: '0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)',
           fontFamily: "-apple-system, sans-serif",
           animation: 'captureIn 0.2s ease',
