@@ -621,12 +621,14 @@ function CollapsibleInstall() {
   return (
     <div style={{ maxWidth: 640, margin: '0 auto' }}>
       <button
+        data-control-panel="true"
         onClick={() => setOpen(!open)}
         style={{
-          width: '100%', background: 'none', border: 'none',
-          cursor: 'pointer', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', gap: 8, padding: '1rem 0',
-          color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem',
+          width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', gap: 8, padding: '1rem 1.5rem',
+          color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem',
+          transition: 'all 0.15s ease',
         }}
       >
         <span>Can't wait? Install from source</span>
