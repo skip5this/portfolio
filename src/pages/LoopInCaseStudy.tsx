@@ -37,9 +37,9 @@ export function LoopInCaseStudy() {
           </h1>
           
           {/* Coming Soon Banner */}
-          <div className="inline-flex items-center gap-3 px-5 py-3 bg-[#635bff]/20 border border-[#635bff]/40 rounded-full mb-10">
-            <span className="w-2 h-2 bg-[#635bff] rounded-full animate-pulse"></span>
-            <span className="text-[#635bff] font-diatype font-medium">Case study in progress</span>
+          <div className="inline-flex items-center gap-3 px-5 py-3 bg-[#9E96B8]/20 border border-[#9E96B8]/40 rounded-full mb-10">
+            <span className="w-2 h-2 bg-[#9E96B8] rounded-full animate-pulse"></span>
+            <span className="text-[#9E96B8] font-diatype font-medium">Case study in progress</span>
           </div>
           
           {/* Tagline */}
@@ -56,7 +56,7 @@ export function LoopInCaseStudy() {
       {/* The Spark */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             The Spark
@@ -79,7 +79,7 @@ export function LoopInCaseStudy() {
       {/* The Problem */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             The Problem
@@ -108,7 +108,7 @@ export function LoopInCaseStudy() {
       {/* The Insight */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             The Insight
@@ -131,7 +131,7 @@ export function LoopInCaseStudy() {
       {/* Design Decisions */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-16">
             Design Decisions
@@ -195,7 +195,7 @@ export function LoopInCaseStudy() {
       {/* The Build */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             The Build
@@ -217,7 +217,7 @@ export function LoopInCaseStudy() {
       {/* What's Next */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             What's Next
@@ -254,7 +254,7 @@ export function LoopInCaseStudy() {
       {/* Reflections */}
       <section className="py-20 md:py-32 px-8 md:px-16 lg:px-32 xl:px-48 border-t border-white/10">
         <div className="max-w-[1680px] mx-auto">
-          <div className="w-16 h-px bg-[#635bff] mb-6"></div>
+          <div className="w-16 h-px bg-[#9E96B8] mb-6"></div>
           
           <h2 className="text-xl md:text-2xl lg:text-[1.75rem] xl:text-[2rem] font-diatype-mono font-normal text-white mb-10">
             Reflections
