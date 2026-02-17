@@ -624,12 +624,14 @@ function CollapsibleInstall() {
         data-control-panel="true"
         onClick={() => setOpen(!open)}
         style={{
-          width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
+          width: '100%', background: 'transparent', border: '1px solid transparent',
           borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', gap: 8, padding: '1rem 1.5rem',
+          justifyContent: 'center', gap: 8, padding: '1rem 1.5rem', marginBottom: '1.5rem',
           color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem',
           transition: 'all 0.15s ease',
         }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'transparent'; }}
       >
         <span>Can't wait? Install from source</span>
         <ChevronDown size={14} style={{
