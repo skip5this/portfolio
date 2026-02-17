@@ -141,11 +141,14 @@ interface CapturedElement {
   clickY: number;
   posX: number;
   posY: number;
+  videoFrame?: { currentTime: number; duration: number; paused: boolean };
 }
 
-function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapture, captures, onAddCapture, onSendAll }: {
+function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapture, captures, onAddCapture, onSendAll, paused, onTogglePause }: {
   captureActive: boolean;
   onToggleCapture: () => void;
+  paused: boolean;
+  onTogglePause: () => void;
   captured: CapturedElement | null;
   onDismissCapture: () => void;
   captures: CapturedElement[];
@@ -202,6 +205,11 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
               <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', fontFamily: "'SF Mono', monospace" }}>
                 {captured.dimensions.width}×{captured.dimensions.height}
               </span>
+              {captured.videoFrame && (
+                <span style={{ fontSize: '0.65rem', color: '#9E96B8', fontFamily: "'SF Mono', monospace" }}>
+                  ▶ {captured.videoFrame.currentTime.toFixed(1)}s / {captured.videoFrame.duration.toFixed(1)}s
+                </span>
+              )}
             </div>
             <button onClick={onDismissCapture} style={{
               background: 'transparent', border: '1px solid transparent',
@@ -343,6 +351,29 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
             animation: 'none',
           }} />
           Capture
+        </button>
+
+        {/* Pause */}
+        <button onClick={onTogglePause} style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: 8, borderRadius: 10, border: 'none', cursor: 'pointer',
+          background: paused ? 'rgba(158,150,184,0.12)' : 'transparent',
+          color: paused ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.45)',
+          transition: 'all 0.15s ease',
+        }}
+          onMouseEnter={e => { if (!paused) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.8)'; } }}
+          onMouseLeave={e => { if (!paused) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; } }}
+          title={paused ? 'Resume videos' : 'Pause videos'}
+        >
+          {paused ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          )}
         </button>
 
         {/* Tasks / Clipboard */}
@@ -705,6 +736,7 @@ function CollapsibleInstall() {
 export function LoopIn() {
   const [tweaks, setTweaks] = useState<Tweaks>({ ...defaultTweaks });
   const [captureActive, setCaptureActive] = useState(true);
+  const [videoPaused, setVideoPaused] = useState(false);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const [captured, setCaptured] = useState<CapturedElement | null>(null);
   const capturedRef = useRef(captured);
@@ -714,6 +746,13 @@ export function LoopIn() {
     setTweaks(prev => ({ ...prev, [key]: value }));
   }, []);
   const resetTweaks = useCallback(() => setTweaks({ ...defaultTweaks }), []);
+
+  const toggleVideoPause = useCallback(() => {
+    const videos = document.querySelectorAll('video');
+    const shouldPause = !videoPaused;
+    videos.forEach(v => shouldPause ? v.pause() : v.play());
+    setVideoPaused(shouldPause);
+  }, [videoPaused]);
 
   // Click handler for capturing elements
   useEffect(() => {
@@ -736,6 +775,21 @@ export function LoopIn() {
       const rect = target.getBoundingClientRect();
       const tag = target.tagName.toLowerCase();
       const classes = target.className && typeof target.className === 'string' ? `.${target.className.split(' ').slice(0, 2).join('.')}` : '';
+      // Check for video context — if target is or is inside a video, or any video is playing
+      let videoFrame: CapturedElement['videoFrame'] | undefined;
+      const videoEl = target.tagName === 'VIDEO' ? target as HTMLVideoElement : target.closest('video') as HTMLVideoElement | null;
+      if (videoEl) {
+        videoFrame = { currentTime: videoEl.currentTime, duration: videoEl.duration, paused: videoEl.paused };
+      } else {
+        // Check nearest video on page
+        const allVideos = document.querySelectorAll('video');
+        allVideos.forEach(v => {
+          if (!v.paused) {
+            videoFrame = { currentTime: v.currentTime, duration: v.duration, paused: v.paused };
+          }
+        });
+      }
+
       setCaptured({
         tag,
         selector: `${tag}${classes}`,
@@ -746,6 +800,7 @@ export function LoopIn() {
         clickY: e.clientY,
         posX: Math.min(e.clientX + 10, window.innerWidth - 360),
         posY: Math.min(e.clientY + 10, window.innerHeight - 350),
+        videoFrame,
       });
     };
     document.addEventListener('click', handleClick, true);
@@ -773,6 +828,8 @@ export function LoopIn() {
       <LoopInToolbar
         captureActive={captureActive}
         onToggleCapture={() => setCaptureActive(p => !p)}
+        paused={videoPaused}
+        onTogglePause={toggleVideoPause}
         captured={captured}
         onDismissCapture={() => setCaptured(null)}
         captures={captures}
