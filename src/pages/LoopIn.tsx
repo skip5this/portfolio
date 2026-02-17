@@ -1058,9 +1058,7 @@ export function LoopIn() {
             { label: 'A11Y', title: 'Accessibility', desc: 'ARIA roles, labels, attributes.' },
             { label: 'JSX', title: 'Components', desc: 'React hierarchy via fiber tree.' },
             { label: 'CTX', title: 'Context', desc: 'Heading context, data attributes.' },
-            { label: 'TXT', title: 'Text Select', desc: 'Highlight and capture text.' },
-            { label: 'FRZ', title: 'Freeze', desc: 'Pause animations mid-state.' },
-            { label: 'LOG', title: 'Task List', desc: 'Track captures in a session panel.' },
+            /* Text Select, Freeze, Task List removed — not core to agent needs */
           ].map((item, i) => (
             <div key={i} style={{ background: '#111113', padding: '1.25rem' }}>
               <p style={{
