@@ -289,7 +289,7 @@ function LoopInToolbar({ captureActive, onToggleCapture, captured, onDismissCapt
       {/* Settings / MCP Panel */}
       {showSettings && !minimized && (
         <div data-control-panel="true" style={{
-          position: 'fixed', bottom: 60, right: 20, width: 300, zIndex: 10000,
+          position: 'fixed', bottom: 76, right: 20, width: 300, zIndex: 10000,
           background: '#0a0a0f', borderRadius: 12,
           boxShadow: '0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)',
           fontFamily: "-apple-system, sans-serif", animation: 'captureIn 0.2s ease',
