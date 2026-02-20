@@ -5,7 +5,7 @@ export function HandCircledNew() {
     <span className="hand-circled-new" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', marginRight: '16px', paddingRight: '10px' }}>
       <span style={{
         fontFamily: "'Caveat', cursive",
-        fontSize: '18px',
+        fontSize: '22px',
         fontWeight: 700,
         color: 'currentColor',
         position: 'relative',
@@ -20,10 +20,10 @@ export function HandCircledNew() {
         xmlns="http://www.w3.org/2000/svg"
         style={{
           position: 'absolute',
-          left: '-7px',
+          left: '-8px',
           top: '-5px',
-          width: '44px',
-          height: '28px',
+          width: '52px',
+          height: '34px',
           zIndex: 0,
           overflow: 'visible',
         }}
