@@ -44,7 +44,7 @@ export function Home({ aiVariant = 'dark' }: HomeProps) {
       <Header />
       <main>
         <RecentWorks />
-        <AISection variant={aiVariant} />
+        {/* <AISection variant={aiVariant} /> */}
         <ProjectFeature 
           title="Strike"
           year="2021-23"

@@ -5,6 +5,8 @@ import { StrikeCaseStudy } from './pages/StrikeCaseStudy';
 import { LoopIn } from './pages/LoopIn';
 import { LoopInCaseStudy } from './pages/LoopInCaseStudy';
 import { DynamicQuality } from './pages/DynamicQuality';
+import { Writing } from './pages/Writing';
+import { BlogPost } from './pages/BlogPost';
 
 export function App() {
   return (
@@ -18,6 +20,8 @@ export function App() {
         <Route path="/loopin" element={<LoopIn />} />
         <Route path="/loopin/case-study" element={<LoopInCaseStudy />} />
         <Route path="/dq" element={<DynamicQuality />} />
+        <Route path="/writing" element={<Writing />} />
+        <Route path="/writing/:slug" element={<BlogPost />} />
       </Routes>
     </Router>
   );
