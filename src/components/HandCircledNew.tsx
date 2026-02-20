@@ -2,10 +2,10 @@ import React from 'react';
 
 export function HandCircledNew() {
   return (
-    <span className="hand-circled-new" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', marginLeft: '6px' }}>
+    <span className="hand-circled-new" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', marginLeft: '12px' }}>
       <span style={{
         fontFamily: "'Caveat', cursive",
-        fontSize: '15px',
+        fontSize: '18px',
         fontWeight: 700,
         color: 'currentColor',
         position: 'relative',
@@ -20,10 +20,10 @@ export function HandCircledNew() {
         xmlns="http://www.w3.org/2000/svg"
         style={{
           position: 'absolute',
-          left: '-8px',
+          left: '-9px',
           top: '-6px',
-          width: '42px',
-          height: '28px',
+          width: '48px',
+          height: '30px',
           zIndex: 0,
           overflow: 'visible',
         }}
