@@ -15,30 +15,30 @@ export function HandCircledNew() {
         new
       </span>
       <svg
-        viewBox="0 0 60 32"
+        viewBox="0 0 56 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{
           position: 'absolute',
-          left: '-9px',
-          top: '-6px',
-          width: '48px',
-          height: '30px',
+          left: '-7px',
+          top: '-5px',
+          width: '44px',
+          height: '28px',
           zIndex: 0,
           overflow: 'visible',
         }}
       >
         <ellipse
           className="circle-stroke"
-          cx="30"
-          cy="16"
-          rx="27"
-          ry="13"
+          cx="28"
+          cy="18"
+          rx="24"
+          ry="15"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           fill="none"
-          transform="rotate(-4 30 16)"
+          transform="rotate(-4 28 18)"
         />
       </svg>
       <style>{`
