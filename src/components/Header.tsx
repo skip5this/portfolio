@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
+import { HandCircledNew } from './HandCircledNew';
 
 type Section = 'hero' | 'strike' | 'fountain' | 'aioz' | 'about' | 'contact';
 
@@ -108,8 +109,8 @@ export function Header() {
         </button>
         {/* Desktop navigation */}
         <nav className="hidden md:flex space-x-8 font-diatype">
-          <a href="/loopin" className="hover:text-gray-600 transition-colors">
-            LoopIn
+          <a href="/loopin" className="hover:text-gray-600 transition-colors" style={{ display: 'inline-flex', alignItems: 'center' }}>
+            LoopIn<HandCircledNew />
           </a>
           <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
             Projects
@@ -125,8 +126,8 @@ export function Header() {
         {isMenuOpen && (
           <nav className={`absolute top-full left-0 right-0 border-b border-gray-100 py-4 md:hidden ${getHeaderBackground()}`}>
             <div className="max-w-7xl mx-auto px-4 md:px-16 flex flex-col space-y-4 items-center font-diatype">
-              <a href="/loopin" className="hover:text-gray-600 transition-colors">
-                LoopIn
+              <a href="/loopin" className="hover:text-gray-600 transition-colors" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                LoopIn<HandCircledNew />
               </a>
               <a href="#projects" className="hover:text-gray-600 transition-colors" onClick={(e) => handleNavClick(e, 'section.bg-strike')}>
                 Projects
