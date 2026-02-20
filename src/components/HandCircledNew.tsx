@@ -2,7 +2,7 @@ import React from 'react';
 
 export function HandCircledNew() {
   return (
-    <span className="hand-circled-new" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', marginRight: '6px', paddingRight: '10px' }}>
+    <span className="hand-circled-new" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', marginRight: '16px', paddingRight: '10px' }}>
       <span style={{
         fontFamily: "'Caveat', cursive",
         fontSize: '18px',
