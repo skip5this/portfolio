@@ -852,7 +852,7 @@ export function LoopIn() {
           <span>Back</span>
         </Link>
         <div className="flex items-center gap-5">
-          <Link
+          {/* <Link
             to="/loopin/case-study"
             className="no-underline transition-colors"
             style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
@@ -860,7 +860,7 @@ export function LoopIn() {
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
           >
             Case Study
-          </Link>
+          </Link> */}
           <a
             href="https://github.com/skip5this/LoopIn"
             target="_blank"
