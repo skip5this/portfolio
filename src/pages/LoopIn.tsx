@@ -1137,7 +1137,7 @@ export function LoopIn() {
 
           {/* Secondary links */}
           <div className="flex items-center justify-center gap-4">
-            <Link
+            {/* <Link
               to="/loopin/case-study"
               style={{
                 color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem',
@@ -1147,7 +1147,7 @@ export function LoopIn() {
               onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
             >
               Read the case study →
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
