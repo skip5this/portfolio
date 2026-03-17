@@ -29,7 +29,7 @@ export const DesktopProjectFeature: React.FC<DesktopProjectFeatureProps> = ({
   };
 
   return (
-    <section data-section="aioz" className={`${backgroundColor} pt-16 pb-16`}>
+    <section data-section="aioz" className={`${backgroundColor} pt-16 pb-16 md:pt-28 md:pb-28`}>
       {/* Title container - matches ProjectFeature exactly */}
       <div className="max-w-7xl mx-auto px-4 md:px-16 mb-6">
         <div className="flex justify-between items-center">

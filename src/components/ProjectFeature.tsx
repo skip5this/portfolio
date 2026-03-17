@@ -43,7 +43,7 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
   };
 
   return (
-    <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'pt-16 pb-16'}`}>
+    <section className={`${backgroundColor} ${layout === 'split' ? 'pt-0 pb-8' : 'pt-16 pb-16 md:pt-24 md:pb-24'}`}>
       {/* Title container */}
       <div className="max-w-7xl mx-auto px-4 md:px-16">
         <div className={`flex justify-between items-center ${layout === 'split' ? 'mb-0' : 'mb-6'}`}>
@@ -63,7 +63,7 @@ export const ProjectFeature: React.FC<ProjectFeatureProps> = ({
             {caseStudyUrl && (
               <a 
                 href={caseStudyUrl}
-                className="text-sm text-gray-600 hover:text-gray-900 font-medium px-3 py-1 border border-gray-300 rounded-md hover:border-gray-400 transition-colors"
+                className="text-sm text-white bg-gray-900 hover:bg-gray-800 font-medium px-4 py-1.5 rounded-md transition-colors"
               >
                 Case Study
               </a>
