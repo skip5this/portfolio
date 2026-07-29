@@ -894,7 +894,7 @@ export function LoopIn() {
             <span style={{
               fontSize: '0.8rem', color: '#9E96B8',
               fontWeight: 500, letterSpacing: '0.02em',
-            }}>Coming to Chrome Web Store</span>
+            }}>Available on Chrome Web Store</span>
           </div>
 
           {/* Logo + Name */}
@@ -1108,16 +1108,16 @@ export function LoopIn() {
               fontSize: '1.5rem', fontWeight: 600,
               letterSpacing: '-0.02em', marginBottom: '0.5rem',
             }}>
-              Coming soon.
+              Available now.
             </h2>
             <p style={{
               color: 'rgba(255,255,255,0.45)', fontSize: '0.9rem',
               marginBottom: '1.5rem',
             }}>
-              LoopIn is being prepared for the Chrome Web Store. One-click install, auto-updates.
+              Install LoopIn from the Chrome Web Store for one-click setup and automatic updates.
             </p>
             <a
-              href="https://github.com/skip5this/LoopIn"
+              href="https://chromewebstore.google.com/detail/loopin/igphcclkppjopmdgjlnbopfdikfijndm"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1131,7 +1131,7 @@ export function LoopIn() {
                 textDecoration: 'none',
               }}
             >
-              Star on GitHub
+              Add to Chrome
             </a>
           </div>
 

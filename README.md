@@ -19,6 +19,5 @@ The local source and production build archive is stored at:
 2. Run `npm run dev`
 
 Vite copies the static portfolio assets from `public/` into the production
-build. Vercel deploys the `main` branch. The original interactive LoopIn page
-and case study are preserved under `/loopin` and `/loopin/case-study` using the
-archived production bundle from the July 29 migration snapshot.
+build. Vercel deploys the `main` branch. The interactive LoopIn page and case
+study are available under `/loopin` and `/loopin/case-study`.
