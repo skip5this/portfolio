@@ -1,15 +1,20 @@
 {
-  "redirects": [
-    {
-      "source": "/loopin",
-      "destination": "https://loopin.nakamotodesign.co/",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/google67cf6219a170c1dc.html",
       "destination": "/google67cf6219a170c1dc.html"
+    },
+    {
+      "source": "/loopin",
+      "destination": "/loopin/index.html"
+    },
+    {
+      "source": "/loopin/",
+      "destination": "/loopin/index.html"
+    },
+    {
+      "source": "/loopin/(.*)",
+      "destination": "/loopin/index.html"
     },
     {
       "source": "/strike-case-study",
