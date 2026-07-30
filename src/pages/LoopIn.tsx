@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Footer } from '../components/Footer';
 
 const defaultTweaks = {
@@ -879,21 +879,30 @@ export function LoopIn() {
       {/* Hero */}
       <section style={{ padding: '8rem 1.5rem 4rem' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-          {/* Chrome Web Store badge */}
+          {/* Chrome Web Store availability */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: 'rgba(158,150,184,0.1)',
-            border: '1px solid rgba(158,150,184,0.2)',
-            borderRadius: 100, padding: '6px 16px',
+            background: 'rgba(158,150,184,0.16)',
+            border: '1px solid rgba(158,150,184,0.48)',
+            boxShadow: '0 0 0 4px rgba(158,150,184,0.06), 0 10px 32px rgba(94,82,132,0.18)',
+            borderRadius: 100, padding: '8px 16px',
             marginBottom: '2rem',
           }}>
             <span style={{
-              width: 6, height: 6, borderRadius: '50%',
-              background: '#9E96B8', display: 'inline-block',
-            }} />
+              width: 18, height: 18, borderRadius: '50%',
+              background: 'conic-gradient(#DB4437 0 33%, #F4B400 0 66%, #0F9D58 0)',
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)',
+            }}>
+              <span style={{
+                width: 7, height: 7, borderRadius: '50%',
+                background: '#4285F4',
+                border: '1px solid rgba(255,255,255,0.7)',
+              }} />
+            </span>
             <span style={{
-              fontSize: '0.8rem', color: '#9E96B8',
-              fontWeight: 500, letterSpacing: '0.02em',
+              fontSize: '0.82rem', color: '#d7d2e8',
+              fontWeight: 600, letterSpacing: '0.01em',
             }}>Available on Chrome Web Store</span>
           </div>
 
@@ -936,11 +945,49 @@ export function LoopIn() {
             fontSize: '1.15rem',
             color: 'rgba(255,255,255,0.75)',
             maxWidth: 480,
-            margin: '0 auto 3rem',
+            margin: '0 auto 2rem',
             lineHeight: 1.6,
           }}>
             LoopIn fixes that. Point. Click. Your agent gets full context — DOM, styles, accessibility data, component hierarchy.
           </p>
+
+          <a
+            href="https://chromewebstore.google.com/detail/loopin/igphcclkppjopmdgjlnbopfdikfijndm"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 9,
+              minHeight: 48,
+              padding: '0.8rem 1.3rem',
+              marginBottom: '1.5rem',
+              background: '#fafafa',
+              color: '#09090b',
+              border: '1px solid rgba(255,255,255,0.9)',
+              borderRadius: 8,
+              boxShadow: '0 10px 30px rgba(0,0,0,0.28)',
+              fontSize: '0.95rem',
+              fontWeight: 650,
+              letterSpacing: '-0.01em',
+              textDecoration: 'none',
+              transition: 'transform 160ms ease, box-shadow 160ms ease, background 160ms ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.background = '#ffffff';
+              e.currentTarget.style.boxShadow = '0 14px 36px rgba(0,0,0,0.34)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.background = '#fafafa';
+              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.28)';
+            }}
+          >
+            Add to Chrome
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
 
           <p style={{
             fontSize: '0.8rem',
