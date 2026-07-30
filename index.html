@@ -324,7 +324,7 @@ nav {
 .aioz-tile--stream .aioz-tile-frame,
 .aioz-tile--wallet .aioz-tile-frame,
 .aioz-tile--storage .aioz-tile-frame { background: #202224; }
-.aioz-tile-button {
+.gallery-trigger {
   position: relative;
   display: block;
   width: 100%;
@@ -333,8 +333,10 @@ nav {
   background: transparent;
   color: inherit;
   cursor: zoom-in;
+  font: inherit;
+  text-align: inherit;
 }
-.aioz-tile-button::after {
+.gallery-trigger::after {
   content: 'View';
   position: absolute;
   top: 8px;
@@ -351,9 +353,9 @@ nav {
   transform: translateY(-2px);
   transition: opacity 160ms ease, transform 160ms ease;
 }
-.aioz-tile-button:hover::after,
-.aioz-tile-button:focus-visible::after { opacity: 1; transform: translateY(0); }
-.aioz-tile-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.gallery-trigger:hover::after,
+.gallery-trigger:focus-visible::after { opacity: 1; transform: translateY(0); }
+.gallery-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .aioz-tile img {
   width: 100%;
   height: 100%;
@@ -367,8 +369,8 @@ nav {
   line-height: 1.35;
   color: var(--mid);
 }
-.aioz-lightbox[hidden] { display: none; }
-.aioz-lightbox {
+.portfolio-lightbox[hidden] { display: none; }
+.portfolio-lightbox {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -380,34 +382,34 @@ nav {
   background: rgba(13, 14, 13, 0.94);
   color: #fff;
 }
-body.aioz-lightbox-open { overflow: hidden; }
-.aioz-lightbox-figure { margin: 0; min-width: 0; text-align: center; }
-.aioz-lightbox-image {
+body.portfolio-lightbox-open { overflow: hidden; }
+.portfolio-lightbox-figure { margin: 0; min-width: 0; text-align: center; touch-action: pan-y; }
+.portfolio-lightbox-image {
   display: block;
   max-width: 100%;
   max-height: calc(100vh - 150px);
   margin: 0 auto;
   object-fit: contain;
 }
-.aioz-lightbox-caption {
+.portfolio-lightbox-caption {
   margin-top: 16px;
   color: rgba(255, 255, 255, 0.78);
   font-size: 13px;
   line-height: 1.4;
 }
-.aioz-lightbox-close,
-.aioz-lightbox-nav {
+.portfolio-lightbox-close,
+.portfolio-lightbox-nav {
   border: 1px solid rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease;
 }
-.aioz-lightbox-close:hover,
-.aioz-lightbox-nav:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.52); }
-.aioz-lightbox-close:focus-visible,
-.aioz-lightbox-nav:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.aioz-lightbox-close {
+.portfolio-lightbox-close:hover,
+.portfolio-lightbox-nav:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.52); }
+.portfolio-lightbox-close:focus-visible,
+.portfolio-lightbox-nav:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.portfolio-lightbox-close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -416,7 +418,7 @@ body.aioz-lightbox-open { overflow: hidden; }
   font-size: 26px;
   line-height: 1;
 }
-.aioz-lightbox-nav {
+.portfolio-lightbox-nav {
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -688,16 +690,16 @@ footer span:last-child {
   .case-grid-4 { grid-template-columns: 1fr 1fr; }
   .case-grid-3-match-4 { grid-template-columns: 1fr 1fr; max-width: none; }
   .aioz-ecosystem-grid { grid-template-columns: 1fr 1fr; gap: 20px 10px; }
-  .aioz-tile-button::after { opacity: 0.82; transform: none; }
-  .aioz-lightbox {
+  .gallery-trigger::after { opacity: 0.82; transform: none; }
+  .portfolio-lightbox {
     grid-template-columns: 1fr;
     gap: 0;
     padding: 72px 16px 92px;
   }
-  .aioz-lightbox-image { max-height: calc(100vh - 190px); }
-  .aioz-lightbox-nav { position: absolute; bottom: 22px; }
-  .aioz-lightbox-prev { left: calc(50% - 66px); }
-  .aioz-lightbox-next { right: calc(50% - 66px); }
+  .portfolio-lightbox-image { max-height: calc(100vh - 190px); }
+  .portfolio-lightbox-nav { position: absolute; bottom: 22px; }
+  .portfolio-lightbox-prev { left: calc(50% - 66px); }
+  .portfolio-lightbox-next { right: calc(50% - 66px); }
   .inline-cta { flex-direction: column; align-items: flex-start; }
   .current-inner { padding: 0 20px; }
   .naka-feature { grid-template-columns: 1fr; gap: 12px; }
@@ -775,27 +777,27 @@ footer span:last-child {
           <div class="case-media">
             <div class="aioz-ecosystem-grid">
               <figure class="aioz-tile aioz-tile--dtransfer">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-dtransfer-full.avif" data-caption="AIOZ dTransfer" aria-label="Open AIOZ dTransfer image in gallery"><img src="assets/aioz-dtransfer.avif" alt="AIOZ dTransfer file transfer product" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-dtransfer-full.avif" data-caption="dTransfer" aria-label="Open AIOZ dTransfer image in gallery"><img src="assets/aioz-dtransfer.avif" alt="AIOZ dTransfer file transfer product" loading="lazy" decoding="async"></button>
                 <figcaption>AIOZ dTransfer</figcaption>
               </figure>
               <figure class="aioz-tile aioz-tile--ai">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-ai-full.avif" data-caption="AIOZ AI" aria-label="Open AIOZ AI image in gallery"><img src="assets/aioz-ai.avif" alt="AIOZ AI models and datasets product" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-ai-full.avif" data-caption="AI" aria-label="Open AIOZ AI image in gallery"><img src="assets/aioz-ai.avif" alt="AIOZ AI models and datasets product" loading="lazy" decoding="async"></button>
                 <figcaption>AIOZ AI</figcaption>
               </figure>
               <figure class="aioz-tile aioz-tile--stream">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-stream-full.avif" data-caption="AIOZ Stream" aria-label="Open AIOZ Stream image in gallery"><img src="assets/aioz-stream.avif" alt="AIOZ Stream live streaming dashboard" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-stream-full.avif" data-caption="Stream" aria-label="Open AIOZ Stream image in gallery"><img src="assets/aioz-stream.avif" alt="AIOZ Stream live streaming dashboard" loading="lazy" decoding="async"></button>
                 <figcaption>AIOZ Stream</figcaption>
               </figure>
               <figure class="aioz-tile aioz-tile--wallet">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-wallet-full.avif" data-caption="AIOZ Wallet" aria-label="Open AIOZ Wallet image in gallery"><img src="assets/aioz-wallet.avif" alt="AIOZ Wallet token swap interface" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-wallet-full.avif" data-caption="Wallet" aria-label="Open AIOZ Wallet image in gallery"><img src="assets/aioz-wallet.avif" alt="AIOZ Wallet token swap interface" loading="lazy" decoding="async"></button>
                 <figcaption>AIOZ Wallet</figcaption>
               </figure>
               <figure class="aioz-tile aioz-tile--storage">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-storage-full.avif" data-caption="AIOZ Storage" aria-label="Open AIOZ Storage image in gallery"><img src="assets/aioz-storage.avif" alt="AIOZ Storage usage and account dashboard" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-storage-full.avif" data-caption="Storage" aria-label="Open AIOZ Storage image in gallery"><img src="assets/aioz-storage.avif" alt="AIOZ Storage usage and account dashboard" loading="lazy" decoding="async"></button>
                 <figcaption>AIOZ Storage</figcaption>
               </figure>
               <figure class="aioz-tile aioz-tile--system">
-                <button class="aioz-tile-frame aioz-tile-button" type="button" data-aioz-gallery data-full="assets/aioz-system-full.avif" data-caption="Shared design system" aria-label="Open shared design system image in gallery"><img src="assets/aioz-system.avif" alt="Shared AIOZ design-system color tokens" loading="lazy" decoding="async"></button>
+                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-system-full.avif" data-caption="Shared design system" aria-label="Open AIOZ shared design system image in gallery"><img src="assets/aioz-system.avif" alt="Shared AIOZ design-system color tokens" loading="lazy" decoding="async"></button>
                 <figcaption>Shared design system</figcaption>
               </figure>
             </div>
@@ -820,10 +822,10 @@ footer span:last-child {
           </div>
           <div class="case-media">
             <div class="case-grid-4">
-              <div class="case-img-wrap"><img src="assets/strike1.png" alt="Strike app home screen" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/strike2.png" alt="Strike payments" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/strike3.png" alt="Strike send flow" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/strike4.png" alt="Strike receive flow" loading="lazy" decoding="async"></div>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="strike" data-gallery-label="Strike" data-full="assets/strike1.png" data-caption="Home screen" aria-label="Open Strike home screen image in gallery"><img src="assets/strike1.png" alt="Strike app home screen" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="strike" data-gallery-label="Strike" data-full="assets/strike2.png" data-caption="Payments" aria-label="Open Strike payments image in gallery"><img src="assets/strike2.png" alt="Strike payments" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="strike" data-gallery-label="Strike" data-full="assets/strike3.png" data-caption="Send flow" aria-label="Open Strike send flow image in gallery"><img src="assets/strike3.png" alt="Strike send flow" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="strike" data-gallery-label="Strike" data-full="assets/strike4.png" data-caption="Receive flow" aria-label="Open Strike receive flow image in gallery"><img src="assets/strike4.png" alt="Strike receive flow" loading="lazy" decoding="async"></button>
             </div>
           </div>
           <a class="case-link" href="/strike-case-study/">Read the Strike case study</a>
@@ -841,10 +843,10 @@ footer span:last-child {
           <p class="case-body">Fountain is a Bitcoin-powered podcast app for listening, earning, and supporting creators. I led the redesign with a junior designer and two CEOs, rebuilt the design system, and helped ship a cleaner listening, payments, and social experience in under five months.</p>
           <div class="case-media">
             <div class="case-grid-4">
-              <div class="case-img-wrap"><img src="assets/fountain1.png" alt="Fountain app redesign" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/fountain2.png" alt="Fountain podcast player" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/fountain3.png" alt="Fountain social feed" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/fountain4.png" alt="Fountain listening experience" loading="lazy" decoding="async"></div>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="fountain" data-gallery-label="Fountain" data-full="assets/fountain1.png" data-caption="App redesign" aria-label="Open Fountain app redesign image in gallery"><img src="assets/fountain1.png" alt="Fountain app redesign" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="fountain" data-gallery-label="Fountain" data-full="assets/fountain2.png" data-caption="Podcast player" aria-label="Open Fountain podcast player image in gallery"><img src="assets/fountain2.png" alt="Fountain podcast player" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="fountain" data-gallery-label="Fountain" data-full="assets/fountain3.png" data-caption="Social feed" aria-label="Open Fountain social feed image in gallery"><img src="assets/fountain3.png" alt="Fountain social feed" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="fountain" data-gallery-label="Fountain" data-full="assets/fountain4.png" data-caption="Listening experience" aria-label="Open Fountain listening experience image in gallery"><img src="assets/fountain4.png" alt="Fountain listening experience" loading="lazy" decoding="async"></button>
             </div>
           </div>
         </div>
@@ -866,9 +868,9 @@ footer span:last-child {
           </div>
           <div class="case-media">
             <div class="case-grid-3-match-4">
-              <div class="case-img-wrap"><img src="assets/koho1.png" alt="KOHO savings experience screen" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/koho2.png" alt="KOHO savings goal details screen" loading="lazy" decoding="async"></div>
-              <div class="case-img-wrap"><img src="assets/koho3.png" alt="KOHO savings plan setup screen" loading="lazy" decoding="async"></div>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="koho" data-gallery-label="KOHO" data-full="assets/koho1.png" data-caption="Savings experience" aria-label="Open KOHO savings experience image in gallery"><img src="assets/koho1.png" alt="KOHO savings experience screen" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="koho" data-gallery-label="KOHO" data-full="assets/koho2.png" data-caption="Savings goal details" aria-label="Open KOHO savings goal details image in gallery"><img src="assets/koho2.png" alt="KOHO savings goal details screen" loading="lazy" decoding="async"></button>
+              <button class="case-img-wrap gallery-trigger" type="button" data-gallery-group="koho" data-gallery-label="KOHO" data-full="assets/koho3.png" data-caption="Savings plan setup" aria-label="Open KOHO savings plan setup image in gallery"><img src="assets/koho3.png" alt="KOHO savings plan setup screen" loading="lazy" decoding="async"></button>
             </div>
           </div>
         </div>
@@ -1011,60 +1013,81 @@ footer span:last-child {
   <span>Victoria, BC &middot; Open to the right fit</span>
 </footer>
 
-<div class="aioz-lightbox" role="dialog" aria-modal="true" aria-label="AIOZ project gallery" hidden>
-  <button class="aioz-lightbox-close" type="button" aria-label="Close gallery">&times;</button>
-  <button class="aioz-lightbox-nav aioz-lightbox-prev" type="button" aria-label="Previous image">&larr;</button>
-  <figure class="aioz-lightbox-figure">
-    <img class="aioz-lightbox-image" alt="">
-    <figcaption class="aioz-lightbox-caption" aria-live="polite"></figcaption>
+<div class="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="Project image gallery" hidden>
+  <button class="portfolio-lightbox-close" type="button" aria-label="Close gallery">&times;</button>
+  <button class="portfolio-lightbox-nav portfolio-lightbox-prev" type="button" aria-label="Previous image">&larr;</button>
+  <figure class="portfolio-lightbox-figure">
+    <img class="portfolio-lightbox-image" alt="">
+    <figcaption class="portfolio-lightbox-caption" aria-live="polite"></figcaption>
   </figure>
-  <button class="aioz-lightbox-nav aioz-lightbox-next" type="button" aria-label="Next image">&rarr;</button>
+  <button class="portfolio-lightbox-nav portfolio-lightbox-next" type="button" aria-label="Next image">&rarr;</button>
 </div>
 
 <script>
 (() => {
-  const triggers = Array.from(document.querySelectorAll('[data-aioz-gallery]'));
-  const dialog = document.querySelector('.aioz-lightbox');
+  const triggers = Array.from(document.querySelectorAll('[data-gallery-group]'));
+  const dialog = document.querySelector('.portfolio-lightbox');
   if (!triggers.length || !dialog) return;
 
-  const image = dialog.querySelector('.aioz-lightbox-image');
-  const caption = dialog.querySelector('.aioz-lightbox-caption');
-  const closeButton = dialog.querySelector('.aioz-lightbox-close');
-  const previousButton = dialog.querySelector('.aioz-lightbox-prev');
-  const nextButton = dialog.querySelector('.aioz-lightbox-next');
+  const groups = new Map();
+  triggers.forEach((trigger) => {
+    const group = trigger.dataset.galleryGroup;
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(trigger);
+  });
+
+  const image = dialog.querySelector('.portfolio-lightbox-image');
+  const figure = dialog.querySelector('.portfolio-lightbox-figure');
+  const caption = dialog.querySelector('.portfolio-lightbox-caption');
+  const closeButton = dialog.querySelector('.portfolio-lightbox-close');
+  const previousButton = dialog.querySelector('.portfolio-lightbox-prev');
+  const nextButton = dialog.querySelector('.portfolio-lightbox-next');
   const controls = [closeButton, previousButton, nextButton];
+  let activeTriggers = [];
   let activeIndex = 0;
   let restoreFocus = null;
+  let touchStartX = null;
 
   const render = () => {
-    const trigger = triggers[activeIndex];
+    const trigger = activeTriggers[activeIndex];
     const thumbnail = trigger.querySelector('img');
+    const groupLabel = trigger.dataset.galleryLabel;
     image.src = trigger.dataset.full;
     image.alt = thumbnail ? thumbnail.alt : '';
-    caption.textContent = `${trigger.dataset.caption} · ${activeIndex + 1} of ${triggers.length}`;
+    caption.textContent = `${groupLabel} · ${trigger.dataset.caption} · ${activeIndex + 1} of ${activeTriggers.length}`;
+    dialog.setAttribute('aria-label', `${groupLabel} project gallery`);
+
+    [-1, 1].forEach((offset) => {
+      const neighborIndex = (activeIndex + offset + activeTriggers.length) % activeTriggers.length;
+      const preload = new Image();
+      preload.src = activeTriggers[neighborIndex].dataset.full;
+    });
   };
 
-  const open = (index) => {
-    activeIndex = index;
-    restoreFocus = document.activeElement;
+  const open = (trigger) => {
+    activeTriggers = groups.get(trigger.dataset.galleryGroup);
+    activeIndex = activeTriggers.indexOf(trigger);
+    restoreFocus = trigger;
     render();
     dialog.hidden = false;
-    document.body.classList.add('aioz-lightbox-open');
+    document.body.classList.add('portfolio-lightbox-open');
     closeButton.focus();
   };
 
   const close = () => {
+    if (dialog.hidden) return;
     dialog.hidden = true;
-    document.body.classList.remove('aioz-lightbox-open');
-    if (restoreFocus) restoreFocus.focus();
+    touchStartX = null;
+    document.body.classList.remove('portfolio-lightbox-open');
+    if (restoreFocus && restoreFocus.isConnected) restoreFocus.focus();
   };
 
   const move = (offset) => {
-    activeIndex = (activeIndex + offset + triggers.length) % triggers.length;
+    activeIndex = (activeIndex + offset + activeTriggers.length) % activeTriggers.length;
     render();
   };
 
-  triggers.forEach((trigger, index) => trigger.addEventListener('click', () => open(index)));
+  triggers.forEach((trigger) => trigger.addEventListener('click', () => open(trigger)));
   closeButton.addEventListener('click', close);
   previousButton.addEventListener('click', () => move(-1));
   nextButton.addEventListener('click', () => move(1));
@@ -1072,11 +1095,33 @@ footer span:last-child {
     if (event.target === dialog) close();
   });
 
+  figure.addEventListener('touchstart', (event) => {
+    if (event.touches.length === 1) touchStartX = event.touches[0].clientX;
+  }, { passive: true });
+
+  figure.addEventListener('touchend', (event) => {
+    if (touchStartX === null || !event.changedTouches.length) return;
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(distance) < 50) return;
+    move(distance > 0 ? -1 : 1);
+  }, { passive: true });
+
+  figure.addEventListener('touchcancel', () => {
+    touchStartX = null;
+  }, { passive: true });
+
   document.addEventListener('keydown', (event) => {
     if (dialog.hidden) return;
     if (event.key === 'Escape') close();
-    if (event.key === 'ArrowLeft') move(-1);
-    if (event.key === 'ArrowRight') move(1);
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      move(-1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      move(1);
+    }
     if (event.key === 'Tab') {
       const first = controls[0];
       const last = controls[controls.length - 1];
