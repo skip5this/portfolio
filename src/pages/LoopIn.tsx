@@ -841,8 +841,8 @@ export function LoopIn() {
         borderBottom: '1px solid rgba(255,255,255,0.08)',
         padding: '1.25rem 2rem',
       }}>
-        <Link
-          to="/"
+        <a
+          href="/"
           className="flex items-center gap-2 no-underline transition-colors"
           style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}
           onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
@@ -850,7 +850,7 @@ export function LoopIn() {
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
-        </Link>
+        </a>
         <div className="flex items-center gap-5">
           {/* <Link
             to="/loopin/case-study"
