@@ -183,13 +183,17 @@ nav {
   z-index: 9999;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.25s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+  transition: opacity 0.25s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 #cursor-follower.visible {
   opacity: 1;
 }
 #cursor-follower.is-orb-hover {
   opacity: 0;
+}
+#cursor-follower.is-strike-hover {
+  background: #FFC4C4;
+  border-color: rgba(255, 196, 196, 0.92);
 }
 .hero-visual-meta {
   display: flex;
@@ -1462,6 +1466,7 @@ import * as THREE from './assets/vendor/three.module.js';
   const stage = document.querySelector('.hero-orb-stage');
   const container = document.querySelector('.hero-orb');
   const follower = document.getElementById('cursor-follower');
+  const strikeCallout = document.querySelector('.inline-cta');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
   if (!stage || !container || reduce) return;
@@ -1865,9 +1870,13 @@ import * as THREE from './assets/vendor/three.module.js';
   window.addEventListener('mousemove', updateMouse);
   window.addEventListener('mousedown', () => { mouseDown = true; });
   window.addEventListener('mouseup', () => { mouseDown = false; });
+  if (strikeCallout && follower) {
+    strikeCallout.addEventListener('mouseenter', () => follower.classList.add('is-strike-hover'));
+    strikeCallout.addEventListener('mouseleave', () => follower.classList.remove('is-strike-hover'));
+  }
   document.addEventListener('mouseleave', () => {
     hasMouse = false;
-    if (follower) follower.classList.remove('visible', 'is-orb-hover');
+    if (follower) follower.classList.remove('visible', 'is-orb-hover', 'is-strike-hover');
     interactionMaterial.uniforms.center.value.set(-1, -1);
   });
 
