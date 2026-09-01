@@ -32,6 +32,7 @@ DELTA: v5 final polish notes
   --ink: #1A1A18;
   --mid: #484845;
   --faint: #E4E3DF;
+  --faint-soft: rgba(26, 26, 24, 0.045);
   --accent: #2D7A5F;
   --accent-bg: #EDF5F1;
   --surface: #F0EFEB;
@@ -215,10 +216,6 @@ nav {
 .hero-visual-meta a:hover {
   color: var(--accent);
 }
-.naka-caption {
-  font-size: 12px; color: var(--mid); margin-top: 12px;
-  letter-spacing: 0.02em;
-}
 .hero-headline {
   font-family: var(--serif); font-size: clamp(44px, 5.8vw, 76px);
   font-weight: 400; line-height: 1.08; letter-spacing: -0.02em;
@@ -306,24 +303,129 @@ nav {
 .case-img-wrap img { width: 100%; display: block; object-fit: cover; }
 .case-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .case-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.aioz-ecosystem-grid {
+.case-item--aioz {
+  row-gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--faint);
+}
+.case-item--subdivider {
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--faint-soft);
+}
+.aioz-showcase {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  margin-top: 16px;
+}
+.aioz-chapter {
+  padding-top: 32px;
+  border-top: 1px solid var(--faint);
+}
+.aioz-chapter-header {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px 12px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 28px;
 }
-.aioz-tile { margin: 0; min-width: 0; }
-.aioz-tile-frame {
-  aspect-ratio: 8 / 5;
+.aioz-chapter-label {
+  padding-top: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.aioz-chapter-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+.aioz-chapter-title {
+  max-width: 720px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+.aioz-chapter-body {
+  max-width: 650px;
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+.aioz-motion-toggle {
+  flex: 0 0 auto;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  padding: 2px 0;
+  background: transparent;
+  color: var(--mid);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+.aioz-motion-toggle:hover,
+.aioz-motion-toggle:focus-visible { color: var(--accent); }
+.aioz-motion-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.aioz-media-pair,
+.aioz-exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.aioz-figure { min-width: 0; margin: 0; }
+.aioz-media-frame {
+  position: relative;
   overflow: hidden;
-  background: #eef3ef;
   border: 1px solid rgba(38, 38, 36, 0.08);
+  background: #fff;
 }
-.aioz-tile--dtransfer .aioz-tile-frame { background: #edf6ef; }
-.aioz-tile--ai .aioz-tile-frame,
-.aioz-tile--system .aioz-tile-frame { background: #fff; }
-.aioz-tile--stream .aioz-tile-frame,
-.aioz-tile--wallet .aioz-tile-frame,
-.aioz-tile--storage .aioz-tile-frame { background: #202224; }
+.aioz-media-frame--resting { background: #edf5ed; }
+.aioz-media-frame--active,
+.aioz-media-frame--wallet { background: #1d1f20; }
+.aioz-media-frame--balanced { aspect-ratio: 1.48 / 1; }
+.aioz-video,
+.aioz-still {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.aioz-media-pair .aioz-video { aspect-ratio: 0.94 / 1; }
+.aioz-figure figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.aioz-caption-title {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--ink);
+}
+.aioz-caption-note {
+  max-width: 520px;
+  color: var(--mid);
+  text-align: right;
+}
+.aioz-system-figure .aioz-media-frame { aspect-ratio: 16 / 9; }
+.aioz-wallet-figure {
+  width: calc(100% - 268px);
+  margin-left: auto;
+}
+.aioz-wallet-figure .aioz-media-frame { aspect-ratio: 2 / 1; }
 .gallery-trigger {
   position: relative;
   display: block;
@@ -356,19 +458,6 @@ nav {
 .gallery-trigger:hover::after,
 .gallery-trigger:focus-visible::after { opacity: 1; transform: translateY(0); }
 .gallery-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.aioz-tile img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
-.aioz-tile figcaption {
-  margin-top: 7px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--mid);
-}
 .portfolio-lightbox[hidden] { display: none; }
 .portfolio-lightbox {
   position: fixed;
@@ -480,8 +569,8 @@ body.portfolio-lightbox-open { overflow: hidden; }
 
 .naka-feature {
   display: grid; grid-template-columns: 220px 1fr; gap: 48px;
-  align-items: start; margin-bottom: 40px;
-  padding-bottom: 0; border-bottom: none;
+  align-items: start; margin-bottom: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--faint);
 }
 .naka-tag {
   font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
@@ -499,82 +588,109 @@ body.portfolio-lightbox-open { overflow: hidden; }
   transition: color 200ms ease;
 }
 .naka-body { font-size: 16px; color: var(--mid); line-height: 1.7; max-width: 600px; transition: color 200ms ease; }
-.naka-body p { margin-bottom: 16px; }
+.naka-body p { margin-bottom: 0; }
 .naka-copy-link:hover .naka-title,
 .naka-copy-link:hover .naka-body {
   color: var(--accent);
 }
-.naka-previews {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  margin-top: 24px;
-}
-.naka-preview-wrap {
-  background: none; border: none; padding: 0;
-}
-.naka-preview-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease;
-}
-.naka-preview-link:hover { opacity: 0.9; }
-.naka-preview-link:active { transform: scale(0.98); }
-.naka-preview-wrap img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; object-position: top center; }
-
-.product-list { display: flex; flex-direction: column; }
-.product-entry { display: flex; flex-direction: column; }
-.product-item {
-  display: grid; grid-template-columns: 220px 1fr;
-  gap: 40px; padding: 28px 0; border-top: 1px solid var(--faint);
-  color: inherit; text-decoration: none;
-  transition: opacity 200ms ease;
-}
-.product-tag {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--accent);
-  transition: color 200ms ease;
-}
-.product-title {
-  font-family: var(--serif); font-size: 24px; font-weight: 400;
-  margin-bottom: 8px; line-height: 1.2;
-  transition: color 200ms ease;
-}
-.product-body {
-  font-size: 15px; color: var(--mid); line-height: 1.7; max-width: 560px;
-  transition: color 200ms ease;
-}
-.product-item:hover .product-tag,
-.product-item:hover .product-title,
-.product-item:hover .product-body {
-  color: var(--accent);
-}
-.product-inline-preview {
+.product-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 40px;
-  margin-top: -4px;
-  padding: 0 0 28px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
 }
-.product-inline-preview-media {
-  width: calc((100% - 36px) / 4);
-  max-width: none;
+.product-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
-.product-preview-link {
+.product-card-media {
   display: block;
   color: inherit;
   text-decoration: none;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(26, 26, 24, 0.06) inset;
+  margin-bottom: 18px;
+  overflow: hidden;
   transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease;
 }
-.product-preview-link:hover { opacity: 0.9; }
-.product-preview-link:active { transform: scale(0.98); }
-.product-preview-link img {
+.product-card-media:hover { opacity: 0.9; }
+.product-card-media:active { transform: scale(0.98); }
+.product-card-media > img {
   width: 100%;
   display: block;
   aspect-ratio: 4/3;
   object-fit: cover;
   object-position: top center;
+}
+.product-card-media--mosaic {
+  aspect-ratio: 4/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  background: var(--surface);
+}
+.product-card-media--mosaic img {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+  object-position: top center;
+}
+.product-card-tag {
+  min-height: 32px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.product-card-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.product-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+.product-card-title a:hover { color: var(--accent); }
+.product-card-body {
+  flex: 1;
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+.product-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 16px;
+}
+.product-card-links--stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.product-card-links a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+.product-card-links a:hover { opacity: 0.65; }
+
+@media (max-width: 980px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
 }
 
 /* ABOUT */
@@ -657,8 +773,9 @@ footer span:last-child {
 .case-item.reveal:nth-child(2) { transition-delay: 60ms; }
 .case-item.reveal:nth-child(3) { transition-delay: 120ms; }
 .case-item.reveal:nth-child(4) { transition-delay: 180ms; }
-.product-item.reveal:nth-child(2) { transition-delay: 60ms; }
-.product-item.reveal:nth-child(3) { transition-delay: 120ms; }
+.product-card.reveal:nth-child(2) { transition-delay: 60ms; }
+.product-card.reveal:nth-child(3) { transition-delay: 120ms; }
+.product-card.reveal:nth-child(4) { transition-delay: 180ms; }
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -689,7 +806,19 @@ footer span:last-child {
   .case-grid-3 { grid-template-columns: 1fr 1fr; }
   .case-grid-4 { grid-template-columns: 1fr 1fr; }
   .case-grid-3-match-4 { grid-template-columns: 1fr 1fr; max-width: none; }
-  .aioz-ecosystem-grid { grid-template-columns: 1fr 1fr; gap: 20px 10px; }
+  .case-item--aioz { gap: 16px; padding-bottom: 40px; }
+  .case-item--subdivider { padding-bottom: 32px; }
+  .aioz-showcase { gap: 64px; margin-top: 12px; }
+  .aioz-chapter { padding-top: 24px; }
+  .aioz-chapter-header { grid-template-columns: 1fr; gap: 8px; margin-bottom: 20px; }
+  .aioz-chapter-label { padding-top: 0; }
+  .aioz-chapter-title-row { align-items: flex-start; gap: 16px; }
+  .aioz-chapter-title { font-size: 24px; }
+  .aioz-media-pair,
+  .aioz-exploration-grid { grid-template-columns: 1fr; gap: 32px; }
+  .aioz-figure figcaption { align-items: flex-start; gap: 16px; }
+  .aioz-caption-note { max-width: 64%; }
+  .aioz-wallet-figure { width: 100%; margin-left: 0; }
   .gallery-trigger::after { opacity: 0.82; transform: none; }
   .portfolio-lightbox {
     grid-template-columns: 1fr;
@@ -703,10 +832,8 @@ footer span:last-child {
   .inline-cta { flex-direction: column; align-items: flex-start; }
   .current-inner { padding: 0 20px; }
   .naka-feature { grid-template-columns: 1fr; gap: 12px; }
-  .naka-previews { grid-template-columns: 1fr 1fr; }
-  .product-item { grid-template-columns: 1fr; gap: 10px; }
-  .product-inline-preview { grid-template-columns: 1fr; gap: 10px; margin-top: 0; padding: 0 0 24px; }
-  .product-inline-preview-media { width: 100%; max-width: none; }
+  .product-grid { grid-template-columns: 1fr; gap: 40px; }
+  .product-card-tag { min-height: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-section { padding: 80px 20px; }
   footer { flex-direction: column; gap: 8px; padding: 20px; }
@@ -738,7 +865,7 @@ footer span:last-child {
 <!-- HERO -->
 <header class="hero reveal">
   <div class="hero-text">
-    <p class="hero-kicker">Staff Product Designer</p>
+    <p class="hero-kicker">Product Designer</p>
     <h1 class="hero-headline">Complex systems made easier to trust.</h1>
     <p class="hero-body">I turn dense fintech, Bitcoin, Web3, AI, and infrastructure products into experiences people can understand, navigate, and use with confidence.</p>
     <p class="hero-status">Open to remote product design roles hiring in Canada</p>
@@ -761,10 +888,10 @@ footer span:last-child {
     <div class="case-list">
 
       <!-- AIOZ -->
-      <article class="case-item reveal">
+      <article class="case-item case-item--aioz reveal">
         <div class="case-meta">
           <p class="case-company">AIOZ Network</p>
-          <p class="case-role">Principal Product Designer<br>2023 – 2025</p>
+          <p class="case-role">Staff Product Designer<br>2023 – 2025</p>
         </div>
         <div class="case-content">
           <h3 class="case-headline">Led the design transformation from 2 disconnected products to a unified ecosystem of 8.</h3>
@@ -774,39 +901,108 @@ footer span:last-child {
             <span class="metric-pill">3 designers led</span>
             <span class="metric-pill">Company context: $13M &rarr; $1.38B</span>
           </div>
-          <div class="case-media">
-            <div class="aioz-ecosystem-grid">
-              <figure class="aioz-tile aioz-tile--dtransfer">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-dtransfer-full.avif" data-caption="dTransfer" aria-label="Open AIOZ dTransfer image in gallery"><img src="assets/aioz-dtransfer.avif" alt="AIOZ dTransfer file transfer product" loading="lazy" decoding="async"></button>
-                <figcaption>AIOZ dTransfer</figcaption>
+        </div>
+
+        <div class="aioz-showcase">
+          <section class="aioz-chapter">
+            <div class="aioz-chapter-header">
+              <p class="aioz-chapter-label">Interaction craft</p>
+              <div>
+                <div class="aioz-chapter-title-row">
+                  <h4 class="aioz-chapter-title">Making file transfers a little more fun.</h4>
+                  <button class="aioz-motion-toggle" type="button" aria-pressed="false">Pause motion</button>
+                </div>
+                <p class="aioz-chapter-body">The little interactions gave dTransfer its personality. Dragging in a file flipped the interface to dark mode and turned the animated form from pale to purple.</p>
+              </div>
+            </div>
+            <div class="aioz-media-pair">
+              <figure class="aioz-figure">
+                <div class="aioz-media-frame aioz-media-frame--resting">
+                  <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-resting-poster.jpg" aria-labelledby="aioz-transfer-resting-caption">
+                    <source src="assets/aioz-v2/transfer-resting.mp4" type="video/mp4">
+                    <source src="assets/aioz-v2/transfer-resting.webm" type="video/webm">
+                  </video>
+                </div>
+                <figcaption id="aioz-transfer-resting-caption"><span class="aioz-caption-title">Resting state</span><span class="aioz-caption-note">A quiet surface keeps the next action obvious.</span></figcaption>
               </figure>
-              <figure class="aioz-tile aioz-tile--ai">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-ai-full.avif" data-caption="AI" aria-label="Open AIOZ AI image in gallery"><img src="assets/aioz-ai.avif" alt="AIOZ AI models and datasets product" loading="lazy" decoding="async"></button>
-                <figcaption>AIOZ AI</figcaption>
-              </figure>
-              <figure class="aioz-tile aioz-tile--stream">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-stream-full.avif" data-caption="Stream" aria-label="Open AIOZ Stream image in gallery"><img src="assets/aioz-stream.avif" alt="AIOZ Stream live streaming dashboard" loading="lazy" decoding="async"></button>
-                <figcaption>AIOZ Stream</figcaption>
-              </figure>
-              <figure class="aioz-tile aioz-tile--wallet">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-wallet-full.avif" data-caption="Wallet" aria-label="Open AIOZ Wallet image in gallery"><img src="assets/aioz-wallet.avif" alt="AIOZ Wallet token swap interface" loading="lazy" decoding="async"></button>
-                <figcaption>AIOZ Wallet</figcaption>
-              </figure>
-              <figure class="aioz-tile aioz-tile--storage">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-storage-full.avif" data-caption="Storage" aria-label="Open AIOZ Storage image in gallery"><img src="assets/aioz-storage.avif" alt="AIOZ Storage usage and account dashboard" loading="lazy" decoding="async"></button>
-                <figcaption>AIOZ Storage</figcaption>
-              </figure>
-              <figure class="aioz-tile aioz-tile--system">
-                <button class="aioz-tile-frame gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-system-full.avif" data-caption="Shared design system" aria-label="Open AIOZ shared design system image in gallery"><img src="assets/aioz-system.avif" alt="Shared AIOZ design-system color tokens" loading="lazy" decoding="async"></button>
-                <figcaption>Shared design system</figcaption>
+              <figure class="aioz-figure">
+                <div class="aioz-media-frame aioz-media-frame--active">
+                  <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-active-poster.jpg" aria-labelledby="aioz-transfer-active-caption">
+                    <source src="assets/aioz-v2/transfer-active.mp4" type="video/mp4">
+                    <source src="assets/aioz-v2/transfer-active.webm" type="video/webm">
+                  </video>
+                </div>
+                <figcaption id="aioz-transfer-active-caption"><span class="aioz-caption-title">Drag state</span><span class="aioz-caption-note">The workspace inverts.</span></figcaption>
               </figure>
             </div>
-          </div>
+          </section>
+
+          <section class="aioz-chapter">
+            <div class="aioz-chapter-header">
+              <p class="aioz-chapter-label">Product character</p>
+              <div>
+                <h4 class="aioz-chapter-title">One ecosystem, distinct personalities.</h4>
+                <p class="aioz-chapter-body">AI discovery and decentralized storage shared a system without collapsing into the same visual treatment.</p>
+              </div>
+            </div>
+            <div class="aioz-exploration-grid">
+              <figure class="aioz-figure">
+                <div class="aioz-media-frame aioz-media-frame--balanced">
+                  <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/aioz-ai-poster.jpg" aria-labelledby="aioz-ai-caption">
+                    <source src="assets/aioz-v2/aioz-ai-motion.mp4" type="video/mp4">
+                    <source src="assets/aioz-v2/aioz-ai-motion.webm" type="video/webm">
+                  </video>
+                </div>
+                <figcaption id="aioz-ai-caption"><span class="aioz-caption-title">AIOZ AI</span><span class="aioz-caption-note">Model and dataset discovery.</span></figcaption>
+              </figure>
+              <figure class="aioz-figure">
+                <div class="aioz-media-frame aioz-media-frame--balanced">
+                  <img class="aioz-still" src="assets/aioz-v2/storage-login.jpg" alt="AIOZ Storage login page with a colorful particle form and a code-inspired message" loading="lazy" decoding="async">
+                </div>
+                <figcaption><span class="aioz-caption-title">AIOZ Storage</span><span class="aioz-caption-note">A more expressive entry into infrastructure.</span></figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="aioz-chapter">
+            <div class="aioz-chapter-header">
+              <p class="aioz-chapter-label">Systems leverage</p>
+              <div>
+                <h4 class="aioz-chapter-title">Light and dark modes designed as one semantic system.</h4>
+                <p class="aioz-chapter-body">Shared colour layers kept interaction states coherent across products and modes, while leaving room for each product’s own character.</p>
+              </div>
+            </div>
+            <figure class="aioz-figure aioz-system-figure">
+              <div class="aioz-media-frame">
+                <img class="aioz-still" src="assets/aioz-v2/semantic-layers.jpg" alt="AIOZ semantic colour layers shown side by side across light and dark modes" loading="lazy" decoding="async">
+              </div>
+              <figcaption><span class="aioz-caption-title">Semantic colour layers</span><span class="aioz-caption-note">The same interface roles adapt across light and dark product surfaces.</span></figcaption>
+            </figure>
+          </section>
+
+          <section class="aioz-chapter">
+            <div class="aioz-chapter-header">
+              <p class="aioz-chapter-label">Product depth</p>
+              <div>
+                <h4 class="aioz-chapter-title">The visual system carried into dense, consequential flows.</h4>
+                <p class="aioz-chapter-body">The wallet swap flow keeps amount, asset, network, fees, and confirmation visible as the transaction moves from setup to review.</p>
+              </div>
+            </div>
+            <figure class="aioz-figure aioz-wallet-figure">
+              <div class="aioz-media-frame aioz-media-frame--wallet">
+                <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/wallet-swap-poster.jpg" aria-labelledby="aioz-wallet-caption">
+                  <source src="assets/aioz-v2/wallet-swap.mp4" type="video/mp4">
+                  <source src="assets/aioz-v2/wallet-swap.webm" type="video/webm">
+                </video>
+              </div>
+              <figcaption id="aioz-wallet-caption"><span class="aioz-caption-title">AIOZ Wallet</span><span class="aioz-caption-note">Token selection and transaction review in one continuous flow.</span></figcaption>
+            </figure>
+          </section>
         </div>
       </article>
 
       <!-- STRIKE -->
-      <article class="case-item reveal">
+      <article class="case-item case-item--subdivider reveal">
         <div class="case-meta">
           <p class="case-company">Strike</p>
           <p class="case-role">Senior Product Designer<br>2021 – 2023</p>
@@ -833,7 +1029,7 @@ footer span:last-child {
       </article>
 
       <!-- FOUNTAIN -->
-      <article class="case-item reveal">
+      <article class="case-item case-item--subdivider reveal">
         <div class="case-meta">
           <p class="case-company">Fountain</p>
           <p class="case-role">Design Lead<br>2023 – 2024 (Contract)</p>
@@ -904,66 +1100,56 @@ footer span:last-child {
         <a class="naka-copy-link" href="https://nakamotodesign.co" target="_blank" rel="noreferrer">
           <h3 class="naka-title">Nakamoto Design Co.</h3>
           <div class="naka-body">
-            <p>Nakamoto is my AI-native design studio. I designed and direct a multi-agent system that finds local businesses without websites, researches them, pulls real signals from Instagram and reviews, writes the positioning, and ships polished live demos. After 230+ sites, the work compounds: every prompt, review, and correction improves the next build.</p>
+            <p>Nakamoto is my AI-native design studio for building products, tools, and systems with AI. The work ranges from a multi-agent website pipeline to small utilities built from problems I kept running into.</p>
           </div>
         </a>
-        <div class="naka-previews">
-          <div class="naka-preview-wrap"><a class="naka-preview-link" href="https://kid-sister-ice-cream.nakamotodesign.co/" target="_blank" rel="noreferrer"><img src="assets/kid-sister-ice-cream-preview.png" alt="Kid Sister Ice Cream live site preview"></a></div>
-          <div class="naka-preview-wrap"><a class="naka-preview-link" href="https://working-culture.nakamotodesign.co/" target="_blank" rel="noreferrer"><img src="assets/working-culture-preview.png" alt="Working Culture live site preview"></a></div>
-          <div class="naka-preview-wrap"><a class="naka-preview-link" href="https://33-acres-brewing.nakamotodesign.co/" target="_blank" rel="noreferrer"><img src="assets/33-acres-brewing-preview.png" alt="33 Acres Brewing live site preview"></a></div>
-          <div class="naka-preview-wrap"><a class="naka-preview-link" href="https://auto-sites.pages.dev/demos/kreative-ink-lucy/" target="_blank" rel="noreferrer"><img src="assets/kreative-ink-v8-preview.png" alt="Kreative Ink live site preview"></a></div>
-        </div>
-        <p class="naka-caption">Recent demo sites built by the studio</p>
       </div>
     </div>
 
-    <!-- Products -->
-    <div class="product-list">
-      <div class="product-entry">
-        <a class="product-item reveal" href="https://clawprint.dev" target="_blank" rel="noreferrer">
-          <p class="product-tag">OpenClaw &middot; Agent calibration</p>
-          <div>
-            <h3 class="product-title">Clawprint</h3>
-            <p class="product-body">Clawprint is a Deep Self assessment and OpenClaw calibration kit. It surfaces how you think, what drives you, and when your agent should push or listen, then imprints that profile as behavior rules so the agent works with your personality instead of around it.</p>
-          </div>
+    <!-- Studio projects -->
+    <div class="product-grid">
+      <article class="product-card reveal">
+        <a class="product-card-media product-card-media--mosaic" href="https://auto-sites.pages.dev/" target="_blank" rel="noreferrer" aria-label="View Auto-Sites">
+          <img src="assets/kid-sister-ice-cream-preview.png" alt="" loading="lazy" decoding="async">
+          <img src="assets/working-culture-preview.png" alt="" loading="lazy" decoding="async">
+          <img src="assets/33-acres-brewing-preview.png" alt="" loading="lazy" decoding="async">
+          <img src="assets/kreative-ink-v8-preview.png" alt="" loading="lazy" decoding="async">
         </a>
-        <div class="product-inline-preview reveal">
-          <div></div>
-          <div class="product-inline-preview-media">
-            <a class="product-preview-link" href="https://clawprint.dev" target="_blank" rel="noreferrer"><img src="assets/clawprint-preview.jpg" alt="Clawprint site preview"></a>
-          </div>
+        <p class="product-card-tag">Multi-agent system &middot; 230+ demos</p>
+        <h3 class="product-card-title"><a href="https://auto-sites.pages.dev/" target="_blank" rel="noreferrer">Auto-Sites</a></h3>
+        <p class="product-card-body">An agent pipeline that researches local businesses, writes the positioning, builds the site, and critiques the result. Each review feeds the next run.</p>
+        <div class="product-card-links"><a href="https://auto-sites.pages.dev/" target="_blank" rel="noreferrer">View project &nearr;</a></div>
+      </article>
+
+      <article class="product-card reveal">
+        <a class="product-card-media" href="https://clawprint.dev" target="_blank" rel="noreferrer"><img src="assets/clawprint-preview.jpg" alt="Clawprint site preview" loading="lazy" decoding="async"></a>
+        <p class="product-card-tag">Agent calibration &middot; OpenClaw</p>
+        <h3 class="product-card-title"><a href="https://clawprint.dev" target="_blank" rel="noreferrer">Clawprint</a></h3>
+        <p class="product-card-body">A personality assessment and calibration kit that turns how someone thinks and works into practical behavior rules for their agent.</p>
+        <div class="product-card-links"><a href="https://clawprint.dev" target="_blank" rel="noreferrer">View project &nearr;</a></div>
+      </article>
+
+      <article class="product-card reveal">
+        <a class="product-card-media" href="https://www.scottkbell.com/loopin"><img src="assets/loopin-preview.jpg" alt="LoopIn site preview" loading="lazy" decoding="async"></a>
+        <p class="product-card-tag">Chrome extension &middot; MCP bridge</p>
+        <h3 class="product-card-title"><a href="https://www.scottkbell.com/loopin">LoopIn</a></h3>
+        <p class="product-card-body">Send live browser context to a coding agent. Click an element and LoopIn captures the DOM, styles, and screenshot so the agent knows exactly what you mean.</p>
+        <div class="product-card-links product-card-links--stacked">
+          <a href="https://www.scottkbell.com/loopin">View project</a>
+          <a href="https://chromewebstore.google.com/detail/loopin/igphcclkppjopmdgjlnbopfdikfijndm" target="_blank" rel="noreferrer">Chrome Web Store &nearr;</a>
         </div>
-      </div>
-      <div class="product-entry">
-        <a class="product-item reveal" href="https://www.scottkbell.com/loopin">
-          <p class="product-tag">Design-to-code &middot; Chrome extension</p>
-          <div>
-            <h3 class="product-title">LoopIn</h3>
-            <p class="product-body">Design-to-code bridge for Claude Code. Click any UI element, and LoopIn captures the DOM, computed styles, and a screenshot, then sends the exact context to the agent. Less guessing. Better fixes.</p>
-          </div>
-        </a>
-        <div class="product-inline-preview reveal">
-          <div></div>
-          <div class="product-inline-preview-media">
-            <a class="product-preview-link" href="https://www.scottkbell.com/loopin"><img src="assets/loopin-preview.jpg" alt="LoopIn site preview"></a>
-          </div>
+      </article>
+
+      <article class="product-card reveal">
+        <a class="product-card-media" href="https://auto-sites.pages.dev/demos/mixid/" target="_blank" rel="noreferrer"><img src="assets/mixid-preview.png" alt="Mix ID site preview" loading="lazy" decoding="async"></a>
+        <p class="product-card-tag">Open source &middot; npm</p>
+        <h3 class="product-card-title"><a href="https://auto-sites.pages.dev/demos/mixid/" target="_blank" rel="noreferrer">Mix ID</a></h3>
+        <p class="product-card-body">A tracklist generator for DJ mixes. Paste a Mixcloud, SoundCloud, or YouTube URL and get timestamped IDs.</p>
+        <div class="product-card-links product-card-links--stacked">
+          <a href="https://auto-sites.pages.dev/demos/mixid/" target="_blank" rel="noreferrer">View project</a>
+          <a href="https://www.npmjs.com/package/mix-id" target="_blank" rel="noreferrer">View on npm &nearr;</a>
         </div>
-      </div>
-      <div class="product-entry">
-        <a class="product-item reveal" href="https://auto-sites.pages.dev/demos/mixid/" target="_blank" rel="noreferrer">
-          <p class="product-tag">Open Source &middot; npm</p>
-          <div>
-            <h3 class="product-title">Mix ID</h3>
-            <p class="product-body">Tracklist generator for DJ mixes. Paste a Mixcloud, SoundCloud, or YouTube URL and get timestamped IDs. It started as a selfish radio-show tool, then turned into an npm package.</p>
-          </div>
-        </a>
-        <div class="product-inline-preview reveal">
-          <div></div>
-          <div class="product-inline-preview-media">
-            <a class="product-preview-link" href="https://auto-sites.pages.dev/demos/mixid/" target="_blank" rel="noreferrer"><img src="assets/mixid-preview.png" alt="Mix ID site preview"></a>
-          </div>
-        </div>
-      </div>
+      </article>
     </div>
   </div>
 </div>
@@ -1022,6 +1208,52 @@ footer span:last-child {
   </figure>
   <button class="portfolio-lightbox-nav portfolio-lightbox-next" type="button" aria-label="Next image">&rarr;</button>
 </div>
+
+<script>
+(() => {
+  const videos = Array.from(document.querySelectorAll('.js-aioz-video'));
+  const toggle = document.querySelector('.aioz-motion-toggle');
+  if (!videos.length || !toggle) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const visibleVideos = new Set();
+  let motionPaused = reducedMotion.matches;
+
+  const updateToggle = () => {
+    toggle.textContent = motionPaused ? 'Play motion' : 'Pause motion';
+    toggle.setAttribute('aria-pressed', String(motionPaused));
+  };
+
+  const syncPlayback = () => {
+    videos.forEach((video) => {
+      const shouldPlay = !motionPaused && !document.hidden && visibleVideos.has(video);
+      if (shouldPlay) {
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+    updateToggle();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) visibleVideos.add(entry.target);
+      else visibleVideos.delete(entry.target);
+    });
+    syncPlayback();
+  }, { threshold: 0.2, rootMargin: '80px 0px' });
+
+  videos.forEach((video) => observer.observe(video));
+  toggle.addEventListener('click', () => {
+    motionPaused = !motionPaused;
+    syncPlayback();
+  });
+  document.addEventListener('visibilitychange', syncPlayback);
+  updateToggle();
+})();
+</script>
 
 <script>
 (() => {
