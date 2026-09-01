@@ -438,25 +438,9 @@ nav {
   font: inherit;
   text-align: inherit;
 }
-.gallery-trigger::after {
-  content: 'View';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 4px 7px;
-  border-radius: 2px;
-  background: rgba(20, 20, 19, 0.78);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  opacity: 0;
-  transform: translateY(-2px);
-  transition: opacity 160ms ease, transform 160ms ease;
+.aioz-media-frame.gallery-trigger {
+  border: 1px solid rgba(38, 38, 36, 0.08);
 }
-.gallery-trigger:hover::after,
-.gallery-trigger:focus-visible::after { opacity: 1; transform: translateY(0); }
 .gallery-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .portfolio-lightbox[hidden] { display: none; }
 .portfolio-lightbox {
@@ -473,13 +457,17 @@ nav {
 }
 body.portfolio-lightbox-open { overflow: hidden; }
 .portfolio-lightbox-figure { margin: 0; min-width: 0; text-align: center; touch-action: pan-y; }
-.portfolio-lightbox-image {
+.portfolio-lightbox-image,
+.portfolio-lightbox-video {
   display: block;
   max-width: 100%;
   max-height: calc(100vh - 150px);
   margin: 0 auto;
   object-fit: contain;
 }
+.portfolio-lightbox-video { background: #111; }
+.portfolio-lightbox-image[hidden],
+.portfolio-lightbox-video[hidden] { display: none; }
 .portfolio-lightbox-caption {
   margin-top: 16px;
   color: rgba(255, 255, 255, 0.78);
@@ -547,21 +535,63 @@ body.portfolio-lightbox-open { overflow: hidden; }
 .case-link:hover { background: var(--accent-bg); border-color: rgba(45,122,95,0.6); opacity: 1; }
 .case-link:hover::after { transform: translateX(2px); }
 
-/* INLINE CTA */
+/* STRIKE CASE STUDY CTA */
 .inline-cta {
-  margin-top: 80px; padding-top: 32px;
-  border-top: 1px solid var(--faint);
-  display: flex; justify-content: space-between; align-items: center; gap: 32px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: center;
+  gap: 56px;
+  margin-top: 80px;
+  padding: 40px 44px;
+  overflow: hidden;
+  border: 1px solid rgba(38, 38, 36, 0.14);
+  background: #fff;
+  color: inherit;
+  transition: border-color 220ms ease, transform 220ms ease;
+}
+.inline-cta:hover { border-color: rgba(38, 38, 36, 0.34); }
+.inline-cta:active { transform: scale(0.995); }
+.inline-cta-content {
+  color: inherit;
+  text-decoration: none;
+}
+.inline-cta-content:focus-visible,
+.inline-cta-visual:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.inline-cta-kicker {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .inline-cta-title { font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 8px; }
 .inline-cta-body { font-size: 15px; color: var(--mid); line-height: 1.6; max-width: 520px; }
 .inline-cta-link {
-  flex-shrink: 0; font-size: 13px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; font-size: 12px; font-weight: 700;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--accent); text-decoration: none;
-  transition: opacity 200ms ease;
+  color: var(--accent);
 }
-.inline-cta-link:hover { opacity: 0.7; }
+.inline-cta-link span { transition: transform 180ms ease; }
+.inline-cta-content:hover .inline-cta-link span { transform: translateX(3px); }
+.inline-cta-visual {
+  position: relative;
+  display: block;
+  width: 220px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #fff;
+  transition: opacity 180ms ease;
+}
+.inline-cta-visual:hover { opacity: 0.76; }
+.inline-cta-visual video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 /* CURRENT WORK */
 .current-section { background: var(--surface); padding: 96px 0; }
@@ -819,17 +849,18 @@ footer span:last-child {
   .aioz-figure figcaption { align-items: flex-start; gap: 16px; }
   .aioz-caption-note { max-width: 64%; }
   .aioz-wallet-figure { width: 100%; margin-left: 0; }
-  .gallery-trigger::after { opacity: 0.82; transform: none; }
   .portfolio-lightbox {
     grid-template-columns: 1fr;
     gap: 0;
     padding: 72px 16px 92px;
   }
-  .portfolio-lightbox-image { max-height: calc(100vh - 190px); }
+  .portfolio-lightbox-image,
+  .portfolio-lightbox-video { max-height: calc(100vh - 190px); }
   .portfolio-lightbox-nav { position: absolute; bottom: 22px; }
   .portfolio-lightbox-prev { left: calc(50% - 66px); }
   .portfolio-lightbox-next { right: calc(50% - 66px); }
-  .inline-cta { flex-direction: column; align-items: flex-start; }
+  .inline-cta { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+  .inline-cta-visual { width: min(160px, 100%); }
   .current-inner { padding: 0 20px; }
   .naka-feature { grid-template-columns: 1fr; gap: 12px; }
   .product-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -917,21 +948,21 @@ footer span:last-child {
             </div>
             <div class="aioz-media-pair">
               <figure class="aioz-figure">
-                <div class="aioz-media-frame aioz-media-frame--resting">
+                <button class="aioz-media-frame aioz-media-frame--resting gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-resting.webm" data-video-mp4="assets/aioz-v2/transfer-resting.mp4" data-poster="assets/aioz-v2/transfer-resting-poster.jpg" data-caption="dTransfer resting state" data-alt="The pale resting state of the dTransfer interface with an animated form" aria-label="Open the dTransfer resting state in the AIOZ detail gallery">
                   <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-resting-poster.jpg" aria-labelledby="aioz-transfer-resting-caption">
                     <source src="assets/aioz-v2/transfer-resting.mp4" type="video/mp4">
                     <source src="assets/aioz-v2/transfer-resting.webm" type="video/webm">
                   </video>
-                </div>
+                </button>
                 <figcaption id="aioz-transfer-resting-caption"><span class="aioz-caption-title">Resting state</span><span class="aioz-caption-note">A quiet surface keeps the next action obvious.</span></figcaption>
               </figure>
               <figure class="aioz-figure">
-                <div class="aioz-media-frame aioz-media-frame--active">
+                <button class="aioz-media-frame aioz-media-frame--active gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-active.webm" data-video-mp4="assets/aioz-v2/transfer-active.mp4" data-poster="assets/aioz-v2/transfer-active-poster.jpg" data-caption="dTransfer drag state" data-alt="The dark drag state of the dTransfer interface with a purple animated form" aria-label="Open the dTransfer drag state in the AIOZ detail gallery">
                   <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-active-poster.jpg" aria-labelledby="aioz-transfer-active-caption">
                     <source src="assets/aioz-v2/transfer-active.mp4" type="video/mp4">
                     <source src="assets/aioz-v2/transfer-active.webm" type="video/webm">
                   </video>
-                </div>
+                </button>
                 <figcaption id="aioz-transfer-active-caption"><span class="aioz-caption-title">Drag state</span><span class="aioz-caption-note">The workspace inverts.</span></figcaption>
               </figure>
             </div>
@@ -947,18 +978,18 @@ footer span:last-child {
             </div>
             <div class="aioz-exploration-grid">
               <figure class="aioz-figure">
-                <div class="aioz-media-frame aioz-media-frame--balanced">
+                <button class="aioz-media-frame aioz-media-frame--balanced gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/aioz-ai-motion.webm" data-video-mp4="assets/aioz-v2/aioz-ai-motion.mp4" data-poster="assets/aioz-v2/aioz-ai-poster.jpg" data-caption="AIOZ AI discovery experience" data-alt="The animated AIOZ AI model and dataset discovery experience" aria-label="Open the AIOZ AI experience in the AIOZ detail gallery">
                   <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/aioz-ai-poster.jpg" aria-labelledby="aioz-ai-caption">
                     <source src="assets/aioz-v2/aioz-ai-motion.mp4" type="video/mp4">
                     <source src="assets/aioz-v2/aioz-ai-motion.webm" type="video/webm">
                   </video>
-                </div>
+                </button>
                 <figcaption id="aioz-ai-caption"><span class="aioz-caption-title">AIOZ AI</span><span class="aioz-caption-note">Model and dataset discovery.</span></figcaption>
               </figure>
               <figure class="aioz-figure">
-                <div class="aioz-media-frame aioz-media-frame--balanced">
+                <button class="aioz-media-frame aioz-media-frame--balanced gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-v2/storage-login.jpg" data-caption="AIOZ Storage login" data-alt="AIOZ Storage login page with a colorful particle form and a code-inspired message" aria-label="Open the AIOZ Storage login in the AIOZ detail gallery">
                   <img class="aioz-still" src="assets/aioz-v2/storage-login.jpg" alt="AIOZ Storage login page with a colorful particle form and a code-inspired message" loading="lazy" decoding="async">
-                </div>
+                </button>
                 <figcaption><span class="aioz-caption-title">AIOZ Storage</span><span class="aioz-caption-note">A more expressive entry into infrastructure.</span></figcaption>
               </figure>
             </div>
@@ -973,9 +1004,9 @@ footer span:last-child {
               </div>
             </div>
             <figure class="aioz-figure aioz-system-figure">
-              <div class="aioz-media-frame">
+              <button class="aioz-media-frame gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-v2/semantic-layers.jpg" data-caption="Semantic colour layers" data-alt="AIOZ semantic colour layers shown side by side across light and dark modes" aria-label="Open the semantic colour system in the AIOZ detail gallery">
                 <img class="aioz-still" src="assets/aioz-v2/semantic-layers.jpg" alt="AIOZ semantic colour layers shown side by side across light and dark modes" loading="lazy" decoding="async">
-              </div>
+              </button>
               <figcaption><span class="aioz-caption-title">Semantic colour layers</span><span class="aioz-caption-note">The same interface roles adapt across light and dark product surfaces.</span></figcaption>
             </figure>
           </section>
@@ -989,12 +1020,12 @@ footer span:last-child {
               </div>
             </div>
             <figure class="aioz-figure aioz-wallet-figure">
-              <div class="aioz-media-frame aioz-media-frame--wallet">
+              <button class="aioz-media-frame aioz-media-frame--wallet gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/wallet-swap.webm" data-video-mp4="assets/aioz-v2/wallet-swap.mp4" data-poster="assets/aioz-v2/wallet-swap-poster.jpg" data-caption="Wallet token swap prototype" data-alt="A high-fidelity AIOZ Wallet token swap prototype moving from setup to review" aria-label="Open the Wallet token swap prototype in the AIOZ detail gallery">
                 <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/wallet-swap-poster.jpg" aria-labelledby="aioz-wallet-caption">
                   <source src="assets/aioz-v2/wallet-swap.mp4" type="video/mp4">
                   <source src="assets/aioz-v2/wallet-swap.webm" type="video/webm">
                 </video>
-              </div>
+              </button>
               <figcaption id="aioz-wallet-caption"><span class="aioz-caption-title">AIOZ Wallet</span><span class="aioz-caption-note">Token selection and transaction review in one continuous flow.</span></figcaption>
             </figure>
           </section>
@@ -1074,12 +1105,19 @@ footer span:last-child {
 
     </div>
 
-    <!-- Inline CTA -->
+    <!-- Strike case study CTA -->
     <div class="inline-cta reveal">
-      <div>
-        <h3 class="inline-cta-title">Product taste and execution, same person.</h3>
-        <p class="inline-cta-body">I’m useful where the product is complex, the system matters, and the team needs someone who can find the shape of the problem, design the experience, and help turn ambiguity into something buildable.</p>
-      </div>
+      <a class="inline-cta-visual" href="https://shotopop.com/strike" target="_blank" rel="noreferrer" aria-label="View the Strike character by Shotopop">
+        <video class="js-aioz-video" muted loop playsinline preload="metadata" poster="assets/strike-character-poster.png" aria-hidden="true">
+          <source src="assets/strike-character.webm" type="video/webm">
+        </video>
+      </a>
+      <a class="inline-cta-content" href="/strike-case-study/" aria-label="Read the Strike case study">
+        <span class="inline-cta-kicker">In-depth case study</span>
+        <h3 class="inline-cta-title">Curious how I work?</h3>
+        <p class="inline-cta-body">See how I helped rebuild Strike from a fragmented global payments app into one coherent product across more than 450 screens and 80 flows.</p>
+        <span class="inline-cta-link">Read the Strike case study <span aria-hidden="true">&rarr;</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1199,14 +1237,15 @@ footer span:last-child {
   <span>Victoria, BC &middot; Open to the right fit</span>
 </footer>
 
-<div class="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="Project image gallery" hidden>
+<div class="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="Project media gallery" hidden>
   <button class="portfolio-lightbox-close" type="button" aria-label="Close gallery">&times;</button>
-  <button class="portfolio-lightbox-nav portfolio-lightbox-prev" type="button" aria-label="Previous image">&larr;</button>
+  <button class="portfolio-lightbox-nav portfolio-lightbox-prev" type="button" aria-label="Previous item">&larr;</button>
   <figure class="portfolio-lightbox-figure">
     <img class="portfolio-lightbox-image" alt="">
+    <video class="portfolio-lightbox-video" muted loop playsinline controls hidden></video>
     <figcaption class="portfolio-lightbox-caption" aria-live="polite"></figcaption>
   </figure>
-  <button class="portfolio-lightbox-nav portfolio-lightbox-next" type="button" aria-label="Next image">&rarr;</button>
+  <button class="portfolio-lightbox-nav portfolio-lightbox-next" type="button" aria-label="Next item">&rarr;</button>
 </div>
 
 <script>
@@ -1269,6 +1308,7 @@ footer span:last-child {
   });
 
   const image = dialog.querySelector('.portfolio-lightbox-image');
+  const video = dialog.querySelector('.portfolio-lightbox-video');
   const figure = dialog.querySelector('.portfolio-lightbox-figure');
   const caption = dialog.querySelector('.portfolio-lightbox-caption');
   const closeButton = dialog.querySelector('.portfolio-lightbox-close');
@@ -1279,20 +1319,65 @@ footer span:last-child {
   let activeIndex = 0;
   let restoreFocus = null;
   let touchStartX = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const clearVideo = () => {
+    video.pause();
+    video.removeAttribute('poster');
+    video.replaceChildren();
+    video.load();
+  };
 
   const render = () => {
     const trigger = activeTriggers[activeIndex];
     const thumbnail = trigger.querySelector('img');
     const groupLabel = trigger.dataset.galleryLabel;
-    image.src = trigger.dataset.full;
-    image.alt = thumbnail ? thumbnail.alt : '';
+    const isVideo = Boolean(trigger.dataset.videoWebm || trigger.dataset.videoMp4);
+    const alt = trigger.dataset.alt || (thumbnail ? thumbnail.alt : '');
+
+    image.hidden = isVideo;
+    video.hidden = !isVideo;
+
+    if (isVideo) {
+      image.removeAttribute('src');
+      image.alt = '';
+      clearVideo();
+      video.poster = trigger.dataset.poster || '';
+      video.setAttribute('aria-label', alt);
+
+      [
+        [trigger.dataset.videoWebm, 'video/webm'],
+        [trigger.dataset.videoMp4, 'video/mp4']
+      ].forEach(([src, type]) => {
+        if (!src) return;
+        const source = document.createElement('source');
+        source.src = src;
+        source.type = type;
+        video.append(source);
+      });
+
+      video.load();
+      if (!reducedMotion.matches) {
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+      }
+    } else {
+      clearVideo();
+      video.removeAttribute('aria-label');
+      image.src = trigger.dataset.full;
+      image.alt = alt;
+    }
+
     caption.textContent = `${groupLabel} · ${trigger.dataset.caption} · ${activeIndex + 1} of ${activeTriggers.length}`;
     dialog.setAttribute('aria-label', `${groupLabel} project gallery`);
 
     [-1, 1].forEach((offset) => {
       const neighborIndex = (activeIndex + offset + activeTriggers.length) % activeTriggers.length;
-      const preload = new Image();
-      preload.src = activeTriggers[neighborIndex].dataset.full;
+      const neighborSrc = activeTriggers[neighborIndex].dataset.full;
+      if (neighborSrc) {
+        const preload = new Image();
+        preload.src = neighborSrc;
+      }
     });
   };
 
@@ -1308,6 +1393,7 @@ footer span:last-child {
 
   const close = () => {
     if (dialog.hidden) return;
+    clearVideo();
     dialog.hidden = true;
     touchStartX = null;
     document.body.classList.remove('portfolio-lightbox-open');
