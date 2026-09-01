@@ -542,9 +542,8 @@ body.portfolio-lightbox-open { overflow: hidden; }
 /* STRIKE CASE STUDY CTA */
 .inline-cta {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 56px;
   margin-top: 80px;
   padding: 40px 44px;
   overflow: hidden;
@@ -576,26 +575,6 @@ body.portfolio-lightbox-open { overflow: hidden; }
 }
 .inline-cta-link span { transition: transform 180ms ease; }
 .inline-cta:hover .inline-cta-link span { transform: translateX(3px); }
-.inline-cta-visual {
-  display: block;
-  width: 220px;
-  background: #fff;
-}
-.inline-cta-visual video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
-}
-.inline-cta-credit {
-  display: block;
-  margin-top: 8px;
-  color: var(--light);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  text-align: center;
-}
-
 /* CURRENT WORK */
 .current-section { background: var(--surface); padding: 96px 0; }
 .current-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
@@ -862,8 +841,7 @@ footer span:last-child {
   .portfolio-lightbox-nav { position: absolute; bottom: 22px; }
   .portfolio-lightbox-prev { left: calc(50% - 66px); }
   .portfolio-lightbox-next { right: calc(50% - 66px); }
-  .inline-cta { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
-  .inline-cta-visual { width: min(160px, 100%); }
+  .inline-cta { grid-template-columns: 1fr; padding: 28px; }
   .current-inner { padding: 0 20px; }
   .naka-feature { grid-template-columns: 1fr; gap: 12px; }
   .product-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1110,12 +1088,6 @@ footer span:last-child {
 
     <!-- Strike case study CTA -->
     <a class="inline-cta reveal" href="/strike-case-study/">
-      <span class="inline-cta-visual">
-        <video class="js-aioz-video" muted loop playsinline preload="metadata" poster="assets/strike-character-poster.png" aria-hidden="true">
-          <source src="assets/strike-character.webm" type="video/webm">
-        </video>
-        <span class="inline-cta-credit">GIF via Shotopop</span>
-      </span>
       <div class="inline-cta-content">
         <span class="inline-cta-kicker">In-depth case study</span>
         <h3 class="inline-cta-title">Curious how I work?</h3>
