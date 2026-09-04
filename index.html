@@ -714,8 +714,44 @@ body.portfolio-lightbox-open { overflow: hidden; }
 
 /* CONTACT */
 .contact-section {
-  background: var(--footer-bg); color: var(--footer-text);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 32%, rgba(244, 215, 120, 0.28), transparent 34%),
+    radial-gradient(circle at 82% 28%, rgba(74, 169, 214, 0.28), transparent 36%),
+    radial-gradient(circle at 58% 88%, rgba(232, 93, 56, 0.22), transparent 42%),
+    var(--footer-bg-deep);
+  color: var(--footer-text);
   text-align: center; padding: 148px 40px 156px;
+}
+.contact-orb-field {
+  position: absolute;
+  inset: -2%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(8px) saturate(1.08);
+  transform: translateZ(0);
+  opacity: 1;
+}
+.contact-orb-field canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.contact-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(5, 12, 10, 0.6), rgba(5, 12, 10, 0.48) 58%, rgba(5, 12, 10, 0.58) 100%),
+    linear-gradient(180deg, rgba(5, 12, 10, 0.06), rgba(5, 12, 10, 0.18));
+}
+.contact-content {
+  position: relative;
+  z-index: 2;
 }
 .contact-headline {
   font-family: var(--serif); font-size: clamp(32px, 5vw, 56px);
@@ -828,6 +864,10 @@ footer span:last-child {
   .product-card-tag { min-height: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-section { padding: 80px 20px; }
+  .contact-orb-field {
+    inset: -2%;
+    filter: blur(6px) saturate(1.06);
+  }
   footer { flex-direction: column; gap: 8px; padding: 20px; }
 }
 
@@ -1203,9 +1243,12 @@ footer span:last-child {
 
 <!-- CONTACT -->
 <div class="contact-section" id="contact">
-  <h2 class="contact-headline reveal">Let’s collaborate.</h2>
-  <p class="contact-body reveal">If you’re building fintech, AI, agent workflows, or infrastructure where people need to understand the system before they can trust it, that’s the work I want. I can help set direction, design the experience, and turn ambiguity into something elegant.</p>
-  <a href="mailto:scott@nakamotodesign.co" class="contact-link reveal">Email me</a>
+  <div class="contact-orb-field" aria-hidden="true"></div>
+  <div class="contact-content">
+    <h2 class="contact-headline reveal">Let’s collaborate.</h2>
+    <p class="contact-body reveal">If you’re building fintech, AI, agent workflows, or infrastructure where people need to understand the system before they can trust it, that’s the work I want. I can help set direction, design the experience, and turn ambiguity into something elegant.</p>
+    <a href="mailto:scott@nakamotodesign.co" class="contact-link reveal">Email me</a>
+  </div>
 </div>
 
 <footer>
@@ -1425,6 +1468,8 @@ import * as THREE from './assets/vendor/three.module.js';
 (function () {
   const stage = document.querySelector('.hero-orb-stage');
   const container = document.querySelector('.hero-orb');
+  const contactSection = document.querySelector('.contact-section');
+  const contactField = document.querySelector('.contact-orb-field');
   const follower = document.getElementById('cursor-follower');
   const strikeCallout = document.querySelector('.inline-cta');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1464,6 +1509,17 @@ import * as THREE from './assets/vendor/three.module.js';
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   container.appendChild(renderer.domElement);
 
+  let contactRenderer = null;
+  if (contactField) {
+    try {
+      contactRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+      contactRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, finePointer ? 1.25 : 1));
+      contactField.appendChild(contactRenderer.domElement);
+    } catch (error) {
+      contactRenderer = null;
+    }
+  }
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
   camera.position.z = 2.4;
@@ -1472,8 +1528,12 @@ import * as THREE from './assets/vendor/three.module.js';
   const mouse = new THREE.Vector2(-1, -1);
   const normalizedMouse = new THREE.Vector2(-1, -1);
   const lastHitUv = new THREE.Vector2(0.5, 0.5);
+  const contactUv = new THREE.Vector2(0.5, 0.5);
   const hitVelocity = new THREE.Vector2(0, 0);
+  const contactLastHitUv = new THREE.Vector2(0.5, 0.5);
+  const contactHitVelocity = new THREE.Vector2(0, 0);
   const clock = new THREE.Clock();
+  let contactVisible = false;
 
   const fboScene = new THREE.Scene();
   const fboCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -1492,6 +1552,8 @@ import * as THREE from './assets/vendor/three.module.js';
   };
   const interactionTarget = new THREE.WebGLRenderTarget(256, 256, targetOptions);
   const simulationTarget = new THREE.WebGLRenderTarget(128, 128, targetOptions);
+  const contactInteractionTarget = new THREE.WebGLRenderTarget(256, 256, targetOptions);
+  const contactSimulationTarget = new THREE.WebGLRenderTarget(128, 128, targetOptions);
 
   const passVertex = `
     varying vec2 vUv;
@@ -1650,6 +1712,11 @@ import * as THREE from './assets/vendor/three.module.js';
     }
   });
 
+  const contactInteractionMaterial = interactionMaterial.clone();
+  contactInteractionMaterial.uniforms.feedbackTex.value = contactSimulationTarget.texture;
+  const contactSimulationMaterial = simulationMaterial.clone();
+  contactSimulationMaterial.uniforms.sourceTex.value = contactInteractionTarget.texture;
+
   function makeColorTexture() {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
@@ -1769,6 +1836,73 @@ import * as THREE from './assets/vendor/three.module.js';
     }
   });
 
+  const contactMaterial = new THREE.ShaderMaterial({
+    vertexShader: passVertex,
+    fragmentShader: `
+      precision highp float;
+      varying vec2 vUv;
+      uniform sampler2D heightMap;
+      uniform sampler2D colorTexture;
+      uniform vec2 size;
+      uniform vec3 lightDirection;
+      uniform float angle;
+      uniform float colorWarp;
+      uniform float specularStrength;
+      uniform float aspect;
+      float blendOverlay(float base,float blend){
+        return base<0.5?(2.0*base*blend):(1.0-2.0*(1.0-base)*(1.0-blend));
+      }
+      vec3 blendOverlay(vec3 base,vec3 blend){
+        return vec3(blendOverlay(base.r,blend.r),blendOverlay(base.g,blend.g),blendOverlay(base.b,blend.b));
+      }
+      vec2 rotateUV(vec2 uv,float rotation){
+        float mid=0.5;
+        return vec2(cos(rotation)*(uv.x-mid)+sin(rotation)*(uv.y-mid)+mid,cos(rotation)*(uv.y-mid)-sin(rotation)*(uv.x-mid)+mid);
+      }
+      vec2 planeUv(vec2 uv){
+        if(aspect>=1.0){
+          return vec2(uv.x,0.5+(uv.y-0.5)/aspect);
+        }
+        return vec2(0.5+(uv.x-0.5)*aspect,uv.y);
+      }
+      void main(){
+        vec2 uv=planeUv(vUv);
+        vec2 texel=vec2(1.0/size.x,1.0/size.y);
+        vec4 data=texture2D(heightMap,uv);
+        float left=texture2D(heightMap,uv-vec2(texel.x,0.0)).r;
+        float right=texture2D(heightMap,uv+vec2(texel.x,0.0)).r;
+        float down=texture2D(heightMap,uv-vec2(0.0,texel.y)).r;
+        float up=texture2D(heightMap,uv+vec2(0.0,texel.y)).r;
+        vec2 slope=vec2(right-left,up-down);
+        vec3 normal=normalize(vec3(-slope.x*18.0,1.0,-slope.y*18.0));
+        float light=max(dot(normal,normalize(lightDirection)),0.0);
+        vec2 colorUv=rotateUV(uv+normal.xz*colorWarp,angle);
+        vec3 color=texture2D(colorTexture,colorUv).rgb;
+        vec3 lit=blendOverlay(color,vec3(light));
+        vec3 viewDir=vec3(0.0,1.0,0.0);
+        vec3 reflectDir=reflect(-normalize(lightDirection),normal);
+        float spec=pow(max(dot(viewDir,reflectDir),0.0),8.0);
+        vec3 specular=specularStrength*spec*vec3(0.47,0.729,0.9);
+        float ripple=clamp(abs(data.r)*0.16,0.0,0.06);
+        gl_FragColor=vec4(lit+specular+ripple,1.0);
+      }
+    `,
+    uniforms: {
+      heightMap: { value: contactSimulationTarget.texture },
+      colorTexture: renderingMaterial.uniforms.colorTexture,
+      size: { value: new THREE.Vector2(128, 128) },
+      lightDirection: renderingMaterial.uniforms.lightDirection,
+      angle: renderingMaterial.uniforms.angle,
+      colorWarp: renderingMaterial.uniforms.colorWarp,
+      specularStrength: renderingMaterial.uniforms.specularStrength,
+      aspect: { value: 1 }
+    }
+  });
+
+  const contactScene = new THREE.Scene();
+  const contactPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), contactMaterial);
+  contactScene.add(contactPlane);
+
   const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 144, 144, 0, Math.PI * 2, 0, Math.PI), renderingMaterial);
   sphere.scale.setScalar(params.scale);
   scene.add(sphere);
@@ -1783,23 +1917,29 @@ import * as THREE from './assets/vendor/three.module.js';
   let dropUntil = 0;
 
   function applyParams() {
-    interactionMaterial.uniforms.radius.value = params.radius;
-    interactionMaterial.uniforms.strength.value = params.strength;
-    interactionMaterial.uniforms.noiseSpeed.value = params.noiseSpeed;
-    interactionMaterial.uniforms.noiseAmplitude.value = params.noiseAmplitude;
-    interactionMaterial.uniforms.noiseFrequency.value = params.noiseFrequency;
-    interactionMaterial.uniforms.pointerBoost.value = params.pointerBoost;
-    interactionMaterial.uniforms.velocityBoost.value = params.velocityBoost;
-    interactionMaterial.uniforms.autoStrength.value = params.autoStrength;
-    interactionMaterial.uniforms.softLimit.value = params.softLimit;
-    simulationMaterial.uniforms.simCoupling.value = params.simCoupling;
-    simulationMaterial.uniforms.velocityDamping.value = params.velocityDamping;
-    simulationMaterial.uniforms.heightDamping.value = params.heightDamping;
-    simulationMaterial.uniforms.softLimit.value = params.softLimit;
+    [interactionMaterial, contactInteractionMaterial].forEach((material) => {
+      material.uniforms.radius.value = params.radius;
+      material.uniforms.strength.value = params.strength;
+      material.uniforms.noiseSpeed.value = params.noiseSpeed;
+      material.uniforms.noiseAmplitude.value = params.noiseAmplitude;
+      material.uniforms.noiseFrequency.value = params.noiseFrequency;
+      material.uniforms.pointerBoost.value = params.pointerBoost;
+      material.uniforms.velocityBoost.value = params.velocityBoost;
+      material.uniforms.autoStrength.value = params.autoStrength;
+      material.uniforms.softLimit.value = params.softLimit;
+    });
+    [simulationMaterial, contactSimulationMaterial].forEach((material) => {
+      material.uniforms.simCoupling.value = params.simCoupling;
+      material.uniforms.velocityDamping.value = params.velocityDamping;
+      material.uniforms.heightDamping.value = params.heightDamping;
+      material.uniforms.softLimit.value = params.softLimit;
+    });
     renderingMaterial.uniforms.displacement.value = params.displacement;
     renderingMaterial.uniforms.softLimit.value = params.softLimit;
     renderingMaterial.uniforms.colorWarp.value = params.colorWarp;
     renderingMaterial.uniforms.specularStrength.value = params.specular;
+    contactMaterial.uniforms.colorWarp.value = params.colorWarp;
+    contactMaterial.uniforms.specularStrength.value = params.specular;
     sphere.scale.setScalar(params.scale);
   }
 
@@ -1810,13 +1950,21 @@ import * as THREE from './assets/vendor/three.module.js';
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+
+    if (contactRenderer && contactField) {
+      const contactRect = contactField.getBoundingClientRect();
+      const contactWidth = Math.max(1, contactRect.width);
+      const contactHeight = Math.max(1, contactRect.height);
+      contactRenderer.setSize(contactWidth, contactHeight, false);
+      contactMaterial.uniforms.aspect.value = contactWidth / contactHeight;
+    }
   }
 
-  function renderToTarget(material, target) {
+  function renderToTarget(material, target, activeRenderer = renderer) {
     fboPlane.material = material;
-    renderer.setRenderTarget(target);
-    renderer.render(fboScene, fboCamera);
-    renderer.setRenderTarget(null);
+    activeRenderer.setRenderTarget(target);
+    activeRenderer.render(fboScene, fboCamera);
+    activeRenderer.setRenderTarget(null);
   }
 
   function updateMouse(event) {
@@ -1830,6 +1978,12 @@ import * as THREE from './assets/vendor/three.module.js';
   window.addEventListener('mousemove', updateMouse);
   window.addEventListener('mousedown', () => { mouseDown = true; });
   window.addEventListener('mouseup', () => { mouseDown = false; });
+  if (contactSection) {
+    const contactObserver = new IntersectionObserver((entries) => {
+      contactVisible = entries.some((entry) => entry.isIntersecting);
+    }, { rootMargin: '120px 0px' });
+    contactObserver.observe(contactSection);
+  }
   if (strikeCallout && follower) {
     strikeCallout.addEventListener('mouseenter', () => follower.classList.add('is-strike-hover'));
     strikeCallout.addEventListener('mouseleave', () => follower.classList.remove('is-strike-hover'));
@@ -1838,11 +1992,14 @@ import * as THREE from './assets/vendor/three.module.js';
     hasMouse = false;
     if (follower) follower.classList.remove('visible', 'is-orb-hover', 'is-strike-hover');
     interactionMaterial.uniforms.center.value.set(-1, -1);
+    contactInteractionMaterial.uniforms.center.value.set(-1, -1);
   });
 
   function animate() {
     const elapsed = clock.getElapsedTime();
-    const rect = container.getBoundingClientRect();
+    const heroRect = container.getBoundingClientRect();
+    const contactRect = contactSection ? contactSection.getBoundingClientRect() : null;
+    const contactFieldRect = contactField ? contactField.getBoundingClientRect() : null;
 
     if (hasMouse && finePointer) {
       followerX += (mouse.x - followerX) * 0.16;
@@ -1851,11 +2008,31 @@ import * as THREE from './assets/vendor/three.module.js';
         follower.style.left = followerX + 'px';
         follower.style.top = followerY + 'px';
       }
-      normalizedMouse.set(
-        THREE.MathUtils.mapLinear((mouse.x - rect.left) / rect.width, 0, 1, -1, 1),
-        THREE.MathUtils.mapLinear((mouse.y - rect.top) / rect.height, 0, 1, 1, -1)
-      );
-      if (normalizedMouse.x !== -1 && normalizedMouse.y !== -1) {
+      const overHero = mouse.x >= heroRect.left && mouse.x <= heroRect.right && mouse.y >= heroRect.top && mouse.y <= heroRect.bottom;
+      const overContact = contactRect && contactFieldRect && mouse.x >= contactRect.left && mouse.x <= contactRect.right && mouse.y >= contactRect.top && mouse.y <= contactRect.bottom;
+
+      if (overContact) {
+        const fieldX = THREE.MathUtils.clamp((mouse.x - contactFieldRect.left) / contactFieldRect.width, 0, 1);
+        const fieldY = THREE.MathUtils.clamp((mouse.y - contactFieldRect.top) / contactFieldRect.height, 0, 1);
+        const aspect = contactMaterial.uniforms.aspect.value;
+        const sourceU = aspect >= 1 ? fieldX : 0.5 + (fieldX - 0.5) * aspect;
+        const sourceV = aspect >= 1 ? 0.5 + ((1 - fieldY) - 0.5) / aspect : 1 - fieldY;
+        contactUv.set(sourceU, sourceV);
+        contactHitVelocity.set(contactUv.x - contactLastHitUv.x, contactUv.y - contactLastHitUv.y).multiplyScalar(2.5);
+        contactHitVelocity.clampLength(0, 0.08);
+        contactLastHitUv.copy(contactUv);
+        contactInteractionMaterial.uniforms.center.value.copy(contactUv);
+        contactInteractionMaterial.uniforms.velocity.value.copy(contactHitVelocity);
+        interactionMaterial.uniforms.center.value.set(-1, -1);
+        interactionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
+        if (follower) follower.classList.add('is-orb-hover');
+      } else if (overHero) {
+        contactInteractionMaterial.uniforms.center.value.set(-1, -1);
+        contactInteractionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
+        normalizedMouse.set(
+          THREE.MathUtils.mapLinear((mouse.x - heroRect.left) / heroRect.width, 0, 1, -1, 1),
+          THREE.MathUtils.mapLinear((mouse.y - heroRect.top) / heroRect.height, 0, 1, 1, -1)
+        );
         pointer.copy(normalizedMouse);
         raycaster.setFromCamera(pointer, camera);
         const hit = raycaster.intersectObject(sphere, false)[0];
@@ -1871,23 +2048,37 @@ import * as THREE from './assets/vendor/three.module.js';
           interactionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
           if (follower) follower.classList.remove('is-orb-hover');
         }
+      } else {
+        interactionMaterial.uniforms.center.value.set(-1, -1);
+        interactionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
+        contactInteractionMaterial.uniforms.center.value.set(-1, -1);
+        contactInteractionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
+        if (follower) follower.classList.remove('is-orb-hover');
       }
     } else {
       interactionMaterial.uniforms.center.value.set(-1, -1);
       interactionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
+      contactInteractionMaterial.uniforms.center.value.set(-1, -1);
+      contactInteractionMaterial.uniforms.velocity.value.multiplyScalar(0.8);
     }
 
     if (elapsed >= nextDrop) {
-      interactionMaterial.uniforms.center2.value.set(THREE.MathUtils.randFloat(0.5, 1), THREE.MathUtils.randFloat(0, 1));
+      const dropX = THREE.MathUtils.randFloat(0.5, 1);
+      const dropY = THREE.MathUtils.randFloat(0, 1);
+      interactionMaterial.uniforms.center2.value.set(dropX, dropY);
+      contactInteractionMaterial.uniforms.center2.value.set(dropX, dropY);
       dropUntil = elapsed + params.dropFlash;
       nextDrop = elapsed + params.dropEvery;
     }
     if (elapsed > dropUntil) {
       interactionMaterial.uniforms.center2.value.set(-1, -1);
+      contactInteractionMaterial.uniforms.center2.value.set(-1, -1);
     }
 
     interactionMaterial.uniforms.time.value = elapsed;
     interactionMaterial.uniforms.mouseDown.value = mouseDown;
+    contactInteractionMaterial.uniforms.time.value = elapsed;
+    contactInteractionMaterial.uniforms.mouseDown.value = mouseDown;
     applyParams();
 
     renderToTarget(interactionMaterial, interactionTarget);
@@ -1902,6 +2093,14 @@ import * as THREE from './assets/vendor/three.module.js';
     renderingMaterial.uniforms.heightMap.value = simulationTarget.texture;
 
     renderer.render(scene, camera);
+    if (contactRenderer && contactVisible) {
+      renderToTarget(contactInteractionMaterial, contactInteractionTarget, contactRenderer);
+      renderToTarget(contactSimulationMaterial, contactSimulationTarget, contactRenderer);
+      contactMaterial.uniforms.heightMap.value = contactSimulationTarget.texture;
+      contactMaterial.uniforms.angle.value = renderingMaterial.uniforms.angle.value;
+      contactMaterial.uniforms.lightDirection.value.copy(renderingMaterial.uniforms.lightDirection.value);
+      contactRenderer.render(contactScene, fboCamera);
+    }
     requestAnimationFrame(animate);
   }
 
