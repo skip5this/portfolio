@@ -173,17 +173,7 @@ nav.is-hidden { transform: translateY(calc(-100% - 1px)); }
   display: block;
   background: transparent !important;
   cursor: crosshair;
-  filter: var(--fluid-field-filter);
-}
-.hero-orb.is-rendering::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  border-radius: 50%;
-  pointer-events: none;
-  background: var(--fluid-field-scrim);
-  opacity: 0.72;
+  filter: var(--fluid-field-filter) brightness(0.52);
 }
 .hero-orb::after {
   content: '';
@@ -1612,7 +1602,6 @@ import * as THREE from './assets/vendor/three.module.js';
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   container.appendChild(renderer.domElement);
-  container.classList.add('is-rendering');
 
   let contactRenderer = null;
   if (contactField) {
