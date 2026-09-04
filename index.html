@@ -69,7 +69,10 @@ nav {
   background: rgba(248, 247, 244, 0.92);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--faint);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
+nav.is-hidden { transform: translateY(calc(-100% - 1px)); }
 .nav-name {
   font-family: var(--sans); font-weight: 600; font-size: 14px;
   letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
@@ -1029,12 +1032,12 @@ footer span:last-child {
               <p class="aioz-chapter-label">Interaction craft</p>
               <div>
                 <h4 class="aioz-chapter-title">Making file transfers a little more fun.</h4>
-                <p class="aioz-chapter-body">The little interactions gave dTransfer its personality. Dragging in a file flipped the interface to dark mode and turned the animated form from pale to purple.</p>
+                <p class="aioz-chapter-body">The little interactions gave AIOZ Transfer its personality. Dragging in a file flipped the interface to dark mode and turned the animated form from pale to purple.</p>
               </div>
             </div>
             <div class="aioz-media-pair">
               <figure class="aioz-figure">
-                <button class="aioz-media-frame aioz-media-frame--resting gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-resting.webm" data-video-mp4="assets/aioz-v2/transfer-resting.mp4" data-poster="assets/aioz-v2/transfer-resting-poster.jpg" data-caption="dTransfer resting state" data-alt="The pale resting state of the dTransfer interface with an animated form" aria-label="Open the dTransfer resting state in the AIOZ detail gallery">
+                <button class="aioz-media-frame aioz-media-frame--resting gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-resting.webm" data-video-mp4="assets/aioz-v2/transfer-resting.mp4" data-poster="assets/aioz-v2/transfer-resting-poster.jpg" data-caption="AIOZ Transfer resting state" data-alt="The pale resting state of the AIOZ Transfer interface with an animated form" aria-label="Open the AIOZ Transfer resting state in the AIOZ detail gallery">
                   <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-resting-poster.jpg" aria-labelledby="aioz-transfer-resting-caption">
                     <source src="assets/aioz-v2/transfer-resting.mp4" type="video/mp4">
                     <source src="assets/aioz-v2/transfer-resting.webm" type="video/webm">
@@ -1043,7 +1046,7 @@ footer span:last-child {
                 <figcaption id="aioz-transfer-resting-caption"><span class="aioz-caption-title">Resting state</span><span class="aioz-caption-note">A quiet surface keeps the next action obvious.</span></figcaption>
               </figure>
               <figure class="aioz-figure">
-                <button class="aioz-media-frame aioz-media-frame--active gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-active.webm" data-video-mp4="assets/aioz-v2/transfer-active.mp4" data-poster="assets/aioz-v2/transfer-active-poster.jpg" data-caption="dTransfer drag state" data-alt="The dark drag state of the dTransfer interface with a purple animated form" aria-label="Open the dTransfer drag state in the AIOZ detail gallery">
+                <button class="aioz-media-frame aioz-media-frame--active gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/transfer-active.webm" data-video-mp4="assets/aioz-v2/transfer-active.mp4" data-poster="assets/aioz-v2/transfer-active-poster.jpg" data-caption="AIOZ Transfer drag state" data-alt="The dark drag state of the AIOZ Transfer interface with a purple animated form" aria-label="Open the AIOZ Transfer drag state in the AIOZ detail gallery">
                   <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/transfer-active-poster.jpg" aria-labelledby="aioz-transfer-active-caption">
                     <source src="assets/aioz-v2/transfer-active.mp4" type="video/mp4">
                     <source src="assets/aioz-v2/transfer-active.webm" type="video/webm">
@@ -1258,6 +1261,42 @@ footer span:last-child {
   <span>Scott Bell</span>
   <span>Victoria, BC &middot; Open to the right fit</span>
 </footer>
+
+<script>
+(() => {
+  const nav = document.querySelector('nav');
+  const navLinks = nav ? nav.querySelector('.nav-links') : null;
+  if (!nav) return;
+
+  let lastScrollY = Math.max(window.scrollY, 0);
+  let ticking = false;
+
+  const showNav = () => nav.classList.remove('is-hidden');
+  const updateNav = () => {
+    const scrollY = Math.max(window.scrollY, 0);
+    const delta = scrollY - lastScrollY;
+    const menuOpen = navLinks && navLinks.classList.contains('open');
+
+    if (scrollY <= 8 || delta < -2 || menuOpen) showNav();
+    else if (delta > 2) nav.classList.add('is-hidden');
+
+    lastScrollY = scrollY;
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateNav);
+  }, { passive: true });
+  nav.addEventListener('focusin', showNav);
+  if (navLinks) {
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.closest('a')) navLinks.classList.remove('open');
+    });
+  }
+})();
+</script>
 
 <div class="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="Project media gallery" hidden>
   <button class="portfolio-lightbox-close" type="button" aria-label="Close gallery">&times;</button>
@@ -2074,13 +2113,11 @@ import * as THREE from './assets/vendor/three.module.js';
       const dropX = THREE.MathUtils.randFloat(0.5, 1);
       const dropY = THREE.MathUtils.randFloat(0, 1);
       interactionMaterial.uniforms.center2.value.set(dropX, dropY);
-      contactInteractionMaterial.uniforms.center2.value.set(dropX, dropY);
       dropUntil = elapsed + params.dropFlash;
       nextDrop = elapsed + params.dropEvery;
     }
     if (elapsed > dropUntil) {
       interactionMaterial.uniforms.center2.value.set(-1, -1);
-      contactInteractionMaterial.uniforms.center2.value.set(-1, -1);
     }
 
     interactionMaterial.uniforms.time.value = elapsed;
