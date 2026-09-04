@@ -252,7 +252,7 @@ nav.is-hidden { transform: translateY(calc(-100% - 1px)); }
 }
 .hero-body {
   font-size: 18px; line-height: 1.7; color: var(--mid);
-  max-width: 560px; margin-bottom: 18px;
+  max-width: min(500px, 90%); margin-bottom: 18px;
 }
 .hero-body a {
   color: inherit;
@@ -862,6 +862,7 @@ footer span:last-child {
   .orb-word { display: none; }
   #cursor-follower { display: none; }
   .hero-headline { font-size: clamp(32px, 8vw, 44px); }
+  .hero-body { max-width: none; }
   .section-wrap { padding: 0 20px; }
   .section-header { flex-direction: column; gap: 8px; }
   .case-item { grid-template-columns: 1fr; gap: 16px; }
