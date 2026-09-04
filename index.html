@@ -342,12 +342,6 @@ nav {
   text-transform: uppercase;
   color: var(--accent);
 }
-.aioz-chapter-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-}
 .aioz-chapter-title {
   max-width: 720px;
   font-family: var(--serif);
@@ -362,24 +356,6 @@ nav {
   line-height: 1.7;
   color: var(--mid);
 }
-.aioz-motion-toggle {
-  flex: 0 0 auto;
-  border: 0;
-  border-bottom: 1px solid currentColor;
-  padding: 2px 0;
-  background: transparent;
-  color: var(--mid);
-  font: inherit;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 180ms ease;
-}
-.aioz-motion-toggle:hover,
-.aioz-motion-toggle:focus-visible { color: var(--accent); }
-.aioz-motion-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .aioz-media-pair,
 .aioz-exploration-grid,
 .aioz-product-grid {
@@ -829,7 +805,6 @@ footer span:last-child {
   .aioz-chapter { padding-top: 24px; }
   .aioz-chapter-header { grid-template-columns: 1fr; gap: 8px; margin-bottom: 20px; }
   .aioz-chapter-label { padding-top: 0; }
-  .aioz-chapter-title-row { align-items: flex-start; gap: 16px; }
   .aioz-chapter-title { font-size: 24px; }
   .aioz-media-pair,
   .aioz-exploration-grid,
@@ -925,10 +900,7 @@ footer span:last-child {
             <div class="aioz-chapter-header">
               <p class="aioz-chapter-label">Product character</p>
               <div>
-                <div class="aioz-chapter-title-row">
-                  <h4 class="aioz-chapter-title">One ecosystem, eight distinct products.</h4>
-                  <button class="aioz-motion-toggle" type="button" aria-pressed="false">Pause motion</button>
-                </div>
+                <h4 class="aioz-chapter-title">One ecosystem, eight distinct products.</h4>
                 <p class="aioz-chapter-body">A shared system created continuity across the platform without flattening each product’s personality. AI discovery and decentralized storage show how that balance worked in practice.</p>
               </div>
             </div>
@@ -1255,17 +1227,11 @@ footer span:last-child {
 <script>
 (() => {
   const videos = Array.from(document.querySelectorAll('.js-aioz-video'));
-  const toggle = document.querySelector('.aioz-motion-toggle');
-  if (!videos.length || !toggle) return;
+  if (!videos.length) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const visibleVideos = new Set();
   let motionPaused = reducedMotion.matches;
-
-  const updateToggle = () => {
-    toggle.textContent = motionPaused ? 'Play motion' : 'Pause motion';
-    toggle.setAttribute('aria-pressed', String(motionPaused));
-  };
 
   const syncPlayback = () => {
     videos.forEach((video) => {
@@ -1277,7 +1243,6 @@ footer span:last-child {
         video.pause();
       }
     });
-    updateToggle();
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -1289,12 +1254,7 @@ footer span:last-child {
   }, { threshold: 0.2, rootMargin: '80px 0px' });
 
   videos.forEach((video) => observer.observe(video));
-  toggle.addEventListener('click', () => {
-    motionPaused = !motionPaused;
-    syncPlayback();
-  });
   document.addEventListener('visibilitychange', syncPlayback);
-  updateToggle();
 })();
 </script>
 
