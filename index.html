@@ -162,7 +162,7 @@ nav.is-hidden { transform: translateY(calc(-100% - 1px)); }
   border-radius: 50%;
   pointer-events: none;
   overflow: visible;
-  transform: translateZ(0);
+  transform: translate3d(12px, 0, 0);
 }
 .hero-orb canvas {
   position: absolute;
@@ -855,7 +855,7 @@ footer span:last-child {
   .hero-text { order: 1; }
   .hero-visual { order: 2; width: min(88vw, 360px); margin: 2px auto 0; }
   .hero-orb-stage { width: 100%; min-height: 0; aspect-ratio: 1; }
-  .hero-orb { width: 100%; max-width: 360px; }
+  .hero-orb { width: 100%; max-width: 360px; transform: translateZ(0); }
   .hero-visual-meta { display: none; }
   .hero-headline { color: var(--ink); mix-blend-mode: normal; }
   .hero-headline .hero-builder-accent { color: var(--accent); }
