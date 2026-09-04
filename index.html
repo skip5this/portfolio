@@ -1545,6 +1545,7 @@ import * as THREE from './assets/vendor/three.module.js';
     catch (e) { return {}; }
   })();
   const params = Object.assign({}, defaults, saved);
+  const contactRadiusScale = 2;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setClearColor(0x000000, 0);
@@ -1960,8 +1961,9 @@ import * as THREE from './assets/vendor/three.module.js';
   let dropUntil = 0;
 
   function applyParams() {
+    interactionMaterial.uniforms.radius.value = params.radius;
+    contactInteractionMaterial.uniforms.radius.value = params.radius * contactRadiusScale;
     [interactionMaterial, contactInteractionMaterial].forEach((material) => {
-      material.uniforms.radius.value = params.radius;
       material.uniforms.strength.value = params.strength;
       material.uniforms.noiseSpeed.value = params.noiseSpeed;
       material.uniforms.noiseAmplitude.value = params.noiseAmplitude;
