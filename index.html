@@ -765,6 +765,7 @@ body.portfolio-lightbox-open { overflow: hidden; }
   z-index: 1;
   pointer-events: none;
   background:
+    linear-gradient(180deg, rgba(5, 12, 10, 0) 68%, rgba(5, 12, 10, 0.34) 100%),
     radial-gradient(circle at 50% 46%, rgba(5, 12, 10, 0.6), rgba(5, 12, 10, 0.48) 58%, rgba(5, 12, 10, 0.58) 100%),
     linear-gradient(180deg, rgba(5, 12, 10, 0.06), rgba(5, 12, 10, 0.18));
 }
@@ -800,11 +801,12 @@ body.portfolio-lightbox-open { overflow: hidden; }
 }
 
 footer {
-  padding: 24px 40px; border-top: 1px solid rgba(248, 247, 244, 0.14);
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 24px 40px 28px;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13px; color: var(--footer-text);
-  max-width: none; margin: 0 auto;
-  background: var(--footer-bg);
+  max-width: none; margin: 0 auto; box-sizing: border-box;
+  background: transparent;
 }
 footer span:last-child {
   color: var(--footer-text-muted);
@@ -1279,12 +1281,11 @@ footer span:last-child {
     <p class="contact-body reveal">If you’re building fintech, AI, agent workflows, or infrastructure where people need to understand the system before they can trust it, that’s the work I want. I can help set direction, design the experience, and turn ambiguity into something elegant.</p>
     <a href="mailto:scott@nakamotodesign.co" class="contact-link reveal">Email me</a>
   </div>
+  <footer>
+    <span>Scott Bell</span>
+    <span>Victoria, BC &middot; Open to the right fit</span>
+  </footer>
 </div>
-
-<footer>
-  <span>Scott Bell</span>
-  <span>Victoria, BC &middot; Open to the right fit</span>
-</footer>
 
 <script src="./assets/vendor/lenis.min.js"></script>
 <script>
@@ -1980,8 +1981,8 @@ import * as THREE from './assets/vendor/three.module.js';
       heightMap: { value: contactSimulationTarget.texture },
       colorTexture: renderingMaterial.uniforms.colorTexture,
       size: { value: new THREE.Vector2(128, 128) },
-      lightDirection: renderingMaterial.uniforms.lightDirection,
-      angle: renderingMaterial.uniforms.angle,
+      lightDirection: { value: new THREE.Vector3(0, 1, 1) },
+      angle: { value: Math.PI / 2 },
       colorWarp: renderingMaterial.uniforms.colorWarp,
       specularStrength: renderingMaterial.uniforms.specularStrength,
       aspect: { value: 1 }
@@ -2190,9 +2191,14 @@ import * as THREE from './assets/vendor/three.module.js';
     if (contactRenderer && contactVisible) {
       renderToTarget(contactInteractionMaterial, contactInteractionTarget, contactRenderer);
       renderToTarget(contactSimulationMaterial, contactSimulationTarget, contactRenderer);
+      const contactPhase = elapsed * params.lightSpeed * 60;
       contactMaterial.uniforms.heightMap.value = contactSimulationTarget.texture;
-      contactMaterial.uniforms.angle.value = renderingMaterial.uniforms.angle.value;
-      contactMaterial.uniforms.lightDirection.value.copy(renderingMaterial.uniforms.lightDirection.value);
+      contactMaterial.uniforms.angle.value = Math.PI / 2 + elapsed * (params.colorSpeed + params.lightSpeed * 60);
+      contactMaterial.uniforms.lightDirection.value.set(
+        Math.cos(contactPhase) * 0.72,
+        0.86 + Math.sin(contactPhase) * 0.14,
+        1
+      );
       contactRenderer.render(contactScene, fboCamera);
     }
     requestAnimationFrame(animate);
