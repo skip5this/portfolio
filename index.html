@@ -381,7 +381,8 @@ nav {
 .aioz-motion-toggle:focus-visible { color: var(--accent); }
 .aioz-motion-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .aioz-media-pair,
-.aioz-exploration-grid {
+.aioz-exploration-grid,
+.aioz-product-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
@@ -394,9 +395,14 @@ nav {
   background: #fff;
 }
 .aioz-media-frame--resting { background: #edf5ed; }
-.aioz-media-frame--active,
-.aioz-media-frame--wallet { background: #1d1f20; }
+.aioz-media-frame--active { background: #1d1f20; }
 .aioz-media-frame--balanced { aspect-ratio: 1.48 / 1; }
+.aioz-media-frame--product {
+  aspect-ratio: 16 / 10;
+  background: #1d1f20;
+}
+.aioz-media-frame--product .aioz-still,
+.aioz-media-frame--product .aioz-video { object-fit: contain; }
 .aioz-video,
 .aioz-still {
   display: block;
@@ -425,11 +431,6 @@ nav {
   text-align: right;
 }
 .aioz-system-figure .aioz-media-frame { aspect-ratio: 16 / 9; }
-.aioz-wallet-figure {
-  width: calc(100% - 268px);
-  margin-left: auto;
-}
-.aioz-wallet-figure .aioz-media-frame { aspect-ratio: 2 / 1; }
 .gallery-trigger {
   position: relative;
   display: block;
@@ -827,10 +828,10 @@ footer span:last-child {
   .aioz-chapter-title-row { align-items: flex-start; gap: 16px; }
   .aioz-chapter-title { font-size: 24px; }
   .aioz-media-pair,
-  .aioz-exploration-grid { grid-template-columns: 1fr; gap: 32px; }
+  .aioz-exploration-grid,
+  .aioz-product-grid { grid-template-columns: 1fr; gap: 32px; }
   .aioz-figure figcaption { align-items: flex-start; gap: 16px; }
   .aioz-caption-note { max-width: 64%; }
-  .aioz-wallet-figure { width: 100%; margin-left: 0; }
   .portfolio-lightbox {
     grid-template-columns: 1fr;
     gap: 0;
@@ -907,10 +908,10 @@ footer span:last-child {
         </div>
         <div class="case-content">
           <h3 class="case-headline">Led the design transformation from 2 disconnected products to a unified ecosystem of 8.</h3>
-          <p class="case-body">AIOZ is a Web3 network for decentralized AI, storage, and streaming. When I joined, it had two disconnected products and no shared design system. By the time I left, I’d led a three-person design team as we expanded the platform to eight products and built the reusable patterns and semantic color system that unified them. During that same period, the company’s market cap grew more than 100×.</p>
+          <p class="case-body">AIOZ is a Web3 network for decentralized AI, storage, and streaming. When I joined, it had two disconnected products and no shared design system. By the time I left, I’d led a design team that grew from three to four people as we expanded the platform to eight products and built the reusable patterns and semantic color system that unified them. During that same period, the company’s market cap grew more than 100×.</p>
           <div class="case-metrics">
             <span class="metric-pill">2 &rarr; 8 products</span>
-            <span class="metric-pill">3 designers led</span>
+            <span class="metric-pill">Design team: 3 &rarr; 4</span>
             <span class="metric-pill">Company context: $13M &rarr; $1.38B</span>
           </div>
         </div>
@@ -992,23 +993,43 @@ footer span:last-child {
             </figure>
           </section>
 
-          <section class="aioz-chapter">
+          <section class="aioz-chapter" id="aioz-product-range">
             <div class="aioz-chapter-header">
-              <p class="aioz-chapter-label">Product depth</p>
+              <p class="aioz-chapter-label">Product range</p>
               <div>
-                <h4 class="aioz-chapter-title">Prototyping a complex transaction flow.</h4>
-                <p class="aioz-chapter-body">This high-fidelity prototype worked through a token swap from setup to review, keeping the amount, asset, network, fees, and confirmation visible at every step.</p>
+                <h4 class="aioz-chapter-title">From quiet entry states to data-dense operations.</h4>
+                <p class="aioz-chapter-body">The shared system had to support everything from a focused wallet unlock screen to portfolio management, transaction review, and live-stream operations, without making every product feel the same.</p>
               </div>
             </div>
-            <figure class="aioz-figure aioz-wallet-figure">
-              <button class="aioz-media-frame aioz-media-frame--wallet gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/wallet-swap.webm" data-video-mp4="assets/aioz-v2/wallet-swap.mp4" data-poster="assets/aioz-v2/wallet-swap-poster.jpg" data-caption="Wallet token swap prototype" data-alt="A high-fidelity AIOZ Wallet token swap prototype moving from setup to review" aria-label="Open the Wallet token swap prototype in the AIOZ detail gallery">
-                <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/wallet-swap-poster.jpg" aria-labelledby="aioz-wallet-caption">
-                  <source src="assets/aioz-v2/wallet-swap.mp4" type="video/mp4">
-                  <source src="assets/aioz-v2/wallet-swap.webm" type="video/webm">
-                </video>
-              </button>
-              <figcaption id="aioz-wallet-caption"><span class="aioz-caption-title">AIOZ Wallet</span><span class="aioz-caption-note">Token selection and transaction review in one continuous flow.</span></figcaption>
-            </figure>
+            <div class="aioz-product-grid">
+              <figure class="aioz-figure">
+                <button class="aioz-media-frame aioz-media-frame--product gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-v2/aioz-wallet-login.avif" data-caption="AIOZ Wallet unlock" data-alt="AIOZ Wallet unlock screen with one focused password task" aria-label="Open the AIOZ Wallet unlock screen in the AIOZ detail gallery">
+                  <img class="aioz-still" src="assets/aioz-v2/aioz-wallet-login.avif" alt="AIOZ Wallet unlock screen with one focused password task" loading="lazy" decoding="async">
+                </button>
+                <figcaption><span class="aioz-caption-title">Wallet entry</span><span class="aioz-caption-note">A restrained state keeps one security task in focus.</span></figcaption>
+              </figure>
+              <figure class="aioz-figure">
+                <button class="aioz-media-frame aioz-media-frame--product gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-v2/aioz-wallet-home.avif" data-caption="AIOZ Wallet portfolio" data-alt="AIOZ Wallet portfolio dashboard with holdings, performance, and transaction history" aria-label="Open the AIOZ Wallet portfolio in the AIOZ detail gallery">
+                  <img class="aioz-still" src="assets/aioz-v2/aioz-wallet-home.avif" alt="AIOZ Wallet portfolio dashboard with holdings, performance, and transaction history" loading="lazy" decoding="async">
+                </button>
+                <figcaption><span class="aioz-caption-title">Wallet portfolio</span><span class="aioz-caption-note">Holdings, network status, activity, and filters in one view.</span></figcaption>
+              </figure>
+              <figure class="aioz-figure">
+                <button class="aioz-media-frame aioz-media-frame--product gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-full="assets/aioz-v2/aioz-stream-control.avif" data-caption="AIOZ Stream live controls" data-alt="AIOZ Stream dashboard with live controls, settings, and analytics" aria-label="Open the AIOZ Stream live controls in the AIOZ detail gallery">
+                  <img class="aioz-still" src="assets/aioz-v2/aioz-stream-control.avif" alt="AIOZ Stream dashboard with live controls, settings, and analytics" loading="lazy" decoding="async">
+                </button>
+                <figcaption><span class="aioz-caption-title">Stream operations</span><span class="aioz-caption-note">Live controls, settings, and performance context stay visible together.</span></figcaption>
+              </figure>
+              <figure class="aioz-figure">
+                <button class="aioz-media-frame aioz-media-frame--product gallery-trigger aioz-gallery-trigger" type="button" data-gallery-group="aioz" data-gallery-label="AIOZ Network" data-video-webm="assets/aioz-v2/wallet-swap.webm" data-video-mp4="assets/aioz-v2/wallet-swap.mp4" data-poster="assets/aioz-v2/wallet-swap-poster.jpg" data-caption="AIOZ Wallet token swap" data-alt="A high-fidelity AIOZ Wallet token swap moving from setup to review" aria-label="Open the AIOZ Wallet token swap in the AIOZ detail gallery">
+                  <video class="aioz-video js-aioz-video" muted loop playsinline preload="metadata" poster="assets/aioz-v2/wallet-swap-poster.jpg" aria-labelledby="aioz-wallet-swap-caption">
+                    <source src="assets/aioz-v2/wallet-swap.mp4" type="video/mp4">
+                    <source src="assets/aioz-v2/wallet-swap.webm" type="video/webm">
+                  </video>
+                </button>
+                <figcaption id="aioz-wallet-swap-caption"><span class="aioz-caption-title">Wallet transaction</span><span class="aioz-caption-note">Amount, asset, network, fees, and confirmation stay in one flow.</span></figcaption>
+              </figure>
+            </div>
           </section>
         </div>
       </article>
@@ -1071,8 +1092,8 @@ footer span:last-child {
           <p class="case-body">KOHO is one of Canada’s first and top-rated neobanks, now used by more than 2.5 million Canadians. I joined as the first hire, helped build the product from scratch, and set the early design direction. During my time there, Apple featured the app twice, including New Apps We Love and the App Store front page. KOHO is now valued at C$1.33B.</p>
           <div class="case-metrics">
             <span class="metric-pill">First hire</span>
+            <span class="metric-pill">0 &rarr; 100K+ users during tenure</span>
             <span class="metric-pill">Featured twice by Apple</span>
-            <span class="metric-pill">C$1.33B valuation</span>
           </div>
           <div class="case-media">
             <div class="case-grid-3-match-4">
@@ -1131,7 +1152,7 @@ footer span:last-child {
         </a>
         <p class="product-card-tag">Multi-agent system &middot; 230+ demos</p>
         <h3 class="product-card-title"><a href="https://auto-sites.pages.dev/" target="_blank" rel="noreferrer">Auto-Sites</a></h3>
-        <p class="product-card-body">An agent pipeline that researches local businesses, writes the positioning, builds the site, and critiques the result. Each review feeds the next run.</p>
+        <p class="product-card-body">A self-improving agent system for scaling design judgment. It researches local businesses, builds and critiques each site, then carries the strongest lessons into the next run.</p>
         <div class="product-card-links"><a href="https://auto-sites.pages.dev/" target="_blank" rel="noreferrer">View project &nearr;</a></div>
       </article>
 
