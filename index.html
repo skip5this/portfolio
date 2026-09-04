@@ -730,7 +730,7 @@ body.portfolio-lightbox-open { overflow: hidden; }
   inset: -2%;
   z-index: 0;
   pointer-events: none;
-  filter: blur(8px) saturate(1.08);
+  filter: blur(4px) saturate(1.08);
   transform: translateZ(0);
   opacity: 1;
 }
@@ -866,7 +866,7 @@ footer span:last-child {
   .contact-section { padding: 80px 20px; }
   .contact-orb-field {
     inset: -2%;
-    filter: blur(6px) saturate(1.06);
+    filter: blur(3px) saturate(1.06);
   }
   footer { flex-direction: column; gap: 8px; padding: 20px; }
 }
@@ -1046,7 +1046,7 @@ footer span:last-child {
                     <source src="assets/aioz-v2/transfer-active.webm" type="video/webm">
                   </video>
                 </button>
-                <figcaption id="aioz-transfer-active-caption"><span class="aioz-caption-title">Drag state</span><span class="aioz-caption-note">The workspace inverts.</span></figcaption>
+                <figcaption id="aioz-transfer-active-caption"><span class="aioz-caption-title">Drag state</span><span class="aioz-caption-note">The workspace inverts when a file is dragged in.</span></figcaption>
               </figure>
             </div>
           </section>
@@ -1512,8 +1512,8 @@ import * as THREE from './assets/vendor/three.module.js';
   let contactRenderer = null;
   if (contactField) {
     try {
-      contactRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
-      contactRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, finePointer ? 1.25 : 1));
+      contactRenderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'high-performance' });
+      contactRenderer.setPixelRatio(1);
       contactField.appendChild(contactRenderer.domElement);
     } catch (error) {
       contactRenderer = null;
@@ -1533,6 +1533,7 @@ import * as THREE from './assets/vendor/three.module.js';
   const contactLastHitUv = new THREE.Vector2(0.5, 0.5);
   const contactHitVelocity = new THREE.Vector2(0, 0);
   const clock = new THREE.Clock();
+  let heroVisible = true;
   let contactVisible = false;
 
   const fboScene = new THREE.Scene();
@@ -1978,6 +1979,10 @@ import * as THREE from './assets/vendor/three.module.js';
   window.addEventListener('mousemove', updateMouse);
   window.addEventListener('mousedown', () => { mouseDown = true; });
   window.addEventListener('mouseup', () => { mouseDown = false; });
+  const heroObserver = new IntersectionObserver((entries) => {
+    heroVisible = entries.some((entry) => entry.isIntersecting);
+  }, { rootMargin: '120px 0px' });
+  heroObserver.observe(stage);
   if (contactSection) {
     const contactObserver = new IntersectionObserver((entries) => {
       contactVisible = entries.some((entry) => entry.isIntersecting);
@@ -1997,7 +2002,7 @@ import * as THREE from './assets/vendor/three.module.js';
 
   function animate() {
     const elapsed = clock.getElapsedTime();
-    const heroRect = container.getBoundingClientRect();
+    const heroRect = heroVisible ? container.getBoundingClientRect() : null;
     const contactRect = contactSection ? contactSection.getBoundingClientRect() : null;
     const contactFieldRect = contactField ? contactField.getBoundingClientRect() : null;
 
@@ -2008,7 +2013,7 @@ import * as THREE from './assets/vendor/three.module.js';
         follower.style.left = followerX + 'px';
         follower.style.top = followerY + 'px';
       }
-      const overHero = mouse.x >= heroRect.left && mouse.x <= heroRect.right && mouse.y >= heroRect.top && mouse.y <= heroRect.bottom;
+      const overHero = heroRect && mouse.x >= heroRect.left && mouse.x <= heroRect.right && mouse.y >= heroRect.top && mouse.y <= heroRect.bottom;
       const overContact = contactRect && contactFieldRect && mouse.x >= contactRect.left && mouse.x <= contactRect.right && mouse.y >= contactRect.top && mouse.y <= contactRect.bottom;
 
       if (overContact) {
@@ -2081,8 +2086,10 @@ import * as THREE from './assets/vendor/three.module.js';
     contactInteractionMaterial.uniforms.mouseDown.value = mouseDown;
     applyParams();
 
-    renderToTarget(interactionMaterial, interactionTarget);
-    renderToTarget(simulationMaterial, simulationTarget);
+    if (heroVisible) {
+      renderToTarget(interactionMaterial, interactionTarget);
+      renderToTarget(simulationMaterial, simulationTarget);
+    }
 
     angle += params.lightSpeed * angleChangeSpeed;
     const bound = 0.5;
@@ -2092,7 +2099,7 @@ import * as THREE from './assets/vendor/three.module.js';
     renderingMaterial.uniforms.lightDirection.value.set(Math.cos(angle), Math.sin(angle), 1);
     renderingMaterial.uniforms.heightMap.value = simulationTarget.texture;
 
-    renderer.render(scene, camera);
+    if (heroVisible) renderer.render(scene, camera);
     if (contactRenderer && contactVisible) {
       renderToTarget(contactInteractionMaterial, contactInteractionTarget, contactRenderer);
       renderToTarget(contactSimulationMaterial, contactSimulationTarget, contactRenderer);
