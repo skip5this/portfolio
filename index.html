@@ -373,6 +373,12 @@ nav.is-hidden { transform: translateY(calc(-100% - 1px)); }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
+.aioz-chapter > .aioz-media-pair,
+.aioz-chapter > .aioz-exploration-grid,
+.aioz-chapter > .aioz-product-grid,
+.aioz-chapter > .aioz-system-figure {
+  margin-left: calc(220px + 48px);
+}
 .aioz-figure { min-width: 0; margin: 0; }
 .aioz-media-frame {
   position: relative;
@@ -573,7 +579,7 @@ body.portfolio-lightbox-open { overflow: hidden; }
 .naka-feature {
   display: grid; grid-template-columns: 220px 1fr; gap: 48px;
   align-items: start; margin-bottom: var(--rhythm-feature);
-  padding-bottom: var(--rhythm-feature); border-bottom: 1px solid var(--faint);
+  padding-bottom: var(--rhythm-feature);
 }
 .naka-tag {
   font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
@@ -864,6 +870,10 @@ footer span:last-child {
   .aioz-media-pair,
   .aioz-exploration-grid,
   .aioz-product-grid { grid-template-columns: 1fr; gap: 32px; }
+  .aioz-chapter > .aioz-media-pair,
+  .aioz-chapter > .aioz-exploration-grid,
+  .aioz-chapter > .aioz-product-grid,
+  .aioz-chapter > .aioz-system-figure { margin-left: 0; }
   .aioz-figure figcaption { align-items: flex-start; gap: 16px; }
   .aioz-caption-note { max-width: 64%; }
   .portfolio-lightbox {
@@ -1968,10 +1978,10 @@ import * as THREE from './assets/vendor/three.module.js';
     `,
     uniforms: {
       heightMap: { value: contactSimulationTarget.texture },
-      colorTexture: renderingMaterial.uniforms.colorTexture,
+      colorTexture: { value: colorTexture },
       size: { value: new THREE.Vector2(128, 128) },
-      lightDirection: renderingMaterial.uniforms.lightDirection,
-      angle: renderingMaterial.uniforms.angle,
+      lightDirection: { value: new THREE.Vector3(0, 1, 1) },
+      angle: { value: Math.PI / 2 },
       colorWarp: renderingMaterial.uniforms.colorWarp,
       specularStrength: renderingMaterial.uniforms.specularStrength,
       aspect: { value: 1 }
@@ -2180,9 +2190,11 @@ import * as THREE from './assets/vendor/three.module.js';
     if (contactRenderer && contactVisible) {
       renderToTarget(contactInteractionMaterial, contactInteractionTarget, contactRenderer);
       renderToTarget(contactSimulationMaterial, contactSimulationTarget, contactRenderer);
+      const contactColorAngle = Math.PI / 2 + elapsed * (params.colorSpeed + params.lightSpeed * 60);
+      const contactLightAngle = Math.PI / 2 + elapsed * params.lightSpeed * 20;
       contactMaterial.uniforms.heightMap.value = contactSimulationTarget.texture;
-      contactMaterial.uniforms.angle.value = renderingMaterial.uniforms.angle.value;
-      contactMaterial.uniforms.lightDirection.value.copy(renderingMaterial.uniforms.lightDirection.value);
+      contactMaterial.uniforms.angle.value = contactColorAngle;
+      contactMaterial.uniforms.lightDirection.value.set(Math.cos(contactLightAngle), Math.sin(contactLightAngle), 1);
       contactRenderer.render(contactScene, fboCamera);
     }
     requestAnimationFrame(animate);
